@@ -2909,8 +2909,11 @@ SOFTWARE.
             for (let attempt = 0; attempt < 12; attempt++) {
                 let res;
                 try {
-                    res = await fetch(GROQ_BASE + path, makeOpts());
+                    const o = makeOpts();
+                    if (typeof AbortSignal !== 'undefined' && AbortSignal.timeout) o.signal = AbortSignal.timeout(path.includes('audio') ? 300000 : 150000);
+                    res = await fetch(GROQ_BASE + path, o);
                 } catch (e) {
+                    if (e && (e.name === 'TimeoutError' || e.name === 'AbortError')) throw new Error(`${label}: a Groq demorou demais para responder.`);
                     throw new Error('O navegador não conseguiu falar com a Groq (sem internet ou chamada bloqueada pelo navegador). Confira a conexão; se continuar, me avise que eu monto a versão com script local.');
                 }
                 if (res.status === 429 || res.status >= 500) {
@@ -7263,6 +7266,7 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
         let geminiKeyIdx = 0;
         const geminiKeyState = {};
         let geminiModelResolved = null;
+        let geminiThinking = null;
         const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta';
 
         function setGeminiKeys(text) {
@@ -7318,9 +7322,21 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
                     contents: [{ role: 'user', parts: [{ text: prompt }] }],
                     generationConfig: Object.assign({ maxOutputTokens: opts.maxTok || 16000 }, opts.json ? { responseMimeType: 'application/json' } : {})
                 };
+                // pensar menos = responder bem mais rápido
+                if (geminiThinking !== false) {
+                    if (/gemini-2\.5/.test(model)) body.generationConfig.thinkingConfig = { thinkingBudget: /pro/.test(model) ? 512 : 0 };
+                    else if (/gemini-[3-9]|latest/.test(model)) body.generationConfig.thinkingConfig = { thinkingLevel: 'low' };
+                }
+                const ctl = new AbortController();
+                const timer = setTimeout(() => ctl.abort(), opts.timeout || 150000);
                 let res;
-                try { res = await fetch(`${GEMINI_BASE}/models/${encodeURIComponent(model)}:generateContent`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body) }); }
-                catch (e) { throw new Error('O navegador não conseguiu falar com o Gemini (sem internet ou bloqueado).'); }
+                try { res = await fetch(`${GEMINI_BASE}/models/${encodeURIComponent(model)}:generateContent`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body), signal: ctl.signal }); }
+                catch (e) {
+                    clearTimeout(timer);
+                    if (e && e.name === 'AbortError') throw new Error(`Gemini demorou mais de ${Math.round((opts.timeout || 150000) / 1000)}s sem responder`);
+                    throw new Error('O navegador não conseguiu falar com o Gemini (sem internet ou bloqueado).');
+                }
+                clearTimeout(timer);
                 if (res.ok) {
                     const j = await res.json();
                     const cand = j.candidates && j.candidates[0];
@@ -7332,6 +7348,7 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
                 }
                 let msg = '', retry = null;
                 try { const e = await res.json(); msg = (e.error && e.error.message) || ''; retry = ((e.error && e.error.details) || []).find(d => d.retryDelay) || null; } catch (e) {}
+                if (res.status === 400 && /thinking/i.test(msg) && geminiThinking !== false) { geminiThinking = false; continue; }
                 if (res.status === 404 || (res.status === 400 && /model/i.test(msg) && /not found|unsupported|invalid/i.test(msg))) {
                     const alt = await geminiPickModel(key);
                     if (alt && alt !== model) { model = alt; showGroqMessage(`Gemini: o modelo escolhido não existe nesta conta; usando ${alt}.`, 'info'); continue; }
@@ -7385,6 +7402,16 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
 
         // usa o Gemini se houver chave; se falhar, cai para a Groq
         async function aiGenerate(prompt, opts) {
+            const t0 = Date.now();
+            const base = (aiScanStepText.textContent || '').replace(/ \(\d+s[^)]*\)$/, '');
+            const tick = setInterval(() => {
+                if (aiScanProgressBox.classList.contains('hidden')) return;
+                const s = Math.round((Date.now() - t0) / 1000);
+                aiScanStepText.textContent = `${base} (${s}s${s > 25 ? ' — a IA ainda está escrevendo' : ''})`;
+            }, 1000);
+            try { return await aiGenerateInner(prompt, opts); } finally { clearInterval(tick); }
+        }
+        async function aiGenerateInner(prompt, opts) {
             opts = opts || {};
             let gErr = null;
             if (geminiKeys.length) {
