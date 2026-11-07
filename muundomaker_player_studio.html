@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUUNDO MAKER • GTA 6 Video Studio</title>
+    <title>MUUNDO MAKER • Video Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,12 +11,12 @@
             theme: {
                 extend: {
                     colors: {
-                        gtaBg: '#120826',
-                        gtaDark: '#0A0915',
-                        gtaPink: '#FF2A6D',
-                        gtaCyan: '#00F0FF',
-                        gtaYellow: '#FFB800',
-                        gtaOrange: '#FF5500'
+                        neonBg: '#120826',
+                        neonDark: '#0A0915',
+                        neonPink: '#FF2A6D',
+                        neonCyan: '#00F0FF',
+                        neonYellow: '#FFB800',
+                        neonOrange: '#FF5500'
                     }
                 }
             }
@@ -52,18 +52,18 @@
     <!-- Top Navigation -->
     <header class="w-full max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-purple-900/50">
         <div class="flex items-center space-x-3">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gtaPink via-gtaOrange to-gtaYellow flex items-center justify-center shadow-lg shadow-gtaPink/40 font-black text-xl text-gtaDark border border-white/20">VI</div>
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-neonPink via-neonOrange to-neonYellow flex items-center justify-center shadow-lg shadow-neonPink/40 font-black text-xl text-neonDark border border-white/20">VI</div>
             <div>
                 <div class="flex items-center gap-2">
-                    <h1 class="text-lg md:text-xl font-black tracking-wider bg-gradient-to-r from-white via-gtaCyan to-gtaPink bg-clip-text text-transparent">MUUNDO MAKER • VIDEO STUDIO</h1>
-                    <span class="px-2 py-0.5 text-[10px] font-mono-tech font-bold bg-gtaCyan/15 text-gtaCyan border border-gtaCyan/40 rounded">v5.0 CLEAN</span>
+                    <h1 class="text-lg md:text-xl font-black tracking-wider bg-gradient-to-r from-white via-neonCyan to-neonPink bg-clip-text text-transparent">MUUNDO MAKER • VIDEO STUDIO</h1>
+                    <span class="px-2 py-0.5 text-[10px] font-mono-tech font-bold bg-neonCyan/15 text-neonCyan border border-neonCyan/40 rounded">v5.0 CLEAN</span>
                 </div>
-                <p class="text-xs text-purple-300/70">Apresentador + Vídeo • Paleta Vice City / Leonida</p>
+                <p class="text-xs text-purple-300/70">Apresentador + Vídeo • Tema Neon</p>
             </div>
         </div>
         <div class="flex items-center gap-2.5">
             <div class="bg-[#120826] p-1 rounded-xl border border-purple-800/50 flex items-center gap-1">
-                <button id="ratio-916-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-gtaPink text-white shadow transition-all">9:16 Shorts</button>
+                <button id="ratio-916-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-neonPink text-white shadow transition-all">9:16 Shorts</button>
                 <button id="ratio-169-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold text-purple-300 hover:text-white transition-all">16:9 Longo</button>
             </div>
             <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-950/50 border border-emerald-500/30 text-emerald-300 text-xs font-mono-tech">
@@ -82,14 +82,14 @@
             <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-purple-500/25 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center justify-between mb-3">
                     <h2 class="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-gtaPink"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-neonPink"></span>
                         Controle Mestre & Sincronia de Voz
                     </h2>
-                    <span id="sync-mode-badge" class="text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded bg-gtaYellow/20 text-gtaYellow border border-gtaYellow/40">Voz IA Nativa</span>
+                    <span id="sync-mode-badge" class="text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded bg-neonYellow/20 text-neonYellow border border-neonYellow/40">Voz IA Nativa</span>
                 </div>
 
                 <div class="flex items-center gap-2.5 mb-4">
-                    <button id="main-play-btn" class="flex-1 bg-gradient-to-r from-gtaPink to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-black py-3.5 px-5 rounded-xl shadow-lg shadow-gtaPink/30 flex items-center justify-center gap-2.5 transition-all active:scale-95 text-sm">
+                    <button id="main-play-btn" class="flex-1 bg-gradient-to-r from-neonPink to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-black py-3.5 px-5 rounded-xl shadow-lg shadow-neonPink/30 flex items-center justify-center gap-2.5 transition-all active:scale-95 text-sm">
                         <svg id="play-svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <svg id="pause-svg" class="w-5 h-5 fill-current hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         <span id="play-label">REPRODUZIR VÍDEO COMPLETO</span>
@@ -102,7 +102,7 @@
                 <div class="mb-4">
                     <label class="block text-[11px] font-bold uppercase tracking-wider text-purple-300 mb-1.5">Navegação Rápida por Partes:</label>
                     <div class="grid grid-cols-3 gap-2">
-                        <button data-part="1" class="part-btn py-2.5 px-2 rounded-xl bg-gtaPink/20 border-2 border-gtaPink text-white font-extrabold text-xs flex flex-col items-center transition-all">
+                        <button data-part="1" class="part-btn py-2.5 px-2 rounded-xl bg-neonPink/20 border-2 border-neonPink text-white font-extrabold text-xs flex flex-col items-center transition-all">
                             <span>PARTE 1</span><span class="text-[9px] font-normal text-purple-200">Trailer & Casal</span>
                         </button>
                         <button data-part="2" class="part-btn py-2.5 px-2 rounded-xl bg-purple-950/50 border border-purple-700/40 text-purple-200 hover:text-white font-extrabold text-xs flex flex-col items-center transition-all">
@@ -116,8 +116,8 @@
 
                 <div class="space-y-1.5 bg-[#0A0915]/80 p-3 rounded-xl border border-purple-900/50 mb-4">
                     <div class="flex justify-between items-center text-xs font-mono-tech">
-                        <span id="time-current" class="text-gtaCyan font-bold">00:00.0</span>
-                        <span id="shot-indicator" class="text-[10px] text-gtaYellow font-bold">FALA 01 / 27</span>
+                        <span id="time-current" class="text-neonCyan font-bold">00:00.0</span>
+                        <span id="shot-indicator" class="text-[10px] text-neonYellow font-bold">FALA 01 / 27</span>
                         <span id="time-total" class="text-purple-300">03:00.0</span>
                     </div>
                     <input type="range" id="timeline-scrubber" min="0" max="180" step="0.05" value="0" class="w-full">
@@ -126,15 +126,15 @@
                 <div class="space-y-2">
                     <label class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-purple-300">
                         <span>Áudio da Narração (1 MP3 ou parte1/2/3)</span>
-                        <span class="text-gtaCyan font-mono-tech text-[10px]">Análise de Voz</span>
+                        <span class="text-neonCyan font-mono-tech text-[10px]">Análise de Voz</span>
                     </label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <label class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-dashed border-gtaPink/50 bg-gtaPink/10 hover:bg-gtaPink/20 cursor-pointer transition-all text-xs font-bold text-white">
-                            <svg class="w-4 h-4 text-gtaPink shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                        <label class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-dashed border-neonPink/50 bg-neonPink/10 hover:bg-neonPink/20 cursor-pointer transition-all text-xs font-bold text-white">
+                            <svg class="w-4 h-4 text-neonPink shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                             <span id="upload-status-text" class="truncate">Escolher MP3(s)...</span>
                             <input type="file" id="mp3-upload-input" accept="audio/*" multiple class="hidden">
                         </label>
-                        <button id="tts-toggle-btn" class="py-2.5 px-3 rounded-xl border border-gtaCyan/40 bg-gtaCyan/10 hover:bg-gtaCyan/20 text-xs font-bold text-gtaCyan flex items-center justify-center gap-1.5 transition-all">
+                        <button id="tts-toggle-btn" class="py-2.5 px-3 rounded-xl border border-neonCyan/40 bg-neonCyan/10 hover:bg-neonCyan/20 text-xs font-bold text-neonCyan flex items-center justify-center gap-1.5 transition-all">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
                             <span id="tts-label">Voz IA Nativa: ON</span>
                         </button>
@@ -143,7 +143,7 @@
                     <div class="bg-[#0A0915]/80 p-3 rounded-xl border border-purple-900/50">
                         <div class="flex justify-between text-[11px] font-bold uppercase tracking-wider text-purple-300">
                             <span>Ajuste fino da legenda</span>
-                            <span id="caption-offset-label" class="font-mono-tech text-gtaYellow">+0.15s</span>
+                            <span id="caption-offset-label" class="font-mono-tech text-neonYellow">+0.15s</span>
                         </div>
                         <input type="range" id="caption-offset" min="-1" max="1" step="0.05" value="0.15" class="w-full mt-2">
                         <p class="text-[10px] text-purple-300/70 mt-1">Valor positivo adianta a legenda. Se ainda parecer atrasada, arraste para a direita.</p>
@@ -164,10 +164,10 @@
             </div>
 
             <!-- Cenário animado -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-gtaYellow/40 rounded-2xl p-4 shadow-2xl">
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonYellow/40 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-black uppercase tracking-wider text-gtaYellow flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-gtaYellow animate-pulse"></span>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-neonYellow flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-neonYellow animate-pulse"></span>
                         Cenário Animado
                     </h3>
                     <span id="scenery-now" class="text-[10px] font-mono-tech px-2 py-0.5 rounded bg-purple-950 text-purple-200 border border-purple-700/40"></span>
@@ -175,12 +175,12 @@
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Cenários que entram na rotação (clique para ligar/desligar):</label>
                 <div class="grid grid-cols-2 gap-1.5 mb-3">
                     <button data-bg="cidade" class="bg-toggle">🌆 Cidade Neon</button>
-                    <button data-bg="praia" class="bg-toggle">🏖️ Praia Vice City</button>
+                    <button data-bg="praia" class="bg-toggle">🏖️ Praia Neon</button>
                     <button data-bg="perseguicao" class="bg-toggle">🚓 Perseguição</button>
                     <button data-bg="sirene" class="bg-toggle">🚨 Sirene</button>
                 </div>
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Trocar de cenário automaticamente:</label>
-                <select id="scenery-interval" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-2 text-xs text-white outline-none focus:border-gtaYellow">
+                <select id="scenery-interval" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-2 text-xs text-white outline-none focus:border-neonYellow">
                     <option value="fala1">A cada fala</option>
                     <option value="fala2">A cada 2 falas</option>
                     <option value="fala4">A cada 4 falas</option>
@@ -192,13 +192,13 @@
             </div>
 
             <!-- Avatar -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-gtaCyan/30 rounded-2xl p-4 shadow-2xl">
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonCyan/30 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-black uppercase tracking-wider text-gtaCyan flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-gtaCyan"></span>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-neonCyan flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-neonCyan"></span>
                         Avatar do Apresentador
                     </h3>
-                    <button id="av-shuffle" class="text-[10px] font-bold text-gtaYellow hover:underline">🎲 Sortear posições</button>
+                    <button id="av-shuffle" class="text-[10px] font-bold text-neonYellow hover:underline">🎲 Sortear posições</button>
                 </div>
 
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Aparência</label>
@@ -223,7 +223,7 @@
                 </div>
 
                 <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-purple-300">
-                    <span>Tamanho</span><span id="av-tamanho-label" class="font-mono-tech text-gtaYellow">100%</span>
+                    <span>Tamanho</span><span id="av-tamanho-label" class="font-mono-tech text-neonYellow">100%</span>
                 </div>
                 <input type="range" id="av-tamanho" min="0.7" max="1.3" step="0.05" value="1" class="w-full mb-2">
 
@@ -264,62 +264,62 @@
                 <div class="flex items-center justify-between gap-2 text-[10px]">
                     <span id="av-img-status" class="text-purple-300">Personagem desenhado</span>
                     <div class="flex items-center gap-3">
-                        <label class="cursor-pointer text-gtaYellow hover:underline font-bold">Usar imagem própria (PNG)<input id="av-img" type="file" accept="image/*" class="hidden"></label>
-                        <button id="av-img-remove" class="text-purple-300 hover:text-gtaPink font-bold">Remover</button>
+                        <label class="cursor-pointer text-neonYellow hover:underline font-bold">Usar imagem própria (PNG)<input id="av-img" type="file" accept="image/*" class="hidden"></label>
+                        <button id="av-img-remove" class="text-purple-300 hover:text-neonPink font-bold">Remover</button>
                     </div>
                 </div>
                 <p class="text-[10px] text-purple-300/70 mt-2 leading-tight">Roupa, braços, pernas e corrente aparecem no modo corpo inteiro. Use PNG com fundo transparente na imagem própria.</p>
             </div>
 
             <!-- Reference Videos + Scene Separation -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-gtaCyan/40 rounded-2xl p-4 shadow-2xl relative overflow-hidden">
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonCyan/40 rounded-2xl p-4 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-black uppercase tracking-wider text-gtaCyan flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-gtaCyan animate-pulse"></span>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-neonCyan flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-neonCyan animate-pulse"></span>
                         Vídeos de Referência + Separação de Cenas
                     </h3>
                     <span id="gameplay-status-badge" class="text-[10px] font-mono-tech px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700/40">Sem Vídeo</span>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                    <label class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-dashed border-gtaCyan/60 bg-gtaCyan/10 hover:bg-gtaCyan/20 cursor-pointer transition-all text-xs font-bold text-white">
-                        <svg class="w-4 h-4 text-gtaCyan shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    <label class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-dashed border-neonCyan/60 bg-neonCyan/10 hover:bg-neonCyan/20 cursor-pointer transition-all text-xs font-bold text-white">
+                        <svg class="w-4 h-4 text-neonCyan shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                         <span class="truncate">Adicionar vídeo(s)</span>
                         <input type="file" id="gameplay-upload-input" accept="video/*" multiple class="hidden">
                     </label>
-                    <button id="remap-shuffle-btn" disabled class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-gtaCyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-gtaDark font-black text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-gtaCyan/20 transition-all">
+                    <button id="remap-shuffle-btn" disabled class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-neonDark font-black text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-neonCyan/20 transition-all">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                         <span>Recalcular Cortes</span>
                     </button>
                 </div>
 
-                <div id="ai-scan-progress-box" class="hidden mb-3 bg-[#0A0915] p-2.5 rounded-xl border border-gtaCyan/30">
-                    <div class="flex justify-between text-[10px] font-mono-tech text-gtaCyan mb-1">
+                <div id="ai-scan-progress-box" class="hidden mb-3 bg-[#0A0915] p-2.5 rounded-xl border border-neonCyan/30">
+                    <div class="flex justify-between text-[10px] font-mono-tech text-neonCyan mb-1">
                         <span id="ai-scan-step-text" class="truncate pr-2">Analisando frames...</span>
                         <span id="ai-scan-percent">0%</span>
                     </div>
                     <div class="w-full h-2 bg-purple-950 rounded-full overflow-hidden">
-                        <div id="ai-scan-bar" class="h-full bg-gradient-to-r from-gtaCyan via-gtaPink to-gtaYellow w-0 transition-all duration-200"></div>
+                        <div id="ai-scan-bar" class="h-full bg-gradient-to-r from-neonCyan via-neonPink to-neonYellow w-0 transition-all duration-200"></div>
                     </div>
                 </div>
 
                 <div class="flex items-center justify-between gap-2 mb-2 bg-[#0A0915] border border-purple-900/60 rounded-xl px-3 py-2">
                     <span class="text-[10px] font-bold uppercase tracking-wider text-purple-300">Máximo seguido do mesmo vídeo</span>
-                    <select id="cut-limit" class="bg-[#160B30] border border-purple-800/60 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-gtaCyan">
+                    <select id="cut-limit" class="bg-[#160B30] border border-purple-800/60 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-neonCyan">
                         <option value="2">2 segundos</option>
                         <option value="3">3 segundos</option>
                         <option value="4">4 segundos</option>
                         <option value="5">5 segundos</option>
                     </select>
                 </div>
-                <div id="usage-warning" class="hidden mb-2 text-[11px] leading-tight px-3 py-2 rounded-lg border border-gtaYellow/50 bg-gtaYellow/10 text-yellow-100"></div>
+                <div id="usage-warning" class="hidden mb-2 text-[11px] leading-tight px-3 py-2 rounded-lg border border-neonYellow/50 bg-neonYellow/10 text-yellow-100"></div>
 
                 <div id="video-list" class="space-y-1 mb-3"></div>
 
                 <div id="mapped-clips-container" class="hidden">
                     <div class="flex items-center justify-between text-[10px] text-purple-300 font-mono-tech mb-1">
                         <span>CORTES NA LINHA DO TEMPO:</span>
-                        <span id="cuts-count" class="text-gtaYellow font-bold"></span>
+                        <span id="cuts-count" class="text-neonYellow font-bold"></span>
                     </div>
                     <div id="mapped-clips-list" class="max-h-40 overflow-y-auto space-y-1 pr-1 text-[11px]"></div>
                 </div>
@@ -330,51 +330,51 @@
             </div>
 
             <!-- Groq AI: Whisper + Vision -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-gtaPink/40 rounded-2xl p-4 shadow-2xl">
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonPink/40 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-black uppercase tracking-wider text-gtaPink flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-gtaPink animate-pulse"></span>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-neonPink flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-neonPink animate-pulse"></span>
                         IA Groq • Whisper + Visão
                     </h3>
                     <span id="groq-status-badge" class="text-[10px] font-mono-tech px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700/40">Sem chave</span>
                 </div>
 
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Chave da API Groq</label>
-                <input id="groq-key" type="password" autocomplete="off" placeholder="gsk_..." class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-3 py-2 text-xs font-mono-tech text-white mb-2 outline-none focus:border-gtaPink">
+                <input id="groq-key" type="password" autocomplete="off" placeholder="gsk_..." class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-3 py-2 text-xs font-mono-tech text-white mb-2 outline-none focus:border-neonPink">
 
                 <div class="grid grid-cols-2 gap-2 mb-3">
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Modelo de visão</label>
-                        <input id="groq-vision-model" type="text" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-gtaPink">
+                        <input id="groq-vision-model" type="text" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-neonPink">
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Modelo Whisper</label>
-                        <input id="groq-whisper-model" type="text" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-gtaPink">
+                        <input id="groq-whisper-model" type="text" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-neonPink">
                     </div>
                 </div>
 
-                <button id="whisper-btn" disabled class="w-full mb-3 py-2.5 px-3 rounded-xl bg-gradient-to-r from-gtaPink to-rose-600 hover:from-pink-500 hover:to-rose-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-black text-xs flex items-center justify-center gap-1.5 transition-all">
+                <button id="whisper-btn" disabled class="w-full mb-3 py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonPink to-rose-600 hover:from-pink-500 hover:to-rose-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-black text-xs flex items-center justify-center gap-1.5 transition-all">
                     🎙️ <span id="whisper-btn-text">Sincronizar legenda com Whisper</span>
                 </button>
 
                 <div class="flex items-center justify-between mb-1 text-[10px]">
                     <span class="font-bold uppercase tracking-wider text-purple-300">Ficha dos personagens</span>
-                    <label class="cursor-pointer text-gtaYellow hover:underline font-bold">Carregar personagens.md<input type="file" id="personagens-input" accept=".md,.txt,text/*" class="hidden"></label>
+                    <label class="cursor-pointer text-neonYellow hover:underline font-bold">Carregar personagens.md<input type="file" id="personagens-input" accept=".md,.txt,text/*" class="hidden"></label>
                 </div>
-                <textarea id="personagens-text" spellcheck="false" class="w-full h-24 bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-purple-100 outline-none focus:border-gtaPink resize-y"></textarea>
+                <textarea id="personagens-text" spellcheck="false" class="w-full h-24 bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-purple-100 outline-none focus:border-neonPink resize-y"></textarea>
 
                 <div class="flex items-center justify-between mt-1 mb-3 text-[10px]">
                     <span id="ref-count" class="text-purple-300">Sem imagens de referência</span>
-                    <label class="cursor-pointer text-gtaYellow hover:underline font-bold">+ Imagens dos personagens<input id="ref-images-input" type="file" accept="image/*" multiple class="hidden"></label>
+                    <label class="cursor-pointer text-neonYellow hover:underline font-bold">+ Imagens dos personagens<input id="ref-images-input" type="file" accept="image/*" multiple class="hidden"></label>
                 </div>
 
                 <div class="flex items-center justify-between mb-1 text-[10px]">
                     <span class="font-bold uppercase tracking-wider text-purple-300">Tipos de cena</span>
-                    <label class="cursor-pointer text-gtaYellow hover:underline font-bold">Carregar cenas_tipos.md<input type="file" id="tipos-input" accept=".md,.txt,text/*" class="hidden"></label>
+                    <label class="cursor-pointer text-neonYellow hover:underline font-bold">Carregar cenas_tipos.md<input type="file" id="tipos-input" accept=".md,.txt,text/*" class="hidden"></label>
                 </div>
-                <textarea id="tipos-text" spellcheck="false" class="w-full h-20 mb-3 bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-purple-100 outline-none focus:border-gtaPink resize-y"></textarea>
+                <textarea id="tipos-text" spellcheck="false" class="w-full h-20 mb-3 bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-purple-100 outline-none focus:border-neonPink resize-y"></textarea>
 
-                <button id="vision-btn" disabled class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-gtaCyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-gtaDark font-black text-xs flex items-center justify-center gap-1.5 transition-all">
+                <button id="vision-btn" disabled class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-neonDark font-black text-xs flex items-center justify-center gap-1.5 transition-all">
                     👁️ <span id="vision-btn-text">Analisar conteúdo das cenas</span>
                 </button>
 
@@ -394,7 +394,7 @@
             <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-purple-500/25 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-2.5">
                     <h3 class="text-xs font-black uppercase tracking-wider text-purple-200 flex items-center gap-1.5">
-                        <svg class="w-4 h-4 text-gtaCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                        <svg class="w-4 h-4 text-neonCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
                         Roteiro (Clique na Fala)
                     </h3>
                     <span id="storyboard-count" class="text-[10px] font-mono-tech text-purple-400"></span>
@@ -403,38 +403,67 @@
             </div>
 
             <!-- Export -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-gtaYellow/30 rounded-2xl p-4 shadow-2xl">
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonYellow/30 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-xs font-black uppercase tracking-wider text-gtaYellow flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-gtaYellow animate-ping"></span>
-                        Exportação Direta (Canvas + Áudio)
+                    <h3 class="text-xs font-black uppercase tracking-wider text-neonYellow flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-neonYellow animate-ping"></span>
+                        Exportar Vídeo
                     </h3>
                     <span id="export-format-label" class="text-[10px] font-mono-tech text-purple-300">30 FPS MP4</span>
                 </div>
-                <button id="record-export-btn" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-gtaYellow to-amber-500 hover:from-amber-400 hover:to-yellow-500 text-gtaDark font-black text-xs uppercase tracking-wider shadow-lg shadow-gtaYellow/20 flex items-center justify-center gap-2 transition-all active:scale-95">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
-                    <span id="record-btn-text">Gravar & Baixar Vídeo</span>
+
+                <button id="export-direct-btn" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-neonYellow to-amber-500 hover:from-amber-400 hover:to-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed text-neonDark font-black text-xs uppercase tracking-wider shadow-lg shadow-neonYellow/20 flex items-center justify-center gap-2 transition-all active:scale-95">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg>
+                    <span id="export-direct-text">Baixar MP4 (sem gravar)</span>
                 </button>
-                <div id="record-feedback" class="hidden mt-2 text-center text-[11px] font-mono-tech text-gtaCyan bg-purple-950/80 py-1.5 px-3 rounded-lg border border-gtaCyan/30">
-                    🔴 Gravando do início... para sozinho no fim ou clique para finalizar.
+
+                <label class="flex items-center gap-2 mt-2 text-[11px] text-purple-100 cursor-pointer">
+                    <input type="checkbox" id="auto-export" class="accent-pink-500" checked>
+                    Baixar sozinho quando o áudio e os vídeos de referência estiverem prontos
+                </label>
+
+                <div id="auto-export-banner" class="hidden mt-2 flex items-center justify-between gap-2 text-[11px] px-3 py-2 rounded-lg border border-neonCyan/40 bg-neonCyan/10 text-cyan-100">
+                    <span id="auto-export-text"></span>
+                    <button id="auto-export-cancel" class="font-bold text-neonPink hover:underline shrink-0">Cancelar</button>
                 </div>
-                <p class="text-[10px] text-purple-300/70 mt-2">A voz nativa do navegador não entra na gravação. Para exportar com som, carregue o MP3 da narração.</p>
+
+                <div id="export-progress" class="hidden mt-2 bg-[#0A0915] p-2.5 rounded-xl border border-neonYellow/30">
+                    <div class="flex justify-between items-center text-[10px] font-mono-tech text-neonYellow mb-1 gap-2">
+                        <span id="export-status" class="truncate">Preparando...</span>
+                        <span class="flex items-center gap-2 shrink-0"><span id="export-pct">0%</span><button id="export-cancel-btn" class="text-neonPink hover:underline">cancelar</button></span>
+                    </div>
+                    <div class="w-full h-2 bg-purple-950 rounded-full overflow-hidden">
+                        <div id="export-bar" class="h-full bg-gradient-to-r from-neonYellow via-neonPink to-neonCyan w-0 transition-all duration-200"></div>
+                    </div>
+                </div>
+
+                <details class="mt-3">
+                    <summary class="text-[10px] font-bold uppercase tracking-wider text-purple-300 cursor-pointer">Gravar em tempo real (alternativa)</summary>
+                    <button id="record-export-btn" class="w-full mt-2 py-2.5 px-4 rounded-xl border border-neonYellow/40 bg-purple-950/60 hover:bg-purple-900 disabled:opacity-50 text-neonYellow font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-2 transition-all">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+                        <span id="record-btn-text">Gravar & Baixar Vídeo</span>
+                    </button>
+                    <div id="record-feedback" class="hidden mt-2 text-center text-[11px] font-mono-tech text-neonCyan bg-purple-950/80 py-1.5 px-3 rounded-lg border border-neonCyan/30">
+                        🔴 Gravando do início... para sozinho no fim ou clique para finalizar.
+                    </div>
+                </details>
+                <p class="text-[10px] text-purple-300/70 mt-2">O MP4 é montado quadro a quadro no seu computador, com o áudio direto do MP3 — pode até deixar a aba em segundo plano. A voz nativa do navegador não entra no arquivo: carregue o MP3 da narração.</p>
             </div>
         </section>
 
         <!-- Right Viewport -->
         <section class="lg:col-span-7 flex flex-col items-center justify-center">
             <div class="relative group flex items-center justify-center w-full">
-                <div class="absolute -inset-2 bg-gradient-to-tr from-gtaPink/30 via-purple-600/20 to-gtaCyan/30 rounded-[2.5rem] blur-2xl pointer-events-none"></div>
+                <div class="absolute -inset-2 bg-gradient-to-tr from-neonPink/30 via-purple-600/20 to-neonCyan/30 rounded-[2.5rem] blur-2xl pointer-events-none"></div>
                 <div id="player-frame" class="relative bg-[#070510] border-4 border-purple-800/80 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col items-center transition-all duration-300" style="width: 405px; height: 720px; max-width: 100%;">
                     <div class="w-full bg-[#0A0915]/95 px-4 py-2 flex items-center justify-between text-[10px] font-mono-tech border-b border-purple-900/60 z-20">
                         <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-gtaPink animate-pulse"></span>
+                            <span class="w-2 h-2 rounded-full bg-neonPink animate-pulse"></span>
                             <span class="font-bold text-white">PRÉVIA AO VIVO</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span id="part-badge-hud" class="px-1.5 py-0.5 rounded bg-gtaPink/20 text-gtaPink font-bold">PARTE 1</span>
-                            <span id="resolution-badge" class="text-gtaCyan">1080x1920</span>
+                            <span id="part-badge-hud" class="px-1.5 py-0.5 rounded bg-neonPink/20 text-neonPink font-bold">PARTE 1</span>
+                            <span id="resolution-badge" class="text-neonCyan">1080x1920</span>
                         </div>
                     </div>
                     <div class="relative w-full flex-1 bg-[#120826] flex items-center justify-center overflow-hidden cursor-pointer" id="canvas-stage">
@@ -442,7 +471,7 @@
                     </div>
                     <div class="w-full bg-[#0A0915]/95 px-4 py-1.5 flex items-center justify-between text-[10px] font-mono-tech text-purple-400 border-t border-purple-900/60 z-20">
                         <span id="cut-hud">SEM VÍDEO</span>
-                        <span id="audio-meter-hud" class="text-gtaYellow">VOZ: —</span>
+                        <span id="audio-meter-hud" class="text-neonYellow">VOZ: —</span>
                     </div>
                 </div>
             </div>
@@ -453,8 +482,34 @@
     <div id="video-pool" style="position:fixed;left:-9999px;top:0;width:2px;height:2px;overflow:hidden;opacity:0;pointer-events:none;"></div>
 
     <script>
+/*! mp4-muxer 5.2.2 — embutido para funcionar offline
+MIT License
+
+Copyright (c) 2023 Vanilagy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+"use strict";var Mp4Muxer=(()=>{var e=Object.defineProperty,t=Object.getOwnPropertyDescriptor,i=Object.getOwnPropertyNames,s=Object.prototype.hasOwnProperty,a=(e,t,i)=>{if(!t.has(e))throw TypeError("Cannot "+i)},r=(e,t,i)=>(a(e,t,"read from private field"),i?i.call(e):t.get(e)),n=(e,t,i)=>{if(t.has(e))throw TypeError("Cannot add the same private member more than once");t instanceof WeakSet?t.add(e):t.set(e,i)},o=(e,t,i,s)=>(a(e,t,"write to private field"),s?s.call(e,i):t.set(e,i),i),h=(e,t,i)=>(a(e,t,"access private method"),i),l={};((t,i)=>{for(var s in i)e(t,s,{get:i[s],enumerable:!0})})(l,{ArrayBufferTarget:()=>Me,FileSystemWritableFileStreamTarget:()=>Oe,Muxer:()=>Rt,StreamTarget:()=>We});var d,f,u,m,p,c,w,g,b=new Uint8Array(8),y=new DataView(b.buffer),k=e=>[(e%256+256)%256],T=e=>(y.setUint16(0,e,!1),[b[0],b[1]]),C=e=>(y.setUint32(0,e,!1),[b[1],b[2],b[3]]),v=e=>(y.setUint32(0,e,!1),[b[0],b[1],b[2],b[3]]),S=e=>(y.setUint32(0,Math.floor(e/2**32),!1),y.setUint32(4,e,!1),[b[0],b[1],b[2],b[3],b[4],b[5],b[6],b[7]]),x=e=>(y.setInt16(0,256*e,!1),[b[0],b[1]]),z=e=>(y.setInt32(0,65536*e,!1),[b[0],b[1],b[2],b[3]]),E=e=>(y.setInt32(0,2**30*e,!1),[b[0],b[1],b[2],b[3]]),A=(e,t=!1)=>{let i=Array(e.length).fill(null).map((t,i)=>e.charCodeAt(i));return t&&i.push(0),i},M=e=>e&&e[e.length-1],W=e=>{let t;for(let i of e)(!t||i.presentationTimestamp>t.presentationTimestamp)&&(t=i);return t},O=(e,t,i=!0)=>{let s=e*t;return i?Math.round(s):s},B=e=>{let t=e*(Math.PI/180),i=Math.cos(t),s=Math.sin(t);return[i,s,0,-s,i,0,0,0,1]},U=B(0),D=e=>[z(e[0]),z(e[1]),E(e[2]),z(e[3]),z(e[4]),E(e[5]),z(e[6]),z(e[7]),E(e[8])],j=e=>e?"object"!=typeof e?e:Array.isArray(e)?e.map(j):Object.fromEntries(Object.entries(e).map(([e,t])=>[e,j(t)])):e,R=e=>e>=0&&e<2**32,I=(e,t,i)=>({type:e,contents:t&&new Uint8Array(t.flat(10)),children:i}),N=(e,t,i,s,a)=>I(e,[k(t),C(i),s??[]],a),V=e=>({type:"mdat",largeSize:e}),F=(e,t,i=!1)=>I("moov",null,[L(t,e),...e.map(e=>$(e,t)),i?me(e):null]),L=(e,t)=>{let i=O(Math.max(0,...t.filter(e=>e.samples.length>0).map(e=>{const t=W(e.samples);return t.presentationTimestamp+t.duration})),Bt),s=Math.max(...t.map(e=>e.id))+1,a=!R(e)||!R(i),r=a?S:v;return N("mvhd",+a,0,[r(e),r(e),v(Bt),r(i),z(1),x(1),Array(10).fill(0),D(U),Array(24).fill(0),v(s)])},$=(e,t)=>I("trak",null,[P(e,t),H(e,t)]),P=(e,t)=>{let i,s=W(e.samples),a=O(s?s.presentationTimestamp+s.duration:0,Bt),r=!R(t)||!R(a),n=r?S:v;return i="video"===e.info.type?"number"==typeof e.info.rotation?B(e.info.rotation):e.info.rotation:U,N("tkhd",+r,3,[n(t),n(t),v(e.id),v(0),n(a),Array(8).fill(0),T(0),T(0),x("audio"===e.info.type?1:0),T(0),D(i),z("video"===e.info.type?e.info.width:0),z("video"===e.info.type?e.info.height:0)])},H=(e,t)=>I("mdia",null,[_(e,t),q("video"===e.info.type?"vide":"soun"),G(e)]),_=(e,t)=>{let i=W(e.samples),s=O(i?i.presentationTimestamp+i.duration:0,e.timescale),a=!R(t)||!R(s),r=a?S:v;return N("mdhd",+a,0,[r(t),r(t),v(e.timescale),r(s),T(21956),T(0)])},q=e=>N("hdlr",0,0,[A("mhlr"),A(e),v(0),v(0),v(0),A("mp4-muxer-hdlr",!0)]),G=e=>I("minf",null,["video"===e.info.type?J():K(),Q(),Z(e)]),J=()=>N("vmhd",0,1,[T(0),T(0),T(0),T(0)]),K=()=>N("smhd",0,0,[T(0),T(0)]),Q=()=>I("dinf",null,[X()]),X=()=>N("dref",0,0,[v(1)],[Y()]),Y=()=>N("url ",0,1),Z=e=>{const t=e.compositionTimeOffsetTable.length>1||e.compositionTimeOffsetTable.some(e=>0!==e.sampleCompositionTimeOffset);return I("stbl",null,[ee(e),oe(e),he(e),le(e),de(e),fe(e),t?ue(e):null])},ee=e=>N("stsd",0,0,[v(1)],["video"===e.info.type?te(Se[e.info.codec],e):ne(ze[e.info.codec],e)]),te=(e,t)=>{return I(e,[Array(6).fill(0),T(1),T(0),T(0),Array(12).fill(0),T(t.info.width),T(t.info.height),v(4718592),v(4718592),v(0),T(1),Array(32).fill(0),T(24),(i=65535,y.setInt16(0,i,!1),[b[0],b[1]])],[xe[t.info.codec](t),t.info.decoderConfig.colorSpace?re(t):null]);var i},ie={bt709:1,bt470bg:5,smpte170m:6},se={bt709:1,smpte170m:6,"iec61966-2-1":13},ae={rgb:0,bt709:1,bt470bg:5,smpte170m:6},re=e=>I("colr",[A("nclx"),T(ie[e.info.decoderConfig.colorSpace.primaries]),T(se[e.info.decoderConfig.colorSpace.transfer]),T(ae[e.info.decoderConfig.colorSpace.matrix]),k((e.info.decoderConfig.colorSpace.fullRange?1:0)<<7)]),ne=(e,t)=>I(e,[Array(6).fill(0),T(1),T(0),T(0),v(0),T(t.info.numberOfChannels),T(16),T(0),T(0),z(t.info.sampleRate)],[Ee[t.info.codec](t)]),oe=e=>N("stts",0,0,[v(e.timeToSampleTable.length),e.timeToSampleTable.map(e=>[v(e.sampleCount),v(e.sampleDelta)])]),he=e=>{if(e.samples.every(e=>"key"===e.type))return null;let t=[...e.samples.entries()].filter(([,e])=>"key"===e.type);return N("stss",0,0,[v(t.length),t.map(([e])=>v(e+1))])},le=e=>N("stsc",0,0,[v(e.compactlyCodedChunkTable.length),e.compactlyCodedChunkTable.map(e=>[v(e.firstChunk),v(e.samplesPerChunk),v(1)])]),de=e=>N("stsz",0,0,[v(0),v(e.samples.length),e.samples.map(e=>v(e.size))]),fe=e=>e.finalizedChunks.length>0&&M(e.finalizedChunks).offset>=2**32?N("co64",0,0,[v(e.finalizedChunks.length),e.finalizedChunks.map(e=>S(e.offset))]):N("stco",0,0,[v(e.finalizedChunks.length),e.finalizedChunks.map(e=>v(e.offset))]),ue=e=>N("ctts",0,0,[v(e.compositionTimeOffsetTable.length),e.compositionTimeOffsetTable.map(e=>[v(e.sampleCount),v(e.sampleCompositionTimeOffset)])]),me=e=>I("mvex",null,e.map(pe)),pe=e=>N("trex",0,0,[v(e.id),v(1),v(0),v(0),v(0)]),ce=(e,t)=>I("moof",null,[we(e),...t.map(be)]),we=e=>N("mfhd",0,0,[v(e)]),ge=e=>{let t=0,i=0,s="delta"===e.type;return i|=+s,t|=s?1:2,t<<24|i<<16},be=e=>I("traf",null,[ye(e),ke(e),Te(e)]),ye=e=>{let t=0;t|=8,t|=16,t|=32,t|=131072;let i=e.currentChunk.samples[1]??e.currentChunk.samples[0],s={duration:i.timescaleUnitsToNextSample,size:i.size,flags:ge(i)};return N("tfhd",0,131128,[v(e.id),v(s.duration),v(s.size),v(s.flags)])},ke=e=>N("tfdt",1,0,[S(O(e.currentChunk.startTimestamp,e.timescale))]),Te=e=>{let t=e.currentChunk.samples.map(e=>e.timescaleUnitsToNextSample),i=e.currentChunk.samples.map(e=>e.size),s=e.currentChunk.samples.map(ge),a=e.currentChunk.samples.map(t=>O(t.presentationTimestamp-t.decodeTimestamp,e.timescale)),r=new Set(t),n=new Set(i),o=new Set(s),h=new Set(a),l=2===o.size&&s[0]!==s[1],d=r.size>1,f=n.size>1,u=!l&&o.size>1,m=h.size>1||[...h].some(e=>0!==e),p=0;return p|=1,p|=4*+l,p|=256*+d,p|=512*+f,p|=1024*+u,p|=2048*+m,N("trun",1,p,[v(e.currentChunk.samples.length),v(e.currentChunk.offset-e.currentChunk.moofOffset||0),l?v(s[0]):[],e.currentChunk.samples.map((e,r)=>{return[d?v(t[r]):[],f?v(i[r]):[],u?v(s[r]):[],m?(n=a[r],y.setInt32(0,n,!1),[b[0],b[1],b[2],b[3]]):[]];var n})])},Ce=(e,t)=>N("tfra",1,0,[v(e.id),v(63),v(e.finalizedChunks.length),e.finalizedChunks.map(i=>[S(O(i.startTimestamp,e.timescale)),S(i.moofOffset),v(t+1),v(1),v(1)])]),ve=()=>N("mfro",0,0,[v(0)]),Se={avc:"avc1",hevc:"hvc1",vp9:"vp09",av1:"av01"},xe={avc:e=>e.info.decoderConfig&&I("avcC",[...new Uint8Array(e.info.decoderConfig.description)]),hevc:e=>e.info.decoderConfig&&I("hvcC",[...new Uint8Array(e.info.decoderConfig.description)]),vp9:e=>{if(!e.info.decoderConfig)return null;let t=e.info.decoderConfig;if(!t.colorSpace)throw new Error("'colorSpace' is required in the decoder config for VP9.");let i=t.codec.split("."),s=Number(i[1]),a=Number(i[2]),r=0+(Number(i[3])<<4)+Number(t.colorSpace.fullRange);return N("vpcC",1,0,[k(s),k(a),k(r),k(2),k(2),k(2),T(0)])},av1:()=>I("av1C",[129,0,0,0])},ze={aac:"mp4a",opus:"Opus"},Ee={aac:e=>{let t=new Uint8Array(e.info.decoderConfig.description);return N("esds",0,0,[v(58753152),k(32+t.byteLength),T(1),k(0),v(75530368),k(18+t.byteLength),k(64),k(21),C(0),v(130071),v(130071),v(92307584),k(t.byteLength),...t,v(109084800),k(1),k(2)])},opus:e=>{let t=3840,i=0;const s=e.info.decoderConfig?.description;if(s){if(s.byteLength<18)throw new TypeError("Invalid decoder description provided for Opus; must be at least 18 bytes long.");const e=ArrayBuffer.isView(s)?new DataView(s.buffer,s.byteOffset,s.byteLength):new DataView(s);t=e.getUint16(10,!0),i=e.getInt16(14,!0)}return I("dOps",[k(0),k(e.info.numberOfChannels),T(t),v(e.info.sampleRate),x(i),k(0)])}},Ae=(Symbol("isTarget"),class{}),Me=class extends Ae{constructor(){super(...arguments),this.buffer=null}},We=class extends Ae{constructor(e){if(super(),this.options=e,"object"!=typeof e)throw new TypeError("StreamTarget requires an options object to be passed to its constructor.");if(e.onData){if("function"!=typeof e.onData)throw new TypeError("options.onData, when provided, must be a function.");if(e.onData.length<2)throw new TypeError("options.onData, when provided, must be a function that takes in at least two arguments (data and position). Ignoring the position argument, which specifies the byte offset at which the data is to be written, can lead to broken outputs.")}if(void 0!==e.chunked&&"boolean"!=typeof e.chunked)throw new TypeError("options.chunked, when provided, must be a boolean.");if(void 0!==e.chunkSize&&(!Number.isInteger(e.chunkSize)||e.chunkSize<1024))throw new TypeError("options.chunkSize, when provided, must be an integer and not smaller than 1024.")}},Oe=class extends Ae{constructor(e,t){if(super(),this.stream=e,this.options=t,!(e instanceof FileSystemWritableFileStream))throw new TypeError("FileSystemWritableFileStreamTarget requires a FileSystemWritableFileStream instance.");if(void 0!==t&&"object"!=typeof t)throw new TypeError("FileSystemWritableFileStreamTarget's options, when provided, must be an object.");if(t&&void 0!==t.chunkSize&&(!Number.isInteger(t.chunkSize)||t.chunkSize<=0))throw new TypeError("options.chunkSize, when provided, must be a positive integer")}},Be=class{constructor(){this.pos=0,n(this,d,new Uint8Array(8)),n(this,f,new DataView(r(this,d).buffer)),this.offsets=new WeakMap}seek(e){this.pos=e}writeU32(e){r(this,f).setUint32(0,e,!1),this.write(r(this,d).subarray(0,4))}writeU64(e){r(this,f).setUint32(0,Math.floor(e/2**32),!1),r(this,f).setUint32(4,e,!1),this.write(r(this,d).subarray(0,8))}writeAscii(e){for(let t=0;t<e.length;t++)r(this,f).setUint8(t%8,e.charCodeAt(t)),t%8==7&&this.write(r(this,d));e.length%8!=0&&this.write(r(this,d).subarray(0,e.length%8))}writeBox(e){if(this.offsets.set(e,this.pos),e.contents&&!e.children)this.writeBoxHeader(e,e.size??e.contents.byteLength+8),this.write(e.contents);else{let t=this.pos;if(this.writeBoxHeader(e,0),e.contents&&this.write(e.contents),e.children)for(let t of e.children)t&&this.writeBox(t);let i=this.pos,s=e.size??i-t;this.seek(t),this.writeBoxHeader(e,s),this.seek(i)}}writeBoxHeader(e,t){this.writeU32(e.largeSize?1:t),this.writeAscii(e.type),e.largeSize&&this.writeU64(t)}measureBoxHeader(e){return 8+(e.largeSize?8:0)}patchBox(e){let t=this.pos;this.seek(this.offsets.get(e)),this.writeBox(e),this.seek(t)}measureBox(e){if(e.contents&&!e.children){return this.measureBoxHeader(e)+e.contents.byteLength}{let t=this.measureBoxHeader(e);if(e.contents&&(t+=e.contents.byteLength),e.children)for(let i of e.children)i&&(t+=this.measureBox(i));return t}}};d=new WeakMap,f=new WeakMap;var Ue=class extends Be{constructor(e){super(),n(this,w),n(this,u,void 0),n(this,m,new ArrayBuffer(65536)),n(this,p,new Uint8Array(r(this,m))),n(this,c,0),o(this,u,e)}write(e){h(this,w,g).call(this,this.pos+e.byteLength),r(this,p).set(e,this.pos),this.pos+=e.byteLength,o(this,c,Math.max(r(this,c),this.pos))}finalize(){h(this,w,g).call(this,this.pos),r(this,u).buffer=r(this,m).slice(0,Math.max(r(this,c),this.pos))}};u=new WeakMap,m=new WeakMap,p=new WeakMap,c=new WeakMap,w=new WeakSet,g=function(e){let t=r(this,m).byteLength;for(;t<e;)t*=2;if(t===r(this,m).byteLength)return;let i=new ArrayBuffer(t),s=new Uint8Array(i);s.set(r(this,p),0),o(this,m,i),o(this,p,s)};var De,je,Re,Ie,Ne,Ve,Fe,Le,$e,Pe,He,_e,qe,Ge=class extends Be{constructor(e){super(),n(this,Ve),n(this,Le),n(this,Pe),n(this,_e),n(this,De,void 0),n(this,je,[]),n(this,Re,void 0),n(this,Ie,void 0),n(this,Ne,[]),o(this,De,e),o(this,Re,e.options?.chunked??!1),o(this,Ie,e.options?.chunkSize??16777216)}write(e){r(this,je).push({data:e.slice(),start:this.pos}),this.pos+=e.byteLength}flush(){if(0===r(this,je).length)return;let e=[],t=[...r(this,je)].sort((e,t)=>e.start-t.start);e.push({start:t[0].start,size:t[0].data.byteLength});for(let i=1;i<t.length;i++){let s=e[e.length-1],a=t[i];a.start<=s.start+s.size?s.size=Math.max(s.size,a.start+a.data.byteLength-s.start):e.push({start:a.start,size:a.data.byteLength})}for(let t of e){t.data=new Uint8Array(t.size);for(let e of r(this,je))t.start<=e.start&&e.start<t.start+t.size&&t.data.set(e.data,e.start-t.start);r(this,Re)?(h(this,Ve,Fe).call(this,t.data,t.start),h(this,_e,qe).call(this)):r(this,De).options.onData?.(t.data,t.start)}r(this,je).length=0}finalize(){r(this,Re)&&h(this,_e,qe).call(this,!0)}};De=new WeakMap,je=new WeakMap,Re=new WeakMap,Ie=new WeakMap,Ne=new WeakMap,Ve=new WeakSet,Fe=function(e,t){let i=r(this,Ne).findIndex(e=>e.start<=t&&t<e.start+r(this,Ie));-1===i&&(i=h(this,Pe,He).call(this,t));let s=r(this,Ne)[i],a=t-s.start,n=e.subarray(0,Math.min(r(this,Ie)-a,e.byteLength));s.data.set(n,a);let o={start:a,end:a+n.byteLength};if(h(this,Le,$e).call(this,s,o),0===s.written[0].start&&s.written[0].end===r(this,Ie)&&(s.shouldFlush=!0),r(this,Ne).length>2){for(let e=0;e<r(this,Ne).length-1;e++)r(this,Ne)[e].shouldFlush=!0;h(this,_e,qe).call(this)}n.byteLength<e.byteLength&&h(this,Ve,Fe).call(this,e.subarray(n.byteLength),t+n.byteLength)},Le=new WeakSet,$e=function(e,t){let i=0,s=e.written.length-1,a=-1;for(;i<=s;){let r=Math.floor(i+(s-i+1)/2);e.written[r].start<=t.start?(i=r+1,a=r):s=r-1}for(e.written.splice(a+1,0,t),(-1===a||e.written[a].end<t.start)&&a++;a<e.written.length-1&&e.written[a].end>=e.written[a+1].start;)e.written[a].end=Math.max(e.written[a].end,e.written[a+1].end),e.written.splice(a+1,1)},Pe=new WeakSet,He=function(e){let t={start:Math.floor(e/r(this,Ie))*r(this,Ie),data:new Uint8Array(r(this,Ie)),written:[],shouldFlush:!1};return r(this,Ne).push(t),r(this,Ne).sort((e,t)=>e.start-t.start),r(this,Ne).indexOf(t)},_e=new WeakSet,qe=function(e=!1){for(let t=0;t<r(this,Ne).length;t++){let i=r(this,Ne)[t];if(i.shouldFlush||e){for(let e of i.written)r(this,De).options.onData?.(i.data.subarray(e.start,e.end),i.start+e.start);r(this,Ne).splice(t--,1)}}};var Je,Ke,Qe,Xe,Ye,Ze,et,tt,it,st,at,rt,nt,ot,ht,lt,dt,ft,ut,mt,pt,ct,wt,gt,bt,yt,kt,Tt,Ct,vt,St,xt,zt,Et,At,Mt,Wt,Ot=class extends Ge{constructor(e){super(new We({onData:(t,i)=>e.stream.write({type:"write",data:t,position:i}),chunked:!0,chunkSize:e.options?.chunkSize}))}},Bt=1e3,Ut=["avc","hevc","vp9","av1"],Dt=["aac","opus"],jt=["strict","offset","cross-track-offset"],Rt=class{constructor(e){if(n(this,nt),n(this,ht),n(this,dt),n(this,ut),n(this,pt),n(this,wt),n(this,bt),n(this,kt),n(this,Ct),n(this,St),n(this,zt),n(this,At),n(this,Je,void 0),n(this,Ke,void 0),n(this,Qe,void 0),n(this,Xe,void 0),n(this,Ye,null),n(this,Ze,null),n(this,et,Math.floor(Date.now()/1e3)+2082844800),n(this,tt,[]),n(this,it,1),n(this,st,[]),n(this,at,[]),n(this,rt,!1),h(this,nt,ot).call(this,e),e.video=j(e.video),e.audio=j(e.audio),e.fastStart=j(e.fastStart),this.target=e.target,o(this,Je,{firstTimestampBehavior:"strict",...e}),e.target instanceof Me)o(this,Ke,new Ue(e.target));else if(e.target instanceof We)o(this,Ke,new Ge(e.target));else{if(!(e.target instanceof Oe))throw new Error(`Invalid target: ${e.target}`);o(this,Ke,new Ot(e.target))}h(this,ut,mt).call(this),h(this,ht,lt).call(this)}addVideoChunk(e,t,i,s){if(!(e instanceof EncodedVideoChunk))throw new TypeError("addVideoChunk's first argument (sample) must be of type EncodedVideoChunk.");if(t&&"object"!=typeof t)throw new TypeError("addVideoChunk's second argument (meta), when provided, must be an object.");if(void 0!==i&&(!Number.isFinite(i)||i<0))throw new TypeError("addVideoChunk's third argument (timestamp), when provided, must be a non-negative real number.");if(void 0!==s&&!Number.isFinite(s))throw new TypeError("addVideoChunk's fourth argument (compositionTimeOffset), when provided, must be a real number.");let a=new Uint8Array(e.byteLength);e.copyTo(a),this.addVideoChunkRaw(a,e.type,i??e.timestamp,e.duration,t,s)}addVideoChunkRaw(e,t,i,s,a,n){if(!(e instanceof Uint8Array))throw new TypeError("addVideoChunkRaw's first argument (data) must be an instance of Uint8Array.");if("key"!==t&&"delta"!==t)throw new TypeError("addVideoChunkRaw's second argument (type) must be either 'key' or 'delta'.");if(!Number.isFinite(i)||i<0)throw new TypeError("addVideoChunkRaw's third argument (timestamp) must be a non-negative real number.");if(!Number.isFinite(s)||s<0)throw new TypeError("addVideoChunkRaw's fourth argument (duration) must be a non-negative real number.");if(a&&"object"!=typeof a)throw new TypeError("addVideoChunkRaw's fifth argument (meta), when provided, must be an object.");if(void 0!==n&&!Number.isFinite(n))throw new TypeError("addVideoChunkRaw's sixth argument (compositionTimeOffset), when provided, must be a real number.");if(h(this,At,Mt).call(this),!r(this,Je).video)throw new Error("No video track declared.");if("object"==typeof r(this,Je).fastStart&&r(this,Ye).samples.length===r(this,Je).fastStart.expectedVideoChunks)throw new Error(`Cannot add more video chunks than specified in 'fastStart' (${r(this,Je).fastStart.expectedVideoChunks}).`);let o=h(this,wt,gt).call(this,r(this,Ye),e,t,i,s,a,n);if("fragmented"===r(this,Je).fastStart&&r(this,Ze)){for(;r(this,at).length>0&&r(this,at)[0].decodeTimestamp<=o.decodeTimestamp;){let e=r(this,at).shift();h(this,bt,yt).call(this,r(this,Ze),e)}o.decodeTimestamp<=r(this,Ze).lastDecodeTimestamp?h(this,bt,yt).call(this,r(this,Ye),o):r(this,st).push(o)}else h(this,bt,yt).call(this,r(this,Ye),o)}addAudioChunk(e,t,i){if(!(e instanceof EncodedAudioChunk))throw new TypeError("addAudioChunk's first argument (sample) must be of type EncodedAudioChunk.");if(t&&"object"!=typeof t)throw new TypeError("addAudioChunk's second argument (meta), when provided, must be an object.");if(void 0!==i&&(!Number.isFinite(i)||i<0))throw new TypeError("addAudioChunk's third argument (timestamp), when provided, must be a non-negative real number.");let s=new Uint8Array(e.byteLength);e.copyTo(s),this.addAudioChunkRaw(s,e.type,i??e.timestamp,e.duration,t)}addAudioChunkRaw(e,t,i,s,a){if(!(e instanceof Uint8Array))throw new TypeError("addAudioChunkRaw's first argument (data) must be an instance of Uint8Array.");if("key"!==t&&"delta"!==t)throw new TypeError("addAudioChunkRaw's second argument (type) must be either 'key' or 'delta'.");if(!Number.isFinite(i)||i<0)throw new TypeError("addAudioChunkRaw's third argument (timestamp) must be a non-negative real number.");if(!Number.isFinite(s)||s<0)throw new TypeError("addAudioChunkRaw's fourth argument (duration) must be a non-negative real number.");if(a&&"object"!=typeof a)throw new TypeError("addAudioChunkRaw's fifth argument (meta), when provided, must be an object.");if(h(this,At,Mt).call(this),!r(this,Je).audio)throw new Error("No audio track declared.");if("object"==typeof r(this,Je).fastStart&&r(this,Ze).samples.length===r(this,Je).fastStart.expectedAudioChunks)throw new Error(`Cannot add more audio chunks than specified in 'fastStart' (${r(this,Je).fastStart.expectedAudioChunks}).`);let n=h(this,wt,gt).call(this,r(this,Ze),e,t,i,s,a);if("fragmented"===r(this,Je).fastStart&&r(this,Ye)){for(;r(this,st).length>0&&r(this,st)[0].decodeTimestamp<=n.decodeTimestamp;){let e=r(this,st).shift();h(this,bt,yt).call(this,r(this,Ye),e)}n.decodeTimestamp<=r(this,Ye).lastDecodeTimestamp?h(this,bt,yt).call(this,r(this,Ze),n):r(this,at).push(n)}else h(this,bt,yt).call(this,r(this,Ze),n)}finalize(){if(r(this,rt))throw new Error("Cannot finalize a muxer more than once.");if("fragmented"===r(this,Je).fastStart){for(let e of r(this,st))h(this,bt,yt).call(this,r(this,Ye),e);for(let e of r(this,at))h(this,bt,yt).call(this,r(this,Ze),e);h(this,St,xt).call(this,!1)}else r(this,Ye)&&h(this,Ct,vt).call(this,r(this,Ye)),r(this,Ze)&&h(this,Ct,vt).call(this,r(this,Ze));let e=[r(this,Ye),r(this,Ze)].filter(Boolean);if("in-memory"===r(this,Je).fastStart){let t;for(let i=0;i<2;i++){let i=F(e,r(this,et)),s=r(this,Ke).measureBox(i);t=r(this,Ke).measureBox(r(this,Xe));let a=r(this,Ke).pos+s+t;for(let e of r(this,tt)){e.offset=a;for(let{data:i}of e.samples)a+=i.byteLength,t+=i.byteLength}if(a<2**32)break;t>=2**32&&(r(this,Xe).largeSize=!0)}let i=F(e,r(this,et));r(this,Ke).writeBox(i),r(this,Xe).size=t,r(this,Ke).writeBox(r(this,Xe));for(let e of r(this,tt))for(let t of e.samples)r(this,Ke).write(t.data),t.data=null}else if("fragmented"===r(this,Je).fastStart){let t=r(this,Ke).pos,i=(e=>I("mfra",null,[...e.map(Ce),ve()]))(e);r(this,Ke).writeBox(i);let s=r(this,Ke).pos-t;r(this,Ke).seek(r(this,Ke).pos-4),r(this,Ke).writeU32(s)}else{let t=r(this,Ke).offsets.get(r(this,Xe)),i=r(this,Ke).pos-t;r(this,Xe).size=i,r(this,Xe).largeSize=i>=2**32,r(this,Ke).patchBox(r(this,Xe));let s=F(e,r(this,et));if("object"==typeof r(this,Je).fastStart){r(this,Ke).seek(r(this,Qe)),r(this,Ke).writeBox(s);let e=t-r(this,Ke).pos;r(this,Ke).writeBox({type:"free",size:e})}else r(this,Ke).writeBox(s)}h(this,zt,Et).call(this),r(this,Ke).finalize(),o(this,rt,!0)}};return Je=new WeakMap,Ke=new WeakMap,Qe=new WeakMap,Xe=new WeakMap,Ye=new WeakMap,Ze=new WeakMap,et=new WeakMap,tt=new WeakMap,it=new WeakMap,st=new WeakMap,at=new WeakMap,rt=new WeakMap,nt=new WeakSet,ot=function(e){if("object"!=typeof e)throw new TypeError("The muxer requires an options object to be passed to its constructor.");if(!(e.target instanceof Ae))throw new TypeError("The target must be provided and an instance of Target.");if(e.video){if(!Ut.includes(e.video.codec))throw new TypeError(`Unsupported video codec: ${e.video.codec}`);if(!Number.isInteger(e.video.width)||e.video.width<=0)throw new TypeError(`Invalid video width: ${e.video.width}. Must be a positive integer.`);if(!Number.isInteger(e.video.height)||e.video.height<=0)throw new TypeError(`Invalid video height: ${e.video.height}. Must be a positive integer.`);const t=e.video.rotation;if("number"==typeof t&&![0,90,180,270].includes(t))throw new TypeError(`Invalid video rotation: ${t}. Has to be 0, 90, 180 or 270.`);if(Array.isArray(t)&&(9!==t.length||t.some(e=>"number"!=typeof e)))throw new TypeError(`Invalid video transformation matrix: ${t.join()}`);if(void 0!==e.video.frameRate&&(!Number.isInteger(e.video.frameRate)||e.video.frameRate<=0))throw new TypeError(`Invalid video frame rate: ${e.video.frameRate}. Must be a positive integer.`)}if(e.audio){if(!Dt.includes(e.audio.codec))throw new TypeError(`Unsupported audio codec: ${e.audio.codec}`);if(!Number.isInteger(e.audio.numberOfChannels)||e.audio.numberOfChannels<=0)throw new TypeError(`Invalid number of audio channels: ${e.audio.numberOfChannels}. Must be a positive integer.`);if(!Number.isInteger(e.audio.sampleRate)||e.audio.sampleRate<=0)throw new TypeError(`Invalid audio sample rate: ${e.audio.sampleRate}. Must be a positive integer.`)}if(e.firstTimestampBehavior&&!jt.includes(e.firstTimestampBehavior))throw new TypeError(`Invalid first timestamp behavior: ${e.firstTimestampBehavior}`);if("object"==typeof e.fastStart){if(e.video){if(void 0===e.fastStart.expectedVideoChunks)throw new TypeError("'fastStart' is an object but is missing property 'expectedVideoChunks'.");if(!Number.isInteger(e.fastStart.expectedVideoChunks)||e.fastStart.expectedVideoChunks<0)throw new TypeError("'expectedVideoChunks' must be a non-negative integer.")}if(e.audio){if(void 0===e.fastStart.expectedAudioChunks)throw new TypeError("'fastStart' is an object but is missing property 'expectedAudioChunks'.");if(!Number.isInteger(e.fastStart.expectedAudioChunks)||e.fastStart.expectedAudioChunks<0)throw new TypeError("'expectedAudioChunks' must be a non-negative integer.")}}else if(![!1,"in-memory","fragmented"].includes(e.fastStart))throw new TypeError("'fastStart' option must be false, 'in-memory', 'fragmented' or an object.");if(void 0!==e.minFragmentDuration&&(!Number.isFinite(e.minFragmentDuration)||e.minFragmentDuration<0))throw new TypeError("'minFragmentDuration' must be a non-negative number.")},ht=new WeakSet,lt=function(){var e;if(r(this,Ke).writeBox((e={holdsAvc:"avc"===r(this,Je).video?.codec,fragmented:"fragmented"===r(this,Je).fastStart}).fragmented?I("ftyp",[A("iso5"),v(512),A("iso5"),A("iso6"),A("mp41")]):I("ftyp",[A("isom"),v(512),A("isom"),e.holdsAvc?A("avc1"):[],A("mp41")])),o(this,Qe,r(this,Ke).pos),"in-memory"===r(this,Je).fastStart)o(this,Xe,V(!1));else if("fragmented"===r(this,Je).fastStart);else{if("object"==typeof r(this,Je).fastStart){let e=h(this,dt,ft).call(this);r(this,Ke).seek(r(this,Ke).pos+e)}o(this,Xe,V(!0)),r(this,Ke).writeBox(r(this,Xe))}h(this,zt,Et).call(this)},dt=new WeakSet,ft=function(){if("object"!=typeof r(this,Je).fastStart)return;let e=0,t=[r(this,Je).fastStart.expectedVideoChunks,r(this,Je).fastStart.expectedAudioChunks];for(let i of t)i&&(e+=8*Math.ceil(2/3*i),e+=4*i,e+=12*Math.ceil(2/3*i),e+=4*i,e+=8*i);return e+=4096,e},ut=new WeakSet,mt=function(){if(r(this,Je).video&&o(this,Ye,{id:1,info:{type:"video",codec:r(this,Je).video.codec,width:r(this,Je).video.width,height:r(this,Je).video.height,rotation:r(this,Je).video.rotation??0,decoderConfig:null},timescale:r(this,Je).video.frameRate??57600,samples:[],finalizedChunks:[],currentChunk:null,firstDecodeTimestamp:void 0,lastDecodeTimestamp:-1,timeToSampleTable:[],compositionTimeOffsetTable:[],lastTimescaleUnits:null,lastSample:null,compactlyCodedChunkTable:[]}),r(this,Je).audio&&(o(this,Ze,{id:r(this,Je).video?2:1,info:{type:"audio",codec:r(this,Je).audio.codec,numberOfChannels:r(this,Je).audio.numberOfChannels,sampleRate:r(this,Je).audio.sampleRate,decoderConfig:null},timescale:r(this,Je).audio.sampleRate,samples:[],finalizedChunks:[],currentChunk:null,firstDecodeTimestamp:void 0,lastDecodeTimestamp:-1,timeToSampleTable:[],compositionTimeOffsetTable:[],lastTimescaleUnits:null,lastSample:null,compactlyCodedChunkTable:[]}),"aac"===r(this,Je).audio.codec)){let e=h(this,pt,ct).call(this,2,r(this,Je).audio.sampleRate,r(this,Je).audio.numberOfChannels);r(this,Ze).info.decoderConfig={codec:r(this,Je).audio.codec,description:e,numberOfChannels:r(this,Je).audio.numberOfChannels,sampleRate:r(this,Je).audio.sampleRate}}},pt=new WeakSet,ct=function(e,t,i){let s=[96e3,88200,64e3,48e3,44100,32e3,24e3,22050,16e3,12e3,11025,8e3,7350].indexOf(t),a=i,r="";r+=e.toString(2).padStart(5,"0"),r+=s.toString(2).padStart(4,"0"),15===s&&(r+=t.toString(2).padStart(24,"0")),r+=a.toString(2).padStart(4,"0");let n=8*Math.ceil(r.length/8);r=r.padEnd(n,"0");let o=new Uint8Array(r.length/8);for(let e=0;e<r.length;e+=8)o[e/8]=parseInt(r.slice(e,e+8),2);return o},wt=new WeakSet,gt=function(e,t,i,s,a,r,n){let o=s/1e6,l=(s-(n??0))/1e6,d=a/1e6,f=h(this,kt,Tt).call(this,o,l,e);return o=f.presentationTimestamp,l=f.decodeTimestamp,r?.decoderConfig&&(null===e.info.decoderConfig?e.info.decoderConfig=r.decoderConfig:Object.assign(e.info.decoderConfig,r.decoderConfig)),{presentationTimestamp:o,decodeTimestamp:l,duration:d,data:t,size:t.byteLength,type:i,timescaleUnitsToNextSample:O(d,e.timescale)}},bt=new WeakSet,yt=function(e,t){"fragmented"!==r(this,Je).fastStart&&e.samples.push(t);const i=O(t.presentationTimestamp-t.decodeTimestamp,e.timescale);if(null!==e.lastTimescaleUnits){let s=O(t.decodeTimestamp,e.timescale,!1),a=Math.round(s-e.lastTimescaleUnits);if(e.lastTimescaleUnits+=a,e.lastSample.timescaleUnitsToNextSample=a,"fragmented"!==r(this,Je).fastStart){let t=M(e.timeToSampleTable);1===t.sampleCount?(t.sampleDelta=a,t.sampleCount++):t.sampleDelta===a?t.sampleCount++:(t.sampleCount--,e.timeToSampleTable.push({sampleCount:2,sampleDelta:a}));const s=M(e.compositionTimeOffsetTable);s.sampleCompositionTimeOffset===i?s.sampleCount++:e.compositionTimeOffsetTable.push({sampleCount:1,sampleCompositionTimeOffset:i})}}else e.lastTimescaleUnits=0,"fragmented"!==r(this,Je).fastStart&&(e.timeToSampleTable.push({sampleCount:1,sampleDelta:O(t.duration,e.timescale)}),e.compositionTimeOffsetTable.push({sampleCount:1,sampleCompositionTimeOffset:i}));e.lastSample=t;let s=!1;if(e.currentChunk){let i=t.presentationTimestamp-e.currentChunk.startTimestamp;if("fragmented"===r(this,Je).fastStart){let a=r(this,Ye)??r(this,Ze);const n=r(this,Je).minFragmentDuration??1;e===a&&"key"===t.type&&i>=n&&(s=!0,h(this,St,xt).call(this))}else s=i>=.5}else s=!0;s&&(e.currentChunk&&h(this,Ct,vt).call(this,e),e.currentChunk={startTimestamp:t.presentationTimestamp,samples:[]}),e.currentChunk.samples.push(t)},kt=new WeakSet,Tt=function(e,t,i){const s="strict"===r(this,Je).firstTimestampBehavior,a=-1===i.lastDecodeTimestamp;if(s&&a&&0!==t)throw new Error(`The first chunk for your media track must have a timestamp of 0 (received DTS=${t}).Non-zero first timestamps are often caused by directly piping frames or audio data from a MediaStreamTrack into the encoder. Their timestamps are typically relative to the age of thedocument, which is probably what you want.\n\nIf you want to offset all timestamps of a track such that the first one is zero, set firstTimestampBehavior: 'offset' in the options.\n`);if("offset"===r(this,Je).firstTimestampBehavior||"cross-track-offset"===r(this,Je).firstTimestampBehavior){let s;void 0===i.firstDecodeTimestamp&&(i.firstDecodeTimestamp=t),s="offset"===r(this,Je).firstTimestampBehavior?i.firstDecodeTimestamp:Math.min(r(this,Ye)?.firstDecodeTimestamp??1/0,r(this,Ze)?.firstDecodeTimestamp??1/0),t-=s,e-=s}if(t<i.lastDecodeTimestamp)throw new Error(`Timestamps must be monotonically increasing (DTS went from ${1e6*i.lastDecodeTimestamp} to ${1e6*t}).`);return i.lastDecodeTimestamp=t,{presentationTimestamp:e,decodeTimestamp:t}},Ct=new WeakSet,vt=function(e){if("fragmented"===r(this,Je).fastStart)throw new Error("Can't finalize individual chunks if 'fastStart' is set to 'fragmented'.");if(e.currentChunk)if(e.finalizedChunks.push(e.currentChunk),r(this,tt).push(e.currentChunk),0!==e.compactlyCodedChunkTable.length&&M(e.compactlyCodedChunkTable).samplesPerChunk===e.currentChunk.samples.length||e.compactlyCodedChunkTable.push({firstChunk:e.finalizedChunks.length,samplesPerChunk:e.currentChunk.samples.length}),"in-memory"!==r(this,Je).fastStart){e.currentChunk.offset=r(this,Ke).pos;for(let t of e.currentChunk.samples)r(this,Ke).write(t.data),t.data=null;h(this,zt,Et).call(this)}else e.currentChunk.offset=0},St=new WeakSet,xt=function(e=!0){if("fragmented"!==r(this,Je).fastStart)throw new Error("Can't finalize a fragment unless 'fastStart' is set to 'fragmented'.");let t=[r(this,Ye),r(this,Ze)].filter(e=>e&&e.currentChunk);if(0===t.length)return;let i=(s=this,a=it,{set _(e){o(s,a,e,n)},get _(){return r(s,a,l)}})._++;var s,a,n,l;if(1===i){let e=F(t,r(this,et),!0);r(this,Ke).writeBox(e)}let d=r(this,Ke).pos,f=ce(i,t);r(this,Ke).writeBox(f);{let e=V(!1),i=0;for(let e of t)for(let t of e.currentChunk.samples)i+=t.size;let s=r(this,Ke).measureBox(e)+i;s>=2**32&&(e.largeSize=!0,s=r(this,Ke).measureBox(e)+i),e.size=s,r(this,Ke).writeBox(e)}for(let e of t){e.currentChunk.offset=r(this,Ke).pos,e.currentChunk.moofOffset=d;for(let t of e.currentChunk.samples)r(this,Ke).write(t.data),t.data=null}let u=r(this,Ke).pos;r(this,Ke).seek(r(this,Ke).offsets.get(f));let m=ce(i,t);r(this,Ke).writeBox(m),r(this,Ke).seek(u);for(let e of t)e.finalizedChunks.push(e.currentChunk),r(this,tt).push(e.currentChunk),e.currentChunk=null;e&&h(this,zt,Et).call(this)},zt=new WeakSet,Et=function(){r(this,Ke)instanceof Ge&&r(this,Ke).flush()},At=new WeakSet,Mt=function(){if(r(this,rt))throw new Error("Cannot add new video or audio chunks after the file has been finalized.")},Wt=l,((a,r,n,o)=>{if(r&&"object"==typeof r||"function"==typeof r)for(let h of i(r))s.call(a,h)||h===n||e(a,h,{get:()=>r[h],enumerable:!(o=t(r,h))||o.enumerable});return a})(e({},"__esModule",{value:!0}),Wt)})();"object"==typeof module&&"object"==typeof module.exports&&Object.assign(module.exports,Mp4Muxer);
+    </script>
+    <script>
         /********************************************************************
-         * MUUNDO MAKER — GTA 6 VIDEO STUDIO
+         * MUUNDO MAKER — VIDEO STUDIO
          * Apresentador + vídeo centralizado • legenda alinhada à voz real
          * • vários vídeos de referência com detecção de cortes de cena
          ********************************************************************/
@@ -1019,7 +1074,7 @@
         /********************************************************************
          * CENÁRIOS — cidade neon, praia, perseguição, sirene (troca automática)
          ********************************************************************/
-        const SCENERY_LABEL = { cidade: '🌆 Cidade Neon', praia: '🏖️ Praia Vice City', perseguicao: '🚓 Perseguição', sirene: '🚨 Sirene' };
+        const SCENERY_LABEL = { cidade: '🌆 Cidade Neon', praia: '🏖️ Praia Neon', perseguicao: '🚓 Perseguição', sirene: '🚨 Sirene' };
 
         function skyGradient(c, L, stops) {
             const g = c.createLinearGradient(0, 0, 0, L.horizonY);
@@ -2073,7 +2128,10 @@
                 setProgress(false);
                 onTimingChanged();
                 updateGroqUI();
+                audioState.whisperTried = false;
+                audioState.whisperExpected = !!groqKey;
                 if (groqKey) runWhisper();
+                scheduleAutoExport();
             } catch (err) {
                 console.error(err);
                 setProgress(false);
@@ -2333,7 +2391,7 @@
                     rebuildScenePool();
                 });
             });
-            analysisChain = analysisChain.then(() => { setProgress(false); updateVideoBadge(); renderVideoList(); updateGroqUI(); });
+            analysisChain = analysisChain.then(() => { setProgress(false); updateVideoBadge(); renderVideoList(); updateGroqUI(); scheduleAutoExport(); });
         }
 
         function removeVideo(id) {
@@ -2364,7 +2422,7 @@
                 gameplayStatusBadge.className = "text-[10px] font-mono-tech px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700/40";
             } else if (busy) {
                 gameplayStatusBadge.textContent = 'Analisando...';
-                gameplayStatusBadge.className = "text-[10px] font-mono-tech px-2 py-0.5 rounded bg-gtaYellow/20 text-gtaYellow border border-gtaYellow/40";
+                gameplayStatusBadge.className = "text-[10px] font-mono-tech px-2 py-0.5 rounded bg-neonYellow/20 text-neonYellow border border-neonYellow/40";
             } else {
                 gameplayStatusBadge.textContent = `${videos.length} vídeo(s) • ${scenes.length} cenas`;
                 gameplayStatusBadge.className = "text-[10px] font-mono-tech px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40";
@@ -2381,19 +2439,19 @@
                     const nai = v.scenes.filter(sc => sc.ai).length;
                     const u = videoUsage.get(v);
                     const usage = u ? ` • usa ${Math.round(u.seconds)}s (${Math.round(u.share * 100)}%)` : '';
-                    status = `<span class="${u && u.warn ? 'text-gtaYellow' : 'text-emerald-300'}">${u && u.warn ? '⚠️ ' : ''}${v.scenes.length} cenas${nai ? ` • 🧠 ${nai}` : ''}${usage}</span>`;
+                    status = `<span class="${u && u.warn ? 'text-neonYellow' : 'text-emerald-300'}">${u && u.warn ? '⚠️ ' : ''}${v.scenes.length} cenas${nai ? ` • 🧠 ${nai}` : ''}${usage}</span>`;
                 }
-                else if (v.status === 'analisando') status = `<span class="text-gtaYellow">analisando ${Math.round(v.progress * 100)}%</span>`;
+                else if (v.status === 'analisando') status = `<span class="text-neonYellow">analisando ${Math.round(v.progress * 100)}%</span>`;
                 else if (v.status === 'erro') status = `<span class="text-red-400">não foi possível ler</span>`;
                 else status = `<span class="text-purple-400">na fila</span>`;
                 row.innerHTML = `
                     <div class="flex items-center gap-2 truncate">
-                        <span class="text-gtaCyan">🎬</span>
+                        <span class="text-neonCyan">🎬</span>
                         <span class="text-white font-semibold truncate">${escapeHtml(v.name)}</span>
                     </div>
                     <div class="flex items-center gap-2 shrink-0 font-mono-tech text-[10px]">
                         ${status}
-                        <button class="text-purple-300 hover:text-gtaPink font-bold px-1" title="Remover">✕</button>
+                        <button class="text-purple-300 hover:text-neonPink font-bold px-1" title="Remover">✕</button>
                     </div>`;
                 row.querySelector('button').addEventListener('click', () => removeVideo(v.id));
                 videoListEl.appendChild(row);
@@ -2535,14 +2593,14 @@
             editList.forEach((cut, i) => {
                 const row = document.createElement('div');
                 row.id = `cut-row-${i}`;
-                row.className = "cut-row flex items-center justify-between gap-2 bg-[#0A0915] px-2.5 py-1.5 rounded-lg border border-purple-900/50 hover:border-gtaCyan/50 cursor-pointer transition-all";
+                row.className = "cut-row flex items-center justify-between gap-2 bg-[#0A0915] px-2.5 py-1.5 rounded-lg border border-purple-900/50 hover:border-neonCyan/50 cursor-pointer transition-all";
                 row.innerHTML = `
                     <div class="flex items-center gap-2 truncate">
-                        <span class="text-[10px] font-mono-tech text-gtaPink font-bold">${formatTime(cut.t0)}</span>
+                        <span class="text-[10px] font-mono-tech text-neonPink font-bold">${formatTime(cut.t0)}</span>
                         <span class="text-white font-semibold truncate">${escapeHtml(cut.video.name)}</span>
                         <span class="text-purple-300 truncate hidden sm:inline" title="${escapeHtml(cut.scene.ai ? cut.scene.ai.descricao : '')}">${cut.scene.ai ? '🧠 ' + escapeHtml((cut.scene.ai.tipo && cut.scene.ai.tipo !== 'outro' ? sceneTypeName(cut.scene.ai.tipo) + ' • ' : '') + (cut.scene.ai.personagens.length ? cut.scene.ai.personagens.join(' + ') + ' • ' : '') + cut.scene.ai.descricao) : (FEATURE_LABEL[cut.feature] || '')}</span>
                     </div>
-                    <span class="text-[10px] font-mono-tech text-gtaCyan shrink-0">@${formatTime(cut.srcIn)} • ${(cut.t1 - cut.t0).toFixed(1)}s</span>`;
+                    <span class="text-[10px] font-mono-tech text-neonCyan shrink-0">@${formatTime(cut.srcIn)} • ${(cut.t1 - cut.t0).toFixed(1)}s</span>`;
                 row.addEventListener('click', () => {
                     seekTo(cut.t0 + 0.01);
                     if (!isPlaying) togglePlay();
@@ -2555,10 +2613,10 @@
         function highlightCutRow(i) {
             if (i === highlightedCutRow) return;
             const old = $(`cut-row-${highlightedCutRow}`);
-            if (old) old.classList.remove('border-gtaCyan', 'bg-gtaCyan/10');
+            if (old) old.classList.remove('border-neonCyan', 'bg-neonCyan/10');
             const el = $(`cut-row-${i}`);
             if (el) {
-                el.classList.add('border-gtaCyan', 'bg-gtaCyan/10');
+                el.classList.add('border-neonCyan', 'bg-neonCyan/10');
                 if (isPlaying) {
                     const box = mappedClipsList;
                     const top = el.offsetTop - box.offsetTop;
@@ -2688,7 +2746,7 @@
                     const dw = V.w * z, dh = V.h * z;
                     ctx.drawImage(frameCache, V.x - (dw - V.w) / 2, V.y - (dh - V.h) / 2, dw, dh);
                 }
-                // Vice City grade (subtle, keeps palette without hiding the footage)
+                // Neon grade (subtle, keeps palette without hiding the footage)
                 const grade = ctx.createLinearGradient(0, V.y, 0, V.y + V.h);
                 grade.addColorStop(0, 'rgba(42, 15, 77, 0.18)');
                 grade.addColorStop(0.5, 'rgba(42, 15, 77, 0.04)');
@@ -2941,7 +2999,7 @@
                 item.className = "sb-item p-2 rounded-xl bg-[#0A0915]/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
                 item.innerHTML = `
                     <div class="flex items-center gap-2 truncate">
-                        <span class="px-1.5 py-0.5 rounded bg-purple-950 text-gtaCyan font-mono-tech text-[10px] font-bold">#${String(idx + 1).padStart(2, '0')}</span>
+                        <span class="px-1.5 py-0.5 rounded bg-purple-950 text-neonCyan font-mono-tech text-[10px] font-bold">#${String(idx + 1).padStart(2, '0')}</span>
                         <span class="font-bold text-white truncate">${escapeHtml(shot.headline)}</span>
                     </div>
                     <span class="text-[10px] font-mono-tech text-purple-400 shrink-0">${formatTime(shot.start)}</span>`;
@@ -3035,7 +3093,7 @@
             const styles = {
                 ok: 'border-emerald-400/40 bg-emerald-500/10 text-emerald-200',
                 err: 'border-red-400/50 bg-red-500/10 text-red-200',
-                info: 'border-gtaCyan/40 bg-gtaCyan/10 text-cyan-100'
+                info: 'border-neonCyan/40 bg-neonCyan/10 text-cyan-100'
             };
             groqMessage.className = `mt-2 text-[11px] leading-tight px-3 py-2 rounded-lg border ${styles[kind] || styles.info}`;
             groqMessage.textContent = text;
@@ -3055,7 +3113,7 @@
                 groqStatusBadge.className = 'text-[10px] font-mono-tech px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700/40';
             } else if (groqBusy) {
                 groqStatusBadge.textContent = 'Processando...';
-                groqStatusBadge.className = 'text-[10px] font-mono-tech px-2 py-0.5 rounded bg-gtaYellow/20 text-gtaYellow border border-gtaYellow/40';
+                groqStatusBadge.className = 'text-[10px] font-mono-tech px-2 py-0.5 rounded bg-neonYellow/20 text-neonYellow border border-neonYellow/40';
             } else {
                 groqStatusBadge.textContent = 'Pronta';
                 groqStatusBadge.className = 'text-[10px] font-mono-tech px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40';
@@ -3285,7 +3343,9 @@
             } finally {
                 setProgress(false);
                 groqBusy = false;
+                audioState.whisperTried = true;
                 updateGroqUI();
+                scheduleAutoExport();
             }
         }
 
@@ -3492,7 +3552,7 @@
                     setProgress(true, `Visão IA: cenas ${b + 1}–${b + batch.length} de ${todo.length}...`, b / todo.length);
                     const grid = await buildSceneGrid(batch, 1, Math.min(cols, batch.length));
                     const text =
-`Você é um assistente de edição de vídeo analisando cenas de GTA 6.
+`Você é um assistente de edição de vídeo analisando cenas de vídeo.
 
 PERSONAGENS (aparência):
 ${fichaCurta}
@@ -3574,6 +3634,7 @@ Regras:
                 buildEditList();
                 renderVideoList();
                 updateGroqUI();
+                scheduleAutoExport();
             }
         }
 
@@ -3695,7 +3756,7 @@ Regras:
             captionSource = src;
             try { localStorage.setItem('vstudio_caption_source', src); } catch (e) {}
             STORYBOARD.forEach(sh => { sh._pagesKey = null; });
-            const on = 'py-1.5 px-1 rounded-lg text-[10px] font-extrabold bg-gtaPink text-white shadow transition-all';
+            const on = 'py-1.5 px-1 rounded-lg text-[10px] font-extrabold bg-neonPink text-white shadow transition-all';
             const off = 'py-1.5 px-1 rounded-lg text-[10px] font-bold text-purple-300 hover:text-white transition-all';
             $('cap-src-real').className = src === 'real' ? on : off;
             $('cap-src-roteiro').className = src === 'roteiro' ? on : off;
@@ -3705,9 +3766,9 @@ Regras:
         setCaptionSource(captionSource);
 
         // ---------------- Avatar & cenário UI ----------------
-        const SEG_ON = 'py-1.5 px-1 rounded-lg text-[10px] font-extrabold bg-gtaPink text-white shadow transition-all';
+        const SEG_ON = 'py-1.5 px-1 rounded-lg text-[10px] font-extrabold bg-neonPink text-white shadow transition-all';
         const SEG_OFF = 'py-1.5 px-1 rounded-lg text-[10px] font-bold text-purple-300 hover:text-white transition-all';
-        const BG_ON = 'py-2 px-2 rounded-lg text-[11px] font-extrabold border-2 border-gtaYellow bg-gtaYellow/15 text-white transition-all';
+        const BG_ON = 'py-2 px-2 rounded-lg text-[11px] font-extrabold border-2 border-neonYellow bg-neonYellow/15 text-white transition-all';
         const BG_OFF = 'py-2 px-2 rounded-lg text-[11px] font-bold border border-purple-800/50 bg-purple-950/50 text-purple-400 line-through transition-all';
         const sceneryNowEl = $('scenery-now');
 
@@ -3849,7 +3910,7 @@ Regras:
             playerFrame.style.width = wide ? '100%' : '405px';
             playerFrame.style.height = wide ? '420px' : '720px';
             $('resolution-badge').textContent = wide ? '1920x1080' : '1080x1920';
-            const on = "px-3 py-1.5 rounded-lg text-xs font-bold bg-gtaPink text-white shadow transition-all";
+            const on = "px-3 py-1.5 rounded-lg text-xs font-bold bg-neonPink text-white shadow transition-all";
             const off = "px-3 py-1.5 rounded-lg text-xs font-bold text-purple-300 hover:text-white transition-all";
             ratio169Btn.className = wide ? on : off;
             ratio916Btn.className = wide ? off : on;
@@ -3871,6 +3932,7 @@ Regras:
         let lastPart = -1;
 
         function animateLoop(now) {
+            if (typeof exporting !== 'undefined' && exporting) { lastFrameTime = now; requestAnimationFrame(animateLoop); return; }
             const dt = (now - lastFrameTime) / 1000;
             lastFrameTime = now;
             if (dt > 0 && dt < 0.5) fps = Math.round(1 / dt);
@@ -3908,7 +3970,7 @@ Regras:
                 partBtns.forEach(btn => {
                     const p = parseInt(btn.getAttribute('data-part'));
                     btn.className = (p === activeShot.part)
-                        ? "part-btn py-2.5 px-2 rounded-xl bg-gtaPink/25 border-2 border-gtaPink text-white font-extrabold text-xs flex flex-col items-center transition-all"
+                        ? "part-btn py-2.5 px-2 rounded-xl bg-neonPink/25 border-2 border-neonPink text-white font-extrabold text-xs flex flex-col items-center transition-all"
                         : "part-btn py-2.5 px-2 rounded-xl bg-purple-950/50 border border-purple-700/40 text-purple-200 hover:text-white font-extrabold text-xs flex flex-col items-center transition-all";
                 });
             }
@@ -3916,7 +3978,7 @@ Regras:
                 const old = $(`sb-item-${lastHighlightedShot}`);
                 if (old) old.className = "sb-item p-2 rounded-xl bg-[#0A0915]/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
                 const el = $(`sb-item-${activeShot.id}`);
-                if (el) el.className = "sb-item p-2 rounded-xl bg-gtaPink/25 border border-gtaPink cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
+                if (el) el.className = "sb-item p-2 rounded-xl bg-neonPink/25 border border-neonPink cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
                 lastHighlightedShot = activeShot.id;
             }
 
@@ -4016,7 +4078,7 @@ Regras:
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `GTA6_ViceCity_Video_${recAspect.replace(':', 'x')}.${recordExt}`;
+                a.download = `MuundoMaker_${recAspect.replace(':', 'x')}.${recordExt}`;
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
@@ -4032,6 +4094,312 @@ Regras:
             recordFeedback.classList.remove('hidden');
             togglePlay();
         });
+
+        /********************************************************************
+         * EXPORTAÇÃO DIRETA — monta o MP4 quadro a quadro (sem gravar a tela)
+         * WebCodecs (H.264/AAC) + mp4-muxer embutido
+         ********************************************************************/
+        const EXPORT_FPS = 30;
+        let exporting = false;
+        let exportCancel = false;
+        let autoExportTimer = null;
+        let lastAutoExportSig = null;
+        let exportEnvPeak = 0;
+
+        const exportBtn = $('export-direct-btn'), exportBtnText = $('export-direct-text');
+        const exportBox = $('export-progress'), exportBar = $('export-bar'), exportStatus = $('export-status'), exportPct = $('export-pct');
+        const exportCancelBtn = $('export-cancel-btn');
+        const autoExportChk = $('auto-export');
+        const autoBanner = $('auto-export-banner'), autoBannerText = $('auto-export-text');
+
+        function yieldUI() {
+            // MessageChannel is not throttled like setTimeout when the tab is in the background
+            return new Promise(r => { const ch = new MessageChannel(); ch.port1.onmessage = () => r(); ch.port2.postMessage(0); });
+        }
+
+        function exportSupported() {
+            return typeof VideoEncoder !== 'undefined' && typeof VideoFrame !== 'undefined' && typeof Mp4Muxer !== 'undefined';
+        }
+
+        async function pickVideoCodec(W, H) {
+            const list = [
+                { codec: 'avc1.640028', muxer: 'avc', label: 'H.264' },
+                { codec: 'avc1.4d0028', muxer: 'avc', label: 'H.264' },
+                { codec: 'avc1.42003e', muxer: 'avc', label: 'H.264' },
+                { codec: 'vp09.00.40.08', muxer: 'vp9', label: 'VP9' }
+            ];
+            for (const c of list) {
+                const cfg = { codec: c.codec, width: W, height: H, bitrate: 8000000, framerate: EXPORT_FPS };
+                if (c.muxer === 'avc') cfg.avc = { format: 'avc' };
+                try {
+                    const r = await VideoEncoder.isConfigSupported(cfg);
+                    if (r.supported) return { cfg, muxer: c.muxer, label: c.label };
+                } catch (e) {}
+            }
+            return null;
+        }
+
+        async function resampleBuffer(buf, rate) {
+            const off = new OfflineAudioContext(Math.min(2, buf.numberOfChannels), Math.ceil(buf.duration * rate), rate);
+            const src = off.createBufferSource();
+            src.buffer = buf;
+            src.connect(off.destination);
+            src.start();
+            return off.startRendering();
+        }
+
+        async function pickAudioCodec(buf) {
+            if (typeof AudioEncoder === 'undefined' || !buf) return null;
+            const ch = Math.min(2, buf.numberOfChannels);
+            for (const [codec, muxer] of [['mp4a.40.2', 'aac'], ['opus', 'opus']]) {
+                for (const rate of [buf.sampleRate, 48000]) {
+                    const cfg = { codec, sampleRate: rate, numberOfChannels: ch, bitrate: 192000 };
+                    try {
+                        const r = await AudioEncoder.isConfigSupported(cfg);
+                        if (r.supported) return { cfg, muxer, rate, ch, label: muxer === 'aac' ? 'AAC' : 'Opus' };
+                    } catch (e) {}
+                }
+            }
+            return null;
+        }
+
+        // voice energy straight from the MP3 envelope (no speakers involved)
+        function offlineEnergy(t) {
+            if (!audioState.env || !audioState.env.length) return 0.04;
+            if (!exportEnvPeak) {
+                const sorted = Float32Array.from(audioState.env).sort();
+                exportEnvPeak = sorted[Math.floor(sorted.length * 0.95)] || 0.1;
+            }
+            const i = Math.min(audioState.env.length - 1, Math.max(0, Math.floor(t / FR)));
+            return Math.min(1, audioState.env[i] / (exportEnvPeak * 0.9));
+        }
+
+        async function prepareOfflineVideo(t) {
+            if (!editList.length) return null;
+            const i = findCut(t);
+            const cut = editList[i];
+            const el = cut.video.players[0];
+            const expected = Math.max(0, Math.min(cut.srcIn + (t - cut.t0), (cut.video.duration || 1e9) - 0.05));
+            if (!el.paused) el.pause();
+            if (el.readyState < 2 || Math.abs(el.currentTime - expected) > 0.001) await seekVideo(el, expected);
+            return { cut, el, i };
+        }
+
+        function drawOfflineFrame(t, active) {
+            const W = canvas.width, H = canvas.height;
+            const L = computeLayout(W, H);
+            const nowMs = t * 1000;
+            const time = t;
+            const energy = offlineEnergy(t);
+            const speaking = !!audioState.buffer && energy > 0.12;
+            const shot = getActiveShot(t);
+            const tc = t + captionOffset;
+            const captionShot = getActiveShot(Math.max(0, tc));
+            const wordIdx = activeWordIndex(captionShot, tc);
+            ctx.clearRect(0, 0, W, H);
+            renderScenery(L, shot, t, time, energy, nowMs);
+            renderVideoFrame(L, shot, t, time, energy, active);
+            renderPresenter(L, shot, time, energy, speaking, nowMs);
+            renderCaptions(L, captionShot, wordIdx, energy);
+        }
+
+        function setExportUI(on, text, frac) {
+            exportBox.classList.toggle('hidden', !on);
+            exportBtn.disabled = on;
+            recordExportBtn.disabled = on;
+            if (!on) return;
+            exportStatus.textContent = text;
+            const p = Math.round(Math.max(0, Math.min(1, frac)) * 100);
+            exportPct.textContent = `${p}%`;
+            exportBar.style.width = `${p}%`;
+        }
+
+        function downloadBlob(blob, name) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 60000);
+        }
+
+        async function exportDirect() {
+            if (exporting || isRecording) return;
+            if (!exportSupported()) {
+                exportStatus.textContent = '';
+                alert('Este navegador não consegue montar o MP4 direto. Use o Chrome ou o Edge atualizado, ou o botão "Gravar em tempo real".');
+                return;
+            }
+            cancelAutoExport();
+            if (isPlaying) togglePlay();
+            pauseAllPlayers();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            exporting = true;
+            exportCancel = false;
+            lockAspectButtons(true);
+            const aspect = currentAspect;
+            const W = canvas.width, H = canvas.height;
+            const savedTime = currentTime;
+            const savedTts = ttsWord;
+            ttsWord = { shotId: -1, idx: -1, live: false };
+            exportEnvPeak = 0;
+            bgState.cur = null; bgState.prev = null;
+            avatarState.key = null; avatarState.prevPose = null;
+            activeCutIdx = -1; preparedCutIdx = -1;
+            frameCacheHasImage = false;
+            const started = performance.now();
+            let videoEncoder = null, audioEncoder = null, encodeError = null;
+            try {
+                setExportUI(true, 'Preparando codificadores...', 0);
+                const vc = await pickVideoCodec(W, H);
+                if (!vc) throw new Error('O navegador não tem codificador de vídeo disponível.');
+                let audioBuf = audioState.buffer;
+                let ac = audioBuf ? await pickAudioCodec(audioBuf) : null;
+                if (ac && audioBuf.sampleRate !== ac.rate) audioBuf = await resampleBuffer(audioBuf, ac.rate);
+
+                const target = new Mp4Muxer.ArrayBufferTarget();
+                const muxer = new Mp4Muxer.Muxer({
+                    target,
+                    video: { codec: vc.muxer, width: W, height: H, frameRate: EXPORT_FPS },
+                    audio: ac ? { codec: ac.muxer, numberOfChannels: ac.ch, sampleRate: ac.rate } : undefined,
+                    fastStart: 'in-memory',
+                    firstTimestampBehavior: 'offset'
+                });
+
+                videoEncoder = new VideoEncoder({
+                    output: (chunk, meta) => muxer.addVideoChunk(chunk, meta),
+                    error: e => { encodeError = e; }
+                });
+                videoEncoder.configure(vc.cfg);
+
+                // --- audio: straight from the decoded MP3 ---
+                if (ac) {
+                    audioEncoder = new AudioEncoder({
+                        output: (chunk, meta) => muxer.addAudioChunk(chunk, meta),
+                        error: e => { encodeError = e; }
+                    });
+                    audioEncoder.configure(ac.cfg);
+                    const chans = [];
+                    for (let c = 0; c < ac.ch; c++) chans.push(audioBuf.getChannelData(Math.min(c, audioBuf.numberOfChannels - 1)));
+                    const total = audioBuf.length, block = 4096;
+                    const maxFrames = Math.min(total, Math.ceil(totalDuration * ac.rate));
+                    for (let off = 0; off < maxFrames; off += block) {
+                        const n = Math.min(block, maxFrames - off);
+                        const data = new Float32Array(n * ac.ch);
+                        for (let c = 0; c < ac.ch; c++) data.set(chans[c].subarray(off, off + n), c * n);
+                        const ad = new AudioData({ format: 'f32-planar', sampleRate: ac.rate, numberOfFrames: n, numberOfChannels: ac.ch, timestamp: Math.round(off / ac.rate * 1e6), data });
+                        audioEncoder.encode(ad);
+                        ad.close();
+                        if (audioEncoder.encodeQueueSize > 30) await yieldUI();
+                    }
+                }
+
+                // --- video: every frame drawn at its exact time ---
+                const frames = Math.max(1, Math.ceil(totalDuration * EXPORT_FPS));
+                for (let f = 0; f < frames; f++) {
+                    if (exportCancel) throw new Error('cancelado');
+                    if (encodeError) throw encodeError;
+                    const t = f / EXPORT_FPS;
+                    currentTime = t;
+                    const active = await prepareOfflineVideo(t);
+                    drawOfflineFrame(t, active);
+                    const frame = new VideoFrame(canvas, { timestamp: Math.round(t * 1e6), duration: Math.round(1e6 / EXPORT_FPS) });
+                    videoEncoder.encode(frame, { keyFrame: f % (EXPORT_FPS * 2) === 0 });
+                    frame.close();
+                    while (videoEncoder.encodeQueueSize > 6) await yieldUI();
+                    if (f % 10 === 0) {
+                        const el = (performance.now() - started) / 1000;
+                        const eta = f > 30 ? Math.max(0, el / f * (frames - f)) : 0;
+                        setExportUI(true, `Montando vídeo ${formatTime(t)} / ${formatTime(totalDuration)}${eta ? ` • falta ~${Math.ceil(eta)}s` : ''}`, f / frames);
+                        await yieldUI();
+                    }
+                }
+                setExportUI(true, 'Finalizando o arquivo...', 1);
+                await videoEncoder.flush();
+                if (audioEncoder) await audioEncoder.flush();
+                if (encodeError) throw encodeError;
+                muxer.finalize();
+                const blob = new Blob([target.buffer], { type: 'video/mp4' });
+                downloadBlob(blob, `MuundoMaker_${aspect.replace(':', 'x')}.mp4`);
+                const secs = Math.round((performance.now() - started) / 1000);
+                exportStatus.textContent = `✅ Pronto em ${secs}s • ${(blob.size / 1048576).toFixed(1)} MB • ${vc.label}${ac ? ' + ' + ac.label : ' (sem áudio)'}`;
+                exportPct.textContent = '100%';
+                exportBar.style.width = '100%';
+                if (!audioState.buffer) exportStatus.textContent += ' — carregue o MP3 para o vídeo sair com voz.';
+            } catch (err) {
+                console.error(err);
+                exportBox.classList.remove('hidden');
+                exportStatus.textContent = err && err.message === 'cancelado' ? 'Exportação cancelada.' : `Não deu para exportar: ${err && err.message ? err.message : err}`;
+            } finally {
+                try { if (videoEncoder && videoEncoder.state !== 'closed') videoEncoder.close(); } catch (e) {}
+                try { if (audioEncoder && audioEncoder.state !== 'closed') audioEncoder.close(); } catch (e) {}
+                exporting = false;
+                exportBtn.disabled = false;
+                recordExportBtn.disabled = false;
+                lockAspectButtons(false);
+                ttsWord = savedTts;
+                bgState.cur = null; bgState.prev = null;
+                avatarState.key = null; avatarState.prevPose = null;
+                activeCutIdx = -1; preparedCutIdx = -1;
+                seekTo(Math.min(savedTime, totalDuration));
+            }
+        }
+
+        // ---------------- automatic download ----------------
+        function exportSignature() {
+            return JSON.stringify([
+                audioState.files.map(f => f.name + f.size),
+                videos.map(v => v.id),
+                scenes.filter(s => s.ai).length,
+                editSeed, cutLimit, currentAspect, audioState.whisper
+            ]);
+        }
+        function exportReady() {
+            const whisperPending = !!audioState.whisperExpected && !audioState.whisper && !audioState.whisperTried;
+            return !!audioState.buffer && videos.length > 0 && scenes.length > 0 &&
+                videos.every(v => v.status === 'pronto' || v.status === 'erro') &&
+                !groqBusy && !whisperPending && !exporting && !isRecording;
+        }
+        function cancelAutoExport(markDone) {
+            if (autoExportTimer) clearInterval(autoExportTimer);
+            autoExportTimer = null;
+            autoBanner.classList.add('hidden');
+            if (markDone) lastAutoExportSig = exportSignature();
+        }
+        function scheduleAutoExport() {
+            if (!autoExportChk.checked || !exportReady() || autoExportTimer) return;
+            const sig = exportSignature();
+            if (sig === lastAutoExportSig) return;
+            let left = 5;
+            autoBanner.classList.remove('hidden');
+            autoBannerText.textContent = `Áudio e vídeos prontos: o MP4 começa a ser montado em ${left}s...`;
+            autoExportTimer = setInterval(() => {
+                left--;
+                if (!exportReady()) { cancelAutoExport(false); return; }
+                if (left > 0) {
+                    autoBannerText.textContent = `Áudio e vídeos prontos: o MP4 começa a ser montado em ${left}s...`;
+                    return;
+                }
+                cancelAutoExport(false);
+                lastAutoExportSig = exportSignature();
+                exportDirect();
+            }, 1000);
+        }
+
+        exportBtn.addEventListener('click', exportDirect);
+        exportCancelBtn.addEventListener('click', () => { exportCancel = true; });
+        $('auto-export-cancel').addEventListener('click', () => cancelAutoExport(true));
+        autoExportChk.checked = (function () { try { return localStorage.getItem('vstudio_auto_export') !== '0'; } catch (e) { return true; } })();
+        autoExportChk.addEventListener('change', () => {
+            try { localStorage.setItem('vstudio_auto_export', autoExportChk.checked ? '1' : '0'); } catch (e) {}
+            if (autoExportChk.checked) scheduleAutoExport(); else cancelAutoExport(false);
+        });
+        if (!exportSupported()) {
+            exportBtnText.textContent = 'Exportação direta indisponível neste navegador';
+            exportBtn.disabled = true;
+        }
 
         // ---------- BOOT ----------
         applyFixedTimings();
