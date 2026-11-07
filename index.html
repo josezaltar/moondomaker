@@ -354,6 +354,13 @@
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Chaves da API Groq <span class="normal-case font-semibold text-purple-400">(uma por linha — quando uma atinge o limite, passa para a próxima)</span></label>
                 <textarea id="groq-key" rows="2" autocomplete="off" spellcheck="false" placeholder="gsk_...&#10;gsk_..." class="w-full bg-inset border border-purple-800/60 rounded-lg px-3 py-2 text-xs font-mono-tech text-white mb-1 outline-none focus:border-neonPink resize-y" style="-webkit-text-security: disc;"></textarea>
                 <div id="groq-keys-info" class="text-[10px] text-purple-300 mb-2"></div>
+                <label class="block text-[10px] font-bold uppercase tracking-wider text-neonCyan mb-1">Chaves do Google Gemini <span class="normal-case font-semibold text-purple-400">(grátis em aistudio.google.com — recomendado para criar a animação)</span></label>
+                <textarea id="gemini-key" rows="2" autocomplete="off" spellcheck="false" placeholder="AIza...&#10;AIza..." class="w-full bg-inset border border-purple-800/60 rounded-lg px-3 py-2 text-xs font-mono-tech text-white mb-1 outline-none focus:border-neonCyan resize-y" style="-webkit-text-security: disc;"></textarea>
+                <div class="flex items-center gap-2 mb-1">
+                    <label class="text-[10px] font-bold uppercase tracking-wider text-purple-300 shrink-0">Modelo Gemini</label>
+                    <input id="gemini-model" type="text" class="flex-1 bg-inset border border-purple-800/60 rounded-lg px-2 py-1 text-[10px] font-mono-tech text-white outline-none focus:border-neonCyan">
+                </div>
+                <div id="gemini-keys-info" class="text-[10px] text-purple-300 mb-3"></div>
 
                 <div class="grid grid-cols-2 gap-2 mb-3">
                     <div>
@@ -6344,16 +6351,9 @@ Regras:
 
         /* ---------------- diretor (IA): elenco + cenas ---------------- */
         function animTextModel() { return ($('groq-text-model') && $('groq-text-model').value.trim()) || 'llama-3.3-70b-versatile'; }
-        async function animGroqJSON(prompt, maxTok, label, model) {
-            const m = model || animTextModel();
-            const call = (json) => groqFetch('/chat/completions', () => ({
-                method: 'POST',
-                headers: { Authorization: `Bearer ${groqKey}`, 'Content-Type': 'application/json' },
-                body: JSON.stringify(Object.assign({ model: m, temperature: 0.75, max_completion_tokens: maxTok, messages: [{ role: 'user', content: prompt }] }, json ? { response_format: { type: 'json_object' } } : {}))
-            }), label);
-            let res;
-            try { res = await call(true); } catch (err) { if (/respondeu 400/.test(err.message)) res = await call(false); else throw err; }
-            return parseJsonLoose(res.choices && res.choices[0] && res.choices[0].message && res.choices[0].message.content);
+        async function animGroqJSON(prompt, maxTok, label) {
+            const txt = await aiGenerate(prompt, { json: true, maxTok: geminiKeys.length ? 16000 : Math.min(maxTok, 4000), label });
+            return parseJsonLoose(txt);
         }
 
         async function animDirectWithAI(shots) {
@@ -7057,19 +7057,7 @@ Regras:
         /* ---------------- chamada à IA ---------------- */
         function animCodeModel() { return ($('groq-code-model') && $('groq-code-model').value.trim()) || 'openai/gpt-oss-120b'; }
         async function animGroqText(prompt, maxTok, label) {
-            let model = animCodeModel();
-            const body = (m, reasoning) => JSON.stringify(Object.assign({ model: m, temperature: 0.6, max_completion_tokens: maxTok, messages: [{ role: 'user', content: prompt }] }, reasoning ? { reasoning_effort: 'medium', include_reasoning: false } : {}));
-            const call = (m, r) => groqFetch('/chat/completions', () => ({ method: 'POST', headers: { Authorization: `Bearer ${groqKey}`, 'Content-Type': 'application/json' }, body: body(m, r) }), label);
-            let res;
-            const isOss = /gpt-oss/.test(model);
-            try { res = await call(model, isOss); }
-            catch (err) {
-                if (/respondeu 400/.test(err.message) && isOss) res = await call(model, false);
-                else if (/respondeu 40[04]/.test(err.message) && model !== 'llama-3.3-70b-versatile') res = await call('llama-3.3-70b-versatile', false);
-                else throw err;
-            }
-            const txt = res.choices && res.choices[0] && res.choices[0].message && res.choices[0].message.content || '';
-            return String(txt).replace(/<think>[\s\S]*?<\/think>/gi, '');
+            return aiGenerate(prompt, { code: true, maxTok: geminiKeys.length ? 16000 : 4000, label });
         }
         function animExtractCode(txt) {
             const m = String(txt).match(/```(?:js|javascript)?\s*\n([\s\S]*?)```/i);
@@ -7207,7 +7195,7 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
                     </div>
                     <div class="flex items-center gap-1 shrink-0">
                         <span class="text-[10px] ${sc.codeStatus === 'ok' ? 'text-emerald-300' : 'text-purple-300'}">${st[sc.codeStatus] || st.none}</span>
-                        <button class="anim-redo px-1.5 py-0.5 rounded bg-purple-950 border border-purple-700/50 hover:bg-purple-800 disabled:opacity-40" data-redo="${sc.i}" title="Desenhar esta cena de novo" ${!groqKey || storyBusy ? 'disabled' : ''}>🎲</button>
+                        <button class="anim-redo px-1.5 py-0.5 rounded bg-purple-950 border border-purple-700/50 hover:bg-purple-800 disabled:opacity-40" data-redo="${sc.i}" title="Desenhar esta cena de novo" ${!aiReady() || storyBusy ? 'disabled' : ''}>🎲</button>
                     </div>
                 </div>`).join('');
             box.querySelectorAll('[data-seek]').forEach(el => el.addEventListener('click', e => { if (e.target.closest('[data-redo]')) return; seekTo(parseFloat(el.dataset.seek) + 0.01); }));
@@ -7230,7 +7218,7 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
             STORY_ANIM = animHeuristicStory(shots) || animDemoStory();
             storyAnimSource = 'auto'; storyAnimRev++;
             renderAnimSceneList();
-            if (!groqKey || !shots.some(s => s.text)) return;
+            if (!aiReady() || !shots.some(s => s.text)) return;
             try {
                 setProgress(true, 'IA escrevendo o roteiro da animação...', 0.05);
                 const A = await animDirectWithAI(shots);
@@ -7265,6 +7253,147 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
             A.cenas[0].efeito = 'dinheiro';
             return A;
         }
+
+        /* =====================================================================
+         * PROVEDOR DE IA PARA ROTEIRO E DESENHO — Gemini (grátis) com Groq de reserva
+         * ===================================================================== */
+        let geminiKeys = [];
+        let geminiKeyIdx = 0;
+        const geminiKeyState = {};
+        let geminiModelResolved = null;
+        const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta';
+
+        function setGeminiKeys(text) {
+            geminiKeys = String(text || '').split(/[\s,;]+/).map(k => k.trim()).filter(k => k.length > 20);
+            geminiKeys = geminiKeys.filter((k, i) => geminiKeys.indexOf(k) === i);
+            if (geminiKeyIdx >= geminiKeys.length) geminiKeyIdx = 0;
+            updateGeminiInfo();
+        }
+        function updateGeminiInfo(extra) {
+            const el = document.getElementById('gemini-keys-info');
+            if (!el) return;
+            if (!geminiKeys.length) { el.textContent = 'Sem chave do Gemini: o roteiro e os desenhos usam a Groq.'; return; }
+            const now = Date.now();
+            const cool = geminiKeys.filter(k => geminiKeyState[k] && geminiKeyState[k].coolUntil > now).length;
+            const bad = geminiKeys.filter(k => geminiKeyState[k] && geminiKeyState[k].invalid).length;
+            el.textContent = `${geminiKeys.length} chave(s) do Gemini • usando a ${geminiKeyIdx + 1}ª` + (cool ? ` • ${cool} no limite` : '') + (bad ? ` • ${bad} inválida(s)` : '') + (extra ? ` • ${extra}` : '');
+        }
+        function geminiModel() { return ($('gemini-model') && $('gemini-model').value.trim()) || 'gemini-flash-latest'; }
+        function rotateGemini(reason) {
+            const k = geminiKeys[geminiKeyIdx];
+            const st = geminiKeyState[k] = geminiKeyState[k] || {};
+            if (reason === 'invalid') st.invalid = true;
+            if (reason && reason.cool) st.coolUntil = Date.now() + reason.cool * 1000;
+            const now = Date.now();
+            for (let d = 1; d <= geminiKeys.length; d++) {
+                const i = (geminiKeyIdx + d) % geminiKeys.length, s2 = geminiKeyState[geminiKeys[i]] || {};
+                if (!s2.invalid && !(s2.coolUntil > now)) { geminiKeyIdx = i; updateGeminiInfo(); return true; }
+            }
+            updateGeminiInfo();
+            return false;
+        }
+        async function geminiPickModel(key) {
+            // se o modelo escolhido não existir, procura o melhor "flash" disponível na conta
+            try {
+                const r = await fetch(`${GEMINI_BASE}/models?pageSize=200`, { headers: { 'x-goog-api-key': key } });
+                if (!r.ok) return null;
+                const j = await r.json();
+                const ok = (j.models || []).filter(m => (m.supportedGenerationMethods || []).includes('generateContent')).map(m => m.name.replace(/^models\//, ''));
+                const flash = ok.filter(n => /flash/.test(n) && !/lite|tts|image|live|audio|embed|thinking-exp/.test(n));
+                const score = n => { const v = parseFloat((n.match(/(\d+(?:\.\d+)?)/) || [0, 0])[1]); return v * 10 - (/preview|exp/.test(n) ? 1 : 0); };
+                flash.sort((a, b) => score(b) - score(a));
+                return flash[0] || ok.find(n => /flash/.test(n)) || null;
+            } catch (e) { return null; }
+        }
+        async function geminiGenerate(prompt, opts) {
+            opts = opts || {};
+            if (!geminiKeys.length) throw new Error('sem chave do Gemini');
+            let model = geminiModelResolved || geminiModel();
+            let waits = 0;
+            for (let attempt = 0; attempt < 10; attempt++) {
+                const key = geminiKeys[geminiKeyIdx];
+                const body = {
+                    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+                    generationConfig: Object.assign({ maxOutputTokens: opts.maxTok || 16000 }, opts.json ? { responseMimeType: 'application/json' } : {})
+                };
+                let res;
+                try { res = await fetch(`${GEMINI_BASE}/models/${encodeURIComponent(model)}:generateContent`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body) }); }
+                catch (e) { throw new Error('O navegador não conseguiu falar com o Gemini (sem internet ou bloqueado).'); }
+                if (res.ok) {
+                    const j = await res.json();
+                    const cand = j.candidates && j.candidates[0];
+                    const txt = cand && cand.content && Array.isArray(cand.content.parts) ? cand.content.parts.filter(p => !p.thought).map(p => p.text || '').join('') : '';
+                    if (!txt) throw new Error(`${opts.label || 'Gemini'}: resposta vazia (${(cand && cand.finishReason) || (j.promptFeedback && j.promptFeedback.blockReason) || 'sem motivo'})`);
+                    geminiModelResolved = model;
+                    updateGeminiInfo(model);
+                    return txt;
+                }
+                let msg = '', retry = null;
+                try { const e = await res.json(); msg = (e.error && e.error.message) || ''; retry = ((e.error && e.error.details) || []).find(d => d.retryDelay) || null; } catch (e) {}
+                if (res.status === 404 || (res.status === 400 && /model/i.test(msg) && /not found|unsupported|invalid/i.test(msg))) {
+                    const alt = await geminiPickModel(key);
+                    if (alt && alt !== model) { model = alt; showGroqMessage(`Gemini: o modelo escolhido não existe nesta conta; usando ${alt}.`, 'info'); continue; }
+                    throw new Error(`Gemini: modelo "${model}" não encontrado. ${msg.slice(0, 120)}`);
+                }
+                if (res.status === 400 && /api key|API_KEY/i.test(msg) || res.status === 401 || res.status === 403) {
+                    if (rotateGemini('invalid')) continue;
+                    throw new Error(`Gemini: chave inválida ou sem permissão (${res.status}). ${msg.slice(0, 120)}`);
+                }
+                if (res.status === 429 || res.status >= 500) {
+                    const ra = retry && parseFloat(String(retry.retryDelay)) || (res.status === 429 ? 30 : 5);
+                    if (geminiKeys.length > 1 && rotateGemini({ cool: ra })) { showGroqMessage(`${opts.label || 'Gemini'}: chave no limite — usando a ${geminiKeyIdx + 1}ª.`, 'info'); continue; }
+                    if (/per day|daily|PerDay/i.test(msg)) throw new Error(`Gemini: limite diário atingido. ${msg.slice(0, 120)}`);
+                    if (waits++ > 4) throw new Error(`Gemini: continua no limite. ${msg.slice(0, 120)}`);
+                    showGroqMessage(`${opts.label || 'Gemini'}: limite por minuto, aguardando ${Math.ceil(Math.min(ra, 60))}s...`, 'info');
+                    await sleep(Math.min(ra, 60) * 1000);
+                    continue;
+                }
+                throw new Error(`Gemini respondeu ${res.status} — ${msg.slice(0, 200)}`);
+            }
+            throw new Error('Gemini: não respondeu depois de várias tentativas.');
+        }
+
+        // Groq com pedido enxuto (o limite grátis por minuto conta também o tamanho máximo da resposta)
+        async function groqGenerate(prompt, opts) {
+            opts = opts || {};
+            const model = opts.code ? animCodeModel() : animTextModel();
+            let maxTok = opts.maxTok || 4000;
+            for (let tries = 0; tries < 3; tries++) {
+                const isOss = /gpt-oss/.test(model);
+                const mk = (m, reasoning, json) => groqFetch('/chat/completions', () => ({
+                    method: 'POST', headers: { Authorization: `Bearer ${groqKey}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.assign({ model: m, temperature: 0.6, max_completion_tokens: maxTok, messages: [{ role: 'user', content: prompt }] }, reasoning ? { reasoning_effort: 'low', include_reasoning: false } : {}, json ? { response_format: { type: 'json_object' } } : {}))
+                }), opts.label || 'IA');
+                try {
+                    let res;
+                    try { res = await mk(model, isOss, opts.json); }
+                    catch (err) {
+                        if (/respondeu 400/.test(err.message)) res = await mk(model, false, false);
+                        else if (/respondeu 404/.test(err.message) && model !== 'llama-3.3-70b-versatile') res = await mk('llama-3.3-70b-versatile', false, opts.json);
+                        else throw err;
+                    }
+                    return String(res.choices && res.choices[0] && res.choices[0].message && res.choices[0].message.content || '').replace(/<think>[\s\S]*?<\/think>/gi, '');
+                } catch (err) {
+                    if (/413/.test(err.message) && maxTok > 1500) { maxTok = Math.floor(maxTok / 2); continue; }
+                    throw err;
+                }
+            }
+            throw new Error('Groq: pedido grande demais para o limite da conta grátis.');
+        }
+
+        // usa o Gemini se houver chave; se falhar, cai para a Groq
+        async function aiGenerate(prompt, opts) {
+            opts = opts || {};
+            let gErr = null;
+            if (geminiKeys.length) {
+                try { return await geminiGenerate(prompt, opts); }
+                catch (e) { gErr = e; console.warn(e); if (!groqKey) throw e; showGroqMessage(`${e.message} — tentando com a Groq...`, 'info'); }
+            }
+            if (!groqKey) throw new Error('Cole uma chave do Gemini ou da Groq para a IA criar a animação.');
+            try { return await groqGenerate(prompt, opts); }
+            catch (e) { throw gErr ? new Error(`${gErr.message} | Groq: ${e.message}`) : e; }
+        }
+        function aiReady() { return geminiKeys.length > 0 || !!groqKey; }
 
         /* ---------------- dispatcher used by the live loop and the MP4 export ---------------- */
         function renderThemeFrame(t, time, nowMs, energy, speaking, active, shot, captionShot, wordIdx) {
@@ -7884,7 +8013,7 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
         $('anim-codegen').addEventListener('change', e => lsSet('vstudio_anim_codegen', e.target.checked ? '1' : '0'));
         $('anim-redo-all').addEventListener('click', async () => {
             if (storyBusy || !audioState.buffer) return;
-            if (!groqKey || !STORYBOARD.some(s => s.text)) { showGroqMessage('Para criar a animação a partir da fala, cole sua chave da Groq e crie o vídeo a partir do áudio.', 'info'); return; }
+            if (!aiReady() || !STORYBOARD.some(s => s.text)) { showGroqMessage('Para criar a animação a partir da fala, cole a chave da Groq (transcrição) e, de preferência, a do Gemini (desenho), e crie o vídeo a partir do áudio.', 'info'); return; }
             animGenToken++;
             storyBusy = true;
             try {
@@ -7894,6 +8023,11 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
             } catch (err) { showGroqMessage(`Nova versão: ${err.message || err}`, 'err'); }
             finally { storyBusy = false; setProgress(false); renderAnimSceneList(); scheduleAutoExport(); }
         });
+        $('gemini-model').value = lsGet('vstudio_gemini_model', 'gemini-flash-latest');
+        $('gemini-model').addEventListener('change', e => { lsSet('vstudio_gemini_model', e.target.value.trim()); geminiModelResolved = null; });
+        setGeminiKeys(lsGet('vstudio_gemini_key', ''));
+        $('gemini-key').value = geminiKeys.join('\n');
+        $('gemini-key').addEventListener('input', e => { setGeminiKeys(e.target.value); lsSet('vstudio_gemini_key', geminiKeys.join('\n')); renderAnimSceneList(); });
         renderAnimSceneList();
         $('presenter-alt').checked = showPresenterAlt;
         $('presenter-alt').addEventListener('change', e => { showPresenterAlt = e.target.checked; lsSet('vstudio_presenter_alt', showPresenterAlt ? '1' : '0'); });
