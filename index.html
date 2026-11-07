@@ -7191,7 +7191,9 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
             if (!A || A.demo || !A.cenas.length) { box.innerHTML = '<div class="text-[11px] text-purple-300/80 px-1">Suba o áudio: a animação é criada a partir do que é falado.</div>'; return; }
             const elenco = A.elenco.map(e => e.nome).join(', ');
             const st = { ok: '🤖 IA', gerando: '⏳ desenhando', falhou: '📚 biblioteca', none: '📚 biblioteca' };
-            box.innerHTML = `<div class="text-[10px] text-purple-300 mb-1.5 px-1">Elenco: <b class="text-white">${escapeHtml(elenco)}</b> • ${A.cenas.length} cena(s) • roteiro: ${storyAnimSource === 'ia' ? 'IA' : 'automático'}</div>` +
+            const phase = storyAnimPhase === 'roteiro' ? '<div class="text-[11px] text-neonYellow mb-1.5 px-1">⏳ A IA está escrevendo o roteiro… (as cenas abaixo são provisórias)</div>' : '';
+            const err = storyAnimErr ? `<div class="text-[11px] text-red-300 bg-red-500/10 border border-red-400/40 rounded-lg px-2 py-1.5 mb-1.5">⚠️ ${escapeHtml(storyAnimErr)}</div>` : '';
+            box.innerHTML = phase + err + `<div class="text-[10px] text-purple-300 mb-1.5 px-1">Elenco: <b class="text-white">${escapeHtml(elenco)}</b> • ${A.cenas.length} cena(s) • roteiro: ${storyAnimSource === 'ia' ? 'IA' : 'automático'}</div>` +
                 A.cenas.map(sc => `<div class="anim-sc p-2 rounded-xl bg-inset/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer flex items-start justify-between gap-2 text-[11px]" data-seek="${sc.t0}">
                     <div class="min-w-0">
                         <div class="font-bold text-white">${sc.i + 1}. ${escapeHtml(ANIM_CEN_LABEL[sc.cenario] || sc.cenario)} <span class="font-mono-tech text-purple-400">${animFmt(sc.t0)}–${animFmt(Math.min(sc.t1, totalDuration))}</span></div>
@@ -7223,15 +7225,21 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
             STORY_ANIM = animHeuristicStory(shots) || animDemoStory();
             storyAnimSource = 'auto'; storyAnimRev++;
             renderAnimSceneList();
-            if (!aiReady() || !shots.some(s => s.text)) return;
+            storyAnimErr = '';
+            if (!shots.some(s => s.text)) { storyAnimErr = 'Sem transcrição: a chave da Groq é necessária para ler a fala do áudio.'; renderAnimSceneList(); return; }
+            if (!aiReady()) { storyAnimErr = 'Sem chave de IA: cole a chave do Gemini ou da Groq.'; renderAnimSceneList(); return; }
+            storyAnimPhase = 'roteiro'; renderAnimSceneList();
             try {
                 setProgress(true, 'IA escrevendo o roteiro da animação...', 0.05);
                 const A = await animDirectWithAI(shots);
                 if (A && A.cenas.length) { STORY_ANIM = A; storyAnimSource = 'ia'; storyAnimRev++; }
+                else storyAnimErr = 'A IA respondeu, mas o roteiro veio em formato inválido; usei o plano automático.';
             } catch (err) {
                 console.error(err);
+                storyAnimErr = `O roteiro pela IA falhou: ${err.message || err}. Usei o plano automático.`;
                 showGroqMessage(`Roteiro: usei o plano automático porque a IA falhou (${err.message || err}).`, 'info');
             }
+            storyAnimPhase = '';
             renderAnimSceneList();
             if (animCodegenOn() && STORY_ANIM && !STORY_ANIM.demo) {
                 try { await animGenerateAllCode(STORY_ANIM); }
@@ -7242,6 +7250,7 @@ Responda SOMENTE com o código dentro de um bloco \`\`\`js (apenas o corpo da fu
         }
 
         let shotPlansDone = false;
+        let storyAnimPhase = '', storyAnimErr = '';
         async function ensureShotPlans() {
             if (shotPlansDone || !groqKey || !videos.length || !STORYBOARD.some(s => s.text) || storyBusy) return;
             shotPlansDone = true;
