@@ -11,39 +11,57 @@
             theme: {
                 extend: {
                     colors: {
-                        neonBg: '#120826',
-                        neonDark: '#0A0915',
-                        neonPink: '#FF2A6D',
-                        neonCyan: '#00F0FF',
-                        neonYellow: '#FFB800',
-                        neonOrange: '#FF5500'
+                        neonBg: 'rgb(var(--panel) / <alpha-value>)',
+                        neonDark: 'rgb(var(--inset) / <alpha-value>)',
+                        neonPink: 'rgb(var(--c1) / <alpha-value>)',
+                        neonCyan: 'rgb(var(--c2) / <alpha-value>)',
+                        neonYellow: 'rgb(var(--c3) / <alpha-value>)',
+                        neonOrange: 'rgb(var(--c4) / <alpha-value>)',
+                        panel: 'rgb(var(--panel) / <alpha-value>)',
+                        panel2: 'rgb(var(--panel2) / <alpha-value>)',
+                        inset: 'rgb(var(--inset) / <alpha-value>)',
+                        base: 'rgb(var(--base) / <alpha-value>)',
+                        purple: {
+                            100: 'rgb(var(--p100) / <alpha-value>)', 200: 'rgb(var(--p200) / <alpha-value>)', 300: 'rgb(var(--p300) / <alpha-value>)',
+                            400: 'rgb(var(--p400) / <alpha-value>)', 500: 'rgb(var(--p500) / <alpha-value>)', 600: 'rgb(var(--p600) / <alpha-value>)',
+                            700: 'rgb(var(--p700) / <alpha-value>)', 800: 'rgb(var(--p800) / <alpha-value>)', 900: 'rgb(var(--p900) / <alpha-value>)',
+                            950: 'rgb(var(--p950) / <alpha-value>)'
+                        }
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@600;700;800&family=Montserrat:wght@800;900&family=Playfair+Display:ital,wght@1,700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --c1: 255 42 109; --c2: 0 240 255; --c3: 255 184 0; --c4: 255 85 0;
+            --base: 7 5 16; --panel: 22 11 48; --panel2: 14 7 32; --inset: 10 9 21;
+            --p100: 243 232 255; --p200: 233 213 255; --p300: 216 180 254; --p400: 192 132 252; --p500: 168 85 247;
+            --p600: 147 51 234; --p700: 126 34 206; --p800: 107 33 168; --p900: 88 28 135; --p950: 59 7 100;
+            --font-display: 'Inter', sans-serif;
+        }
+        h1, h2, h3 { font-family: var(--font-display); }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #070510;
+            background-color: rgb(var(--base));
             color: #FFFFFF;
             overflow-x: hidden;
         }
         .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0A0915; }
-        ::-webkit-scrollbar-thumb { background: #FF2A6D; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: rgb(var(--inset)); }
+        ::-webkit-scrollbar-thumb { background: rgb(var(--c1)); border-radius: 3px; }
 
         input[type=range] { -webkit-appearance: none; background: transparent; }
         input[type=range]::-webkit-slider-runnable-track {
             height: 8px; border-radius: 4px;
-            background: linear-gradient(90deg, #FF2A6D 0%, #00F0FF 100%);
+            background: linear-gradient(90deg, rgb(var(--c1)) 0%, rgb(var(--c2)) 100%);
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%;
-            background: #FFB800; border: 3px solid #0A0915; margin-top: -6px;
-            box-shadow: 0 0 12px #FFB800; cursor: pointer;
+            background: rgb(var(--c3)); border: 3px solid rgb(var(--inset)); margin-top: -6px;
+            box-shadow: 0 0 12px rgb(var(--c3)); cursor: pointer;
         }
     </style>
 </head>
@@ -58,11 +76,12 @@
                     <h1 class="text-lg md:text-xl font-black tracking-wider bg-gradient-to-r from-white via-neonCyan to-neonPink bg-clip-text text-transparent">MUUNDO MAKER • VIDEO STUDIO</h1>
                     <span class="px-2 py-0.5 text-[10px] font-mono-tech font-bold bg-neonCyan/15 text-neonCyan border border-neonCyan/40 rounded">v5.0 CLEAN</span>
                 </div>
-                <p class="text-xs text-purple-300/70">Apresentador + Vídeo • Tema Neon</p>
+                <p class="text-xs text-purple-300/70">Suba a narração e o vídeo é criado no estilo escolhido</p>
             </div>
         </div>
-        <div class="flex items-center gap-2.5">
-            <div class="bg-[#120826] p-1 rounded-xl border border-purple-800/50 flex items-center gap-1">
+        <div class="flex items-center gap-2.5 flex-wrap">
+            <button id="theme-btn" class="px-3 py-2 rounded-xl bg-panel border border-neonYellow/50 text-xs font-bold text-white hover:border-neonYellow transition-all">🎨 Estilo: <span id="theme-btn-label" class="text-neonYellow">Neon</span></button>
+            <div class="bg-panel p-1 rounded-xl border border-purple-800/50 flex items-center gap-1">
                 <button id="ratio-916-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-neonPink text-white shadow transition-all">9:16 Shorts</button>
                 <button id="ratio-169-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold text-purple-300 hover:text-white transition-all">16:9 Longo</button>
             </div>
@@ -79,7 +98,7 @@
         <section class="lg:col-span-5 flex flex-col gap-4">
 
             <!-- Master Transport & Voice Sync -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-purple-500/25 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+            <div class="bg-gradient-to-b from-panel to-panel2 border border-purple-500/25 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center justify-between mb-3">
                     <h2 class="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-neonPink"></span>
@@ -89,7 +108,7 @@
                 </div>
 
                 <div class="flex items-center gap-2.5 mb-4">
-                    <button id="main-play-btn" class="flex-1 bg-gradient-to-r from-neonPink to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-black py-3.5 px-5 rounded-xl shadow-lg shadow-neonPink/30 flex items-center justify-center gap-2.5 transition-all active:scale-95 text-sm">
+                    <button id="main-play-btn" class="flex-1 bg-gradient-to-r from-neonPink to-neonOrange hover:brightness-110 text-white font-black py-3.5 px-5 rounded-xl shadow-lg shadow-neonPink/30 flex items-center justify-center gap-2.5 transition-all active:scale-95 text-sm">
                         <svg id="play-svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <svg id="pause-svg" class="w-5 h-5 fill-current hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         <span id="play-label">REPRODUZIR VÍDEO COMPLETO</span>
@@ -99,22 +118,7 @@
                     </button>
                 </div>
 
-                <div class="mb-4">
-                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purple-300 mb-1.5">Navegação Rápida por Partes:</label>
-                    <div class="grid grid-cols-3 gap-2">
-                        <button data-part="1" class="part-btn py-2.5 px-2 rounded-xl bg-neonPink/20 border-2 border-neonPink text-white font-extrabold text-xs flex flex-col items-center transition-all">
-                            <span>PARTE 1</span><span class="text-[9px] font-normal text-purple-200">Trailer & Casal</span>
-                        </button>
-                        <button data-part="2" class="part-btn py-2.5 px-2 rounded-xl bg-purple-950/50 border border-purple-700/40 text-purple-200 hover:text-white font-extrabold text-xs flex flex-col items-center transition-all">
-                            <span>PARTE 2</span><span class="text-[9px] font-normal text-purple-300">Polícia & Cassino</span>
-                        </button>
-                        <button data-part="3" class="part-btn py-2.5 px-2 rounded-xl bg-purple-950/50 border border-purple-700/40 text-purple-200 hover:text-white font-extrabold text-xs flex flex-col items-center transition-all">
-                            <span>PARTE 3</span><span class="text-[9px] font-normal text-purple-300">Traição & Missão</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="space-y-1.5 bg-[#0A0915]/80 p-3 rounded-xl border border-purple-900/50 mb-4">
+                <div class="space-y-1.5 bg-inset/80 p-3 rounded-xl border border-purple-900/50 mb-4">
                     <div class="flex justify-between items-center text-xs font-mono-tech">
                         <span id="time-current" class="text-neonCyan font-bold">00:00.0</span>
                         <span id="shot-indicator" class="text-[10px] text-neonYellow font-bold">FALA 01 / 27</span>
@@ -125,7 +129,7 @@
 
                 <div class="space-y-2">
                     <label class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-purple-300">
-                        <span>Áudio da Narração (1 MP3 ou parte1/2/3)</span>
+                        <span>Áudio da narração (MP3)</span>
                         <span class="text-neonCyan font-mono-tech text-[10px]">Análise de Voz</span>
                     </label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -140,7 +144,7 @@
                         </button>
                     </div>
 
-                    <div class="bg-[#0A0915]/80 p-3 rounded-xl border border-purple-900/50">
+                    <div class="bg-inset/80 p-3 rounded-xl border border-purple-900/50">
                         <div class="flex justify-between text-[11px] font-bold uppercase tracking-wider text-purple-300">
                             <span>Ajuste fino da legenda</span>
                             <span id="caption-offset-label" class="font-mono-tech text-neonYellow">+0.15s</span>
@@ -150,7 +154,7 @@
                         <div class="flex items-center justify-between mt-2 text-[11px] font-bold uppercase tracking-wider text-purple-300">
                             <span>Texto da legenda</span>
                         </div>
-                        <div class="grid grid-cols-2 gap-1 bg-[#0A0915] p-1 rounded-xl border border-purple-900/60 mt-1">
+                        <div class="grid grid-cols-2 gap-1 bg-inset p-1 rounded-xl border border-purple-900/60 mt-1">
                             <button id="cap-src-real">Fala real (Whisper)</button>
                             <button id="cap-src-roteiro">Roteiro escrito</button>
                         </div>
@@ -158,13 +162,12 @@
                     </div>
 
                     <p class="text-[11px] text-purple-300/70 leading-tight">
-                        💡 Ao carregar o MP3, o sistema detecta onde há fala e onde há pausa e encaixa cada palavra no momento real. Com 3 arquivos (<code>parte1</code>, <code>parte2</code>, <code>parte3</code>), cada um é ligado à sua parte do roteiro.
-                    </p>
+                        💡 Ao subir o áudio o vídeo é criado sozinho: o Whisper transcreve, a fala é dividida em cenas e a IA monta a animação de cada uma no estilo escolhido. Com vídeos de referência, as cenas usam os cortes deles.</p>
                 </div>
             </div>
 
             <!-- Cenário animado -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonYellow/40 rounded-2xl p-4 shadow-2xl">
+            <div data-theme-only="neon" class="bg-gradient-to-b from-panel to-panel2 border border-neonYellow/40 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-xs font-black uppercase tracking-wider text-neonYellow flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-neonYellow animate-pulse"></span>
@@ -180,7 +183,7 @@
                     <button data-bg="sirene" class="bg-toggle">🚨 Sirene</button>
                 </div>
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Trocar de cenário automaticamente:</label>
-                <select id="scenery-interval" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-2 text-xs text-white outline-none focus:border-neonYellow">
+                <select id="scenery-interval" class="w-full bg-inset border border-purple-800/60 rounded-lg px-2 py-2 text-xs text-white outline-none focus:border-neonYellow">
                     <option value="fala1">A cada fala</option>
                     <option value="fala2">A cada 2 falas</option>
                     <option value="fala4">A cada 4 falas</option>
@@ -191,8 +194,17 @@
                 </select>
             </div>
 
+            <!-- Opções do estilo (stickman) -->
+            <div data-theme-only="stickman" class="hidden bg-gradient-to-b from-panel to-panel2 border border-neonCyan/30 rounded-2xl p-4 shadow-2xl">
+                <h3 class="text-xs font-black uppercase tracking-wider text-neonCyan mb-2">Apresentador</h3>
+                <label class="flex items-center gap-2 text-[12px] text-purple-100 cursor-pointer">
+                    <input type="checkbox" id="presenter-alt" class="accent-pink-500"> Mostrar o apresentador no canto da tela
+                </label>
+                <p class="text-[10px] text-purple-300/70 mt-1">A cor da camisa e o chapéu seguem as escolhas do avatar (troque para o estilo Neon para editar).</p>
+            </div>
+
             <!-- Avatar -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonCyan/30 rounded-2xl p-4 shadow-2xl">
+            <div data-theme-only="neon" class="bg-gradient-to-b from-panel to-panel2 border border-neonCyan/30 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-xs font-black uppercase tracking-wider text-neonCyan flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-neonCyan"></span>
@@ -202,21 +214,21 @@
                 </div>
 
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Aparência</label>
-                <div class="grid grid-cols-3 gap-1 bg-[#0A0915] p-1 rounded-xl border border-purple-900/60 mb-2">
+                <div class="grid grid-cols-3 gap-1 bg-inset p-1 rounded-xl border border-purple-900/60 mb-2">
                     <button data-av-key="aparencia" data-av-val="cabeca">Só cabeça</button>
                     <button data-av-key="aparencia" data-av-val="corpo">Corpo inteiro</button>
                     <button data-av-key="aparencia" data-av-val="ambos">Os dois (sorteia)</button>
                 </div>
 
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Posição (sempre ao lado do vídeo)</label>
-                <div class="grid grid-cols-3 gap-1 bg-[#0A0915] p-1 rounded-xl border border-purple-900/60 mb-2">
+                <div class="grid grid-cols-3 gap-1 bg-inset p-1 rounded-xl border border-purple-900/60 mb-2">
                     <button data-av-key="posicao" data-av-val="aleatoria">Aleatória</button>
                     <button data-av-key="posicao" data-av-val="esquerda">Esquerda</button>
                     <button data-av-key="posicao" data-av-val="direita">Direita</button>
                 </div>
 
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Movimento</label>
-                <div class="grid grid-cols-3 gap-1 bg-[#0A0915] p-1 rounded-xl border border-purple-900/60 mb-2">
+                <div class="grid grid-cols-3 gap-1 bg-inset p-1 rounded-xl border border-purple-900/60 mb-2">
                     <button data-av-key="movimento" data-av-val="estatico">Estático</button>
                     <button data-av-key="movimento" data-av-val="suave">Suave</button>
                     <button data-av-key="movimento" data-av-val="animado">Animado</button>
@@ -230,7 +242,7 @@
                 <div class="grid grid-cols-2 gap-2 mb-2">
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Chapéu</label>
-                        <select id="av-chapeu" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-xs text-white outline-none">
+                        <select id="av-chapeu" class="w-full bg-inset border border-purple-800/60 rounded-lg px-2 py-1.5 text-xs text-white outline-none">
                             <option value="safari">Safari</option>
                             <option value="bone">Boné neon</option>
                             <option value="panama">Panamá</option>
@@ -239,7 +251,7 @@
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Roupa</label>
-                        <select id="av-roupa" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-xs text-white outline-none">
+                        <select id="av-roupa" class="w-full bg-inset border border-purple-800/60 rounded-lg px-2 py-1.5 text-xs text-white outline-none">
                             <option value="havaiana">Camisa havaiana</option>
                             <option value="camiseta">Camiseta</option>
                             <option value="regata">Regata</option>
@@ -247,8 +259,8 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2 mb-2 text-[10px] font-bold uppercase tracking-wider text-purple-300">
-                    <label class="flex items-center justify-between bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1">Cor da roupa <input type="color" id="av-cor-roupa" class="w-8 h-6 bg-transparent cursor-pointer"></label>
-                    <label class="flex items-center justify-between bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1">Cor da pele <input type="color" id="av-cor-pele" class="w-8 h-6 bg-transparent cursor-pointer"></label>
+                    <label class="flex items-center justify-between bg-inset border border-purple-800/60 rounded-lg px-2 py-1">Cor da roupa <input type="color" id="av-cor-roupa" class="w-8 h-6 bg-transparent cursor-pointer"></label>
+                    <label class="flex items-center justify-between bg-inset border border-purple-800/60 rounded-lg px-2 py-1">Cor da pele <input type="color" id="av-cor-pele" class="w-8 h-6 bg-transparent cursor-pointer"></label>
                 </div>
 
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Acessórios</label>
@@ -272,7 +284,7 @@
             </div>
 
             <!-- Reference Videos + Scene Separation -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonCyan/40 rounded-2xl p-4 shadow-2xl relative overflow-hidden">
+            <div class="bg-gradient-to-b from-panel to-panel2 border border-neonCyan/40 rounded-2xl p-4 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-xs font-black uppercase tracking-wider text-neonCyan flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-neonCyan animate-pulse"></span>
@@ -287,13 +299,13 @@
                         <span class="truncate">Adicionar vídeo(s)</span>
                         <input type="file" id="gameplay-upload-input" accept="video/*" multiple class="hidden">
                     </label>
-                    <button id="remap-shuffle-btn" disabled class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-neonDark font-black text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-neonCyan/20 transition-all">
+                    <button id="remap-shuffle-btn" disabled class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonCyan to-neonPink hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed text-neonDark font-black text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-neonCyan/20 transition-all">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                         <span>Recalcular Cortes</span>
                     </button>
                 </div>
 
-                <div id="ai-scan-progress-box" class="hidden mb-3 bg-[#0A0915] p-2.5 rounded-xl border border-neonCyan/30">
+                <div id="ai-scan-progress-box" class="hidden mb-3 bg-inset p-2.5 rounded-xl border border-neonCyan/30">
                     <div class="flex justify-between text-[10px] font-mono-tech text-neonCyan mb-1">
                         <span id="ai-scan-step-text" class="truncate pr-2">Analisando frames...</span>
                         <span id="ai-scan-percent">0%</span>
@@ -303,9 +315,9 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between gap-2 mb-2 bg-[#0A0915] border border-purple-900/60 rounded-xl px-3 py-2">
+                <div class="flex items-center justify-between gap-2 mb-2 bg-inset border border-purple-900/60 rounded-xl px-3 py-2">
                     <span class="text-[10px] font-bold uppercase tracking-wider text-purple-300">Máximo seguido do mesmo vídeo</span>
-                    <select id="cut-limit" class="bg-[#160B30] border border-purple-800/60 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-neonCyan">
+                    <select id="cut-limit" class="bg-panel border border-purple-800/60 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-neonCyan">
                         <option value="2">2 segundos</option>
                         <option value="3">3 segundos</option>
                         <option value="4">4 segundos</option>
@@ -330,7 +342,7 @@
             </div>
 
             <!-- Groq AI: Whisper + Vision -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonPink/40 rounded-2xl p-4 shadow-2xl">
+            <div class="bg-gradient-to-b from-panel to-panel2 border border-neonPink/40 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-xs font-black uppercase tracking-wider text-neonPink flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-neonPink animate-pulse"></span>
@@ -340,28 +352,33 @@
                 </div>
 
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Chave da API Groq</label>
-                <input id="groq-key" type="password" autocomplete="off" placeholder="gsk_..." class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-3 py-2 text-xs font-mono-tech text-white mb-2 outline-none focus:border-neonPink">
+                <input id="groq-key" type="password" autocomplete="off" placeholder="gsk_..." class="w-full bg-inset border border-purple-800/60 rounded-lg px-3 py-2 text-xs font-mono-tech text-white mb-2 outline-none focus:border-neonPink">
 
                 <div class="grid grid-cols-2 gap-2 mb-3">
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Modelo de visão</label>
-                        <input id="groq-vision-model" type="text" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-neonPink">
+                        <input id="groq-vision-model" type="text" class="w-full bg-inset border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-neonPink">
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Modelo Whisper</label>
-                        <input id="groq-whisper-model" type="text" class="w-full bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-neonPink">
+                        <input id="groq-whisper-model" type="text" class="w-full bg-inset border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-neonPink">
                     </div>
                 </div>
 
-                <button id="whisper-btn" disabled class="w-full mb-3 py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonPink to-rose-600 hover:from-pink-500 hover:to-rose-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-black text-xs flex items-center justify-center gap-1.5 transition-all">
-                    🎙️ <span id="whisper-btn-text">Sincronizar legenda com Whisper</span>
+                <div class="mb-3">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Modelo de texto (cria as cenas)</label>
+                    <input id="groq-text-model" type="text" class="w-full bg-inset border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-white outline-none focus:border-neonPink">
+                </div>
+
+                <button id="whisper-btn" disabled class="w-full mb-3 py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonPink to-neonOrange hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed text-white font-black text-xs flex items-center justify-center gap-1.5 transition-all">
+                    🎬 <span id="whisper-btn-text">Sincronizar legenda com Whisper</span>
                 </button>
 
                 <div class="flex items-center justify-between mb-1 text-[10px]">
                     <span class="font-bold uppercase tracking-wider text-purple-300">Ficha dos personagens</span>
                     <label class="cursor-pointer text-neonYellow hover:underline font-bold">Carregar personagens.md<input type="file" id="personagens-input" accept=".md,.txt,text/*" class="hidden"></label>
                 </div>
-                <textarea id="personagens-text" spellcheck="false" class="w-full h-24 bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-purple-100 outline-none focus:border-neonPink resize-y"></textarea>
+                <textarea id="personagens-text" spellcheck="false" class="w-full h-24 bg-inset border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-purple-100 outline-none focus:border-neonPink resize-y"></textarea>
 
                 <div class="flex items-center justify-between mt-1 mb-3 text-[10px]">
                     <span id="ref-count" class="text-purple-300">Sem imagens de referência</span>
@@ -372,9 +389,9 @@
                     <span class="font-bold uppercase tracking-wider text-purple-300">Tipos de cena</span>
                     <label class="cursor-pointer text-neonYellow hover:underline font-bold">Carregar cenas_tipos.md<input type="file" id="tipos-input" accept=".md,.txt,text/*" class="hidden"></label>
                 </div>
-                <textarea id="tipos-text" spellcheck="false" class="w-full h-20 mb-3 bg-[#0A0915] border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-purple-100 outline-none focus:border-neonPink resize-y"></textarea>
+                <textarea id="tipos-text" spellcheck="false" class="w-full h-20 mb-3 bg-inset border border-purple-800/60 rounded-lg px-2 py-1.5 text-[10px] font-mono-tech text-purple-100 outline-none focus:border-neonPink resize-y"></textarea>
 
-                <button id="vision-btn" disabled class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-neonDark font-black text-xs flex items-center justify-center gap-1.5 transition-all">
+                <button id="vision-btn" disabled class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-neonCyan to-neonPink hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed text-neonDark font-black text-xs flex items-center justify-center gap-1.5 transition-all">
                     👁️ <span id="vision-btn-text">Analisar conteúdo das cenas</span>
                 </button>
 
@@ -386,16 +403,16 @@
                 <div id="groq-message" class="hidden mt-2 text-[11px] leading-tight px-3 py-2 rounded-lg border"></div>
 
                 <p class="text-[10px] text-purple-300/70 mt-2 leading-tight">
-                    A chave fica salva só neste navegador. Nomeie as imagens de referência com o nome do personagem (ex.: <code>jason.jpg</code>, <code>lucia.png</code>). O <code>cenas.json</code> guarda a análise para você não gastar a API de novo com os mesmos vídeos.
+                    A chave fica salva só neste navegador. Nomeie as imagens de referência com o nome do personagem (ex.: <code>ana.jpg</code>, <code>pedro.png</code>). O <code>cenas.json</code> guarda a análise para você não gastar a API de novo com os mesmos vídeos.
                 </p>
             </div>
 
             <!-- Storyboard -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-purple-500/25 rounded-2xl p-4 shadow-2xl">
+            <div class="bg-gradient-to-b from-panel to-panel2 border border-purple-500/25 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-2.5">
                     <h3 class="text-xs font-black uppercase tracking-wider text-purple-200 flex items-center gap-1.5">
                         <svg class="w-4 h-4 text-neonCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
-                        Roteiro (Clique na Fala)
+                        Cenas do vídeo
                     </h3>
                     <span id="storyboard-count" class="text-[10px] font-mono-tech text-purple-400"></span>
                 </div>
@@ -403,7 +420,7 @@
             </div>
 
             <!-- Export -->
-            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-neonYellow/30 rounded-2xl p-4 shadow-2xl">
+            <div class="bg-gradient-to-b from-panel to-panel2 border border-neonYellow/30 rounded-2xl p-4 shadow-2xl">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="text-xs font-black uppercase tracking-wider text-neonYellow flex items-center gap-1.5">
                         <span class="w-2 h-2 rounded-full bg-neonYellow animate-ping"></span>
@@ -419,7 +436,7 @@
 
                 <label class="flex items-center gap-2 mt-2 text-[11px] text-purple-100 cursor-pointer">
                     <input type="checkbox" id="auto-export" class="accent-pink-500" checked>
-                    Baixar sozinho quando o áudio e os vídeos de referência estiverem prontos
+                    Baixar o MP4 sozinho assim que o vídeo for criado a partir do áudio
                 </label>
 
                 <div id="auto-export-banner" class="hidden mt-2 flex items-center justify-between gap-2 text-[11px] px-3 py-2 rounded-lg border border-neonCyan/40 bg-neonCyan/10 text-cyan-100">
@@ -427,7 +444,7 @@
                     <button id="auto-export-cancel" class="font-bold text-neonPink hover:underline shrink-0">Cancelar</button>
                 </div>
 
-                <div id="export-progress" class="hidden mt-2 bg-[#0A0915] p-2.5 rounded-xl border border-neonYellow/30">
+                <div id="export-progress" class="hidden mt-2 bg-inset p-2.5 rounded-xl border border-neonYellow/30">
                     <div class="flex justify-between items-center text-[10px] font-mono-tech text-neonYellow mb-1 gap-2">
                         <span id="export-status" class="truncate">Preparando...</span>
                         <span class="flex items-center gap-2 shrink-0"><span id="export-pct">0%</span><button id="export-cancel-btn" class="text-neonPink hover:underline">cancelar</button></span>
@@ -455,8 +472,8 @@
         <section class="lg:col-span-7 flex flex-col items-center justify-center">
             <div class="relative group flex items-center justify-center w-full">
                 <div class="absolute -inset-2 bg-gradient-to-tr from-neonPink/30 via-purple-600/20 to-neonCyan/30 rounded-[2.5rem] blur-2xl pointer-events-none"></div>
-                <div id="player-frame" class="relative bg-[#070510] border-4 border-purple-800/80 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col items-center transition-all duration-300" style="width: 405px; height: 720px; max-width: 100%;">
-                    <div class="w-full bg-[#0A0915]/95 px-4 py-2 flex items-center justify-between text-[10px] font-mono-tech border-b border-purple-900/60 z-20">
+                <div id="player-frame" class="relative bg-base border-4 border-purple-800/80 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col items-center transition-all duration-300" style="width: 405px; height: 720px; max-width: 100%;">
+                    <div class="w-full bg-inset/95 px-4 py-2 flex items-center justify-between text-[10px] font-mono-tech border-b border-purple-900/60 z-20">
                         <div class="flex items-center gap-2">
                             <span class="w-2 h-2 rounded-full bg-neonPink animate-pulse"></span>
                             <span class="font-bold text-white">PRÉVIA AO VIVO</span>
@@ -466,10 +483,10 @@
                             <span id="resolution-badge" class="text-neonCyan">1080x1920</span>
                         </div>
                     </div>
-                    <div class="relative w-full flex-1 bg-[#120826] flex items-center justify-center overflow-hidden cursor-pointer" id="canvas-stage">
+                    <div class="relative w-full flex-1 bg-panel flex items-center justify-center overflow-hidden cursor-pointer" id="canvas-stage">
                         <canvas id="studio-canvas" width="1080" height="1920" class="w-full h-full object-contain"></canvas>
                     </div>
-                    <div class="w-full bg-[#0A0915]/95 px-4 py-1.5 flex items-center justify-between text-[10px] font-mono-tech text-purple-400 border-t border-purple-900/60 z-20">
+                    <div class="w-full bg-inset/95 px-4 py-1.5 flex items-center justify-between text-[10px] font-mono-tech text-purple-400 border-t border-purple-900/60 z-20">
                         <span id="cut-hud">SEM VÍDEO</span>
                         <span id="audio-meter-hud" class="text-neonYellow">VOZ: —</span>
                     </div>
@@ -478,6 +495,34 @@
         </section>
     </main>
 
+
+    <!-- Style picker -->
+    <div id="theme-picker" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="max-w-5xl w-full">
+            <div class="text-center mb-5">
+                <h2 class="text-2xl md:text-3xl font-black text-white">Escolha o estilo do seu vídeo</h2>
+                <p class="text-sm text-purple-300 mt-1">O estilo muda o visual do vídeo e de toda a ferramenta. Dá para trocar depois no botão 🎨 Estilo.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button data-pick-theme="neon" class="group text-left bg-panel border-2 border-purple-800/60 hover:border-neonPink rounded-2xl p-3 transition-all">
+                    <canvas data-theme-preview="neon" width="270" height="480" class="w-full rounded-xl bg-black"></canvas>
+                    <div class="mt-2 font-black text-white text-lg">Neon</div>
+                    <div class="text-xs text-purple-300">Cidade retrô neon, apresentador ao lado do vídeo, cenários animados.</div>
+                </button>
+                <button data-pick-theme="stickman" class="group text-left bg-panel border-2 border-purple-800/60 hover:border-neonPink rounded-2xl p-3 transition-all">
+                    <canvas data-theme-preview="stickman" width="270" height="480" class="w-full rounded-xl bg-black"></canvas>
+                    <div class="mt-2 font-black text-white text-lg">Stickman 2D</div>
+                    <div class="text-xs text-purple-300">Desenho 2D chapado, bonecos expressivos, faixas e etiquetas coloridas.</div>
+                </button>
+                <button data-pick-theme="infografico" class="group text-left bg-panel border-2 border-purple-800/60 hover:border-neonPink rounded-2xl p-3 transition-all">
+                    <canvas data-theme-preview="infografico" width="270" height="480" class="w-full rounded-xl bg-black"></canvas>
+                    <div class="mt-2 font-black text-white text-lg">Infográfico 3D</div>
+                    <div class="text-xs text-purple-300">Dados em blocos 3D, painéis com números, fundo azul-marinho.</div>
+                </button>
+            </div>
+            <div class="text-center mt-4"><button id="theme-picker-close" class="text-xs text-purple-300 hover:text-white underline">fechar</button></div>
+        </div>
+    </div>
     <!-- Hidden container for video decoders -->
     <div id="video-pool" style="position:fixed;left:-9999px;top:0;width:2px;height:2px;overflow:hidden;opacity:0;pointer-events:none;"></div>
 
@@ -519,337 +564,7 @@ SOFTWARE.
         const playerFrame = document.getElementById('player-frame');
 
         // Full 3-Part Storyboard synced to the user's exact Portuguese script
-        const STORYBOARD = [
-            // ==================== PARTE 1 ====================
-            {
-                id: 1, part: 1, start: 0, end: 5,
-                tag: "trailer_secret", tagLabel: "🔍 Segredo no Trailer", preferredMode: "billboard",
-                chapter: "PARTE 1 • O SEGREDO DO TRAILER",
-                badge: "🔍 PISTA OCULTA • ROCKSTAR",
-                badgeColor: "#FF2A6D",
-                sceneType: "trailer_magnifying",
-                cam: "PUSH-IN RÁPIDO",
-                headline: "MISSÃO SECRETA NO TRAILER?",
-                subStats: ["FRAME A FRAME", "99% NÃO PERCEBERAM"],
-                text: "Imagine descobrir que a Rockstar mostrou uma das missões mais importantes de GTA 6 sem que praticamente ninguém percebesse."
-            },
-            {
-                id: 2, part: 1, start: 5, end: 10,
-                tag: "couple", tagLabel: "👫 Jason & Lúcia", preferredMode: "fullscreen",
-                chapter: "PARTE 1 • O SEGREDO DO TRAILER",
-                badge: "❓ PARECE IMPOSSÍVEL?",
-                badgeColor: "#00F0FF",
-                sceneType: "jason_lucia_heist_board",
-                cam: "PANORÂMICA + ZOOM",
-                headline: "JASON & LÚCIA: O GRANDE GOLPE",
-                subStats: ["PISTAS NO TRAILER 1", "PLANO MILIONÁRIO"],
-                text: "Parece impossível, não é? Mas e se eu te dissesse que algumas cenas do trailer podem esconder pistas sobre um grande golpe envolvendo Jason e Lúcia?"
-            },
-            {
-                id: 3, part: 1, start: 10, end: 16,
-                tag: "city_map", tagLabel: "🌴 Mapa de Leonida", preferredMode: "billboard",
-                chapter: "PARTE 1 • ANÁLISE DA COMUNIDADE",
-                badge: "🗺️ RADAR DE LEONIDA",
-                badgeColor: "#FFB800",
-                sceneType: "leonida_map_scan",
-                cam: "ÓRBITA AÉREA 10KM",
-                headline: "MILHÕES ANALISANDO CADA SEGUNDO",
-                subStats: ["MAPA DE LEONIDA", "NOVOS PERSONAGENS"],
-                text: "Desde que o primeiro trailer de GTA 6 foi lançado, milhões de jogadores começaram a analisar cada segundo das imagens procurando detalhes do mapa."
-            },
-            {
-                id: 4, part: 1, start: 16, end: 22,
-                tag: "vice_night", tagLabel: "🌆 Vice City Neon", preferredMode: "fullscreen",
-                chapter: "PARTE 1 • TEORIA DE VICE CITY",
-                badge: "⚡ TEORIA PRINCIPAL",
-                badgeColor: "#FF2A6D",
-                sceneType: "vice_city_neon_grid",
-                cam: "TRACKING FRONTAL",
-                headline: "DINHEIRO, TRAIÇÃO & POLÍCIA",
-                subStats: ["JASON & LÚCIA", "MUDANÇA DE RUMO"],
-                text: "Hoje vamos explorar uma das teorias mais curiosas sobre Vice City: envolvendo Jason, Lúcia, dinheiro, traição, polícia e um plano criminoso."
-            },
-            {
-                id: 5, part: 1, start: 22, end: 28,
-                tag: "city_map", tagLabel: "🏙️ Mundo Rockstar", preferredMode: "billboard",
-                chapter: "PARTE 1 • PADRÃO ROCKSTAR",
-                badge: "✓ ARQUITETURA DE MUNDO",
-                badgeColor: "#00F0FF",
-                sceneType: "world_layers_diagram",
-                cam: "ZOOM EM CAMADAS",
-                headline: "NADA É POR ACASO NA ROCKSTAR",
-                subStats: ["REALISMO EXTREMO", "EXPLORAÇÃO NÍVEL MÁXIMO"],
-                text: "A Rockstar não costuma construir seus mundos de qualquer jeito. Cada cidade, cada personagem e cada situação tem uma função dentro da experiência."
-            },
-            {
-                id: 6, part: 1, start: 28, end: 35,
-                tag: "couple", tagLabel: "❤️ Casal Protagonista", preferredMode: "fullscreen",
-                chapter: "PARTE 1 • OS PROTAGONISTAS",
-                badge: "❤️ CONEXÃO PERIGOSA",
-                badgeColor: "#FF2A6D",
-                sceneType: "couple_trust_meter",
-                cam: "DOLLY IN DRAMÁTICO",
-                headline: "CONFIANÇA • PAIXÃO • PERIGO",
-                subStats: ["RELAÇÃO INÉDITA", "PONTO CENTRAL"],
-                text: "Vamos começar pelo casal principal: Jason e Lúcia. Existe uma conexão entre eles que mistura confiança, paixão e perigo."
-            },
-            {
-                id: 7, part: 1, start: 35, end: 42,
-                tag: "heist_action", tagLabel: "💰 Assalto & Ação", preferredMode: "fullscreen",
-                chapter: "PARTE 1 • A ESCALADA DO CRIME",
-                badge: "📈 DE LOJAS A MILHÕES",
-                badgeColor: "#FFB800",
-                sceneType: "crime_escalation_bars",
-                cam: "PAN VERTICAL",
-                headline: "A OPORTUNIDADE DE MILHÕES",
-                subStats: ["PEQUENOS ASSALTOS", "GOLPE MILIONÁRIO"],
-                text: "Jason e Lúcia começam cometendo pequenos crimes para conseguir dinheiro, mas descobrem uma oportunidade capaz de render milhões de dólares."
-            },
-            {
-                id: 8, part: 1, start: 42, end: 48,
-                tag: "planning", tagLabel: "📋 Planejamento", preferredMode: "billboard",
-                chapter: "PARTE 1 • OS 4 PILARES",
-                badge: "📋 REQUISITOS DO GOLPE",
-                badgeColor: "#00F0FF",
-                sceneType: "four_pillars_hud",
-                cam: "PUSH-IN SIMÉTRICO",
-                headline: "O QUE O GRANDE GOLPE EXIGE?",
-                subStats: ["1. PLANEJAMENTO", "2. CONTATOS • 3. EQUIPAMENTOS"],
-                text: "O problema é que esse golpe não envolve apenas entrar e pegar dinheiro. Ele exige planejamento, exige contatos..."
-            },
-
-            // ==================== PARTE 2 ====================
-            {
-                id: 9, part: 2, start: 48, end: 54,
-                tag: "betrayal_dark", tagLabel: "⚠️ Infiltrado Secreto", preferredMode: "billboard",
-                chapter: "PARTE 2 • A ARMADILHA OCULTA",
-                badge: "⚠️ EXIGE CONFIANÇA TOTAL",
-                badgeColor: "#FF2A6D",
-                sceneType: "four_pillars_hud",
-                cam: "ZOOM DE IMPACTO",
-                headline: "E PRINCIPALMENTE: CONFIANÇA!",
-                subStats: ["INFILTRADO SECRETO?", "OUTRA ORGANIZAÇÃO"],
-                text: "Exige equipamentos e, principalmente, exige confiança! Agora imagine se uma das pessoas envolvidas estiver trabalhando secretamente para outra organização."
-            },
-            {
-                id: 10, part: 2, start: 54, end: 61,
-                tag: "betrayal_dark", tagLabel: "🕸️ Armadilha", preferredMode: "fullscreen",
-                chapter: "PARTE 2 • A ARMADILHA OCULTA",
-                badge: "🕸️ EMBOSCADA",
-                badgeColor: "#FFB800",
-                sceneType: "syndicate_web_trap",
-                cam: "ORBIT + TILT",
-                headline: "PREPARANDO UMA ARMADILHA",
-                subStats: ["CONTROLE ILUSÓRIO", "INÍCIO DO CONFLITO"],
-                text: "Jason e Lúcia poderiam acreditar que estão controlando a situação, enquanto alguém estaria preparando uma armadilha para os dois."
-            },
-            {
-                id: 11, part: 2, start: 61, end: 68,
-                tag: "city_map", tagLabel: "🌴 Vice City Dia/Sol", preferredMode: "fullscreen",
-                chapter: "PARTE 2 • ECOSSISTEMA VICE CITY",
-                badge: "🌴 VICE CITY VIVA",
-                badgeColor: "#00F0FF",
-                sceneType: "vice_city_districts",
-                cam: "TRACKING LATERAL",
-                headline: "LUXO VS. SUBMUNDO DO CRIME",
-                subStats: ["REGIÕES LUXUOSAS", "BAIRROS POPULARES"],
-                text: "Mas vamos analisar outra pista: Vice City! Temos regiões luxuosas, bairros populares, áreas comerciais e lugares onde o crime faz parte da rotina."
-            },
-            {
-                id: 12, part: 2, start: 68, end: 76,
-                tag: "heist_action", tagLabel: "👁️ Reconhecimento Loja", preferredMode: "billboard",
-                chapter: "PARTE 2 • RECONHECIMENTO TÁTICO",
-                badge: "👁️ VIGILÂNCIA DIURNA",
-                badgeColor: "#FFB800",
-                sceneType: "store_recon_day_night",
-                cam: "PAN DIA -> NOITE",
-                headline: "OBSERVAR DE DIA • AGIR À NOITE",
-                subStats: ["CÂMERAS ATIVAS", "VEÍCULO RECONHECIDO"],
-                text: "Imagine entrar em uma loja durante o dia, identificar pontos de entrada e saída e retornar à noite... mas as câmeras estão funcionando e a polícia passa na região!"
-            },
-            {
-                id: 13, part: 2, start: 76, end: 83,
-                tag: "planning", tagLabel: "🎮 Estratégia Livre", preferredMode: "billboard",
-                chapter: "PARTE 2 • LIBERDADE DE ESCOLHA",
-                badge: "🎮 GAMEPLAY EMERGENTE",
-                badgeColor: "#00F0FF",
-                sceneType: "strategy_blueprint",
-                cam: "PUSH-IN ESTRATÉGICO",
-                headline: "MISSÕES SEM CAMINHO FIXO",
-                subStats: ["OBSERVAR AMBIENTE", "DECIDIR QUANDO AGIR"],
-                text: "Missões que não dependem apenas de seguir um caminho marcado no mapa: observar o ambiente, preparar uma estratégia e decidir quando agir."
-            },
-            {
-                id: 14, part: 2, start: 83, end: 91,
-                tag: "police_chase", tagLabel: "🚓 Perseguição Policial", preferredMode: "fullscreen",
-                chapter: "PARTE 2 • SISTEMA POLICIAL",
-                badge: "🚨 IA POLICIAL: GTA 5 vs GTA 6",
-                badgeColor: "#FF2A6D",
-                sceneType: "police_ai_comparison",
-                cam: "PERSEGUIÇÃO NA PONTE",
-                headline: "CERCO TÁTICO & RUAS BLOQUEADAS",
-                subStats: ["GTA 5: APENAS ESCONDER", "GTA 6: BLOQUEIO DE ROTAS"],
-                text: "Agora vamos falar da polícia! Em vez de simplesmente perseguir o carro, os policiais fecham possíveis rotas de fuga e bloqueiam ruas."
-            },
-            {
-                id: 15, part: 2, start: 91, end: 98,
-                tag: "police_chase", tagLabel: "🚁 Cerco Policial", preferredMode: "fullscreen",
-                chapter: "PARTE 2 • OPERAÇÃO CAPTURA",
-                badge: "🚔 CAÇADA EM VICE CITY",
-                badgeColor: "#FFB800",
-                sceneType: "police_ai_comparison",
-                cam: "ZOOM HELICÓPTERO",
-                headline: "OBJETIVO REAL: SOBREVIVER",
-                subStats: ["GANGUES RIVAIS", "EMPRESÁRIOS CORRUPTOS"],
-                text: "Imagine se o verdadeiro objetivo não for roubar dinheiro, mas escapar de uma operação policial e de gangues disputando o mesmo território!"
-            },
-            {
-                id: 16, part: 2, start: 98, end: 106,
-                tag: "betrayal_dark", tagLabel: "🕴️ Manipulador Oculto", preferredMode: "billboard",
-                chapter: "PARTE 2 • O MANIPULADOR",
-                badge: "🕴️ SOMBRA NO COMANDO",
-                badgeColor: "#FF2A6D",
-                sceneType: "puppet_master_shadow",
-                cam: "SLOW PUSH-IN",
-                headline: "QUEM PLANEJOU O GOLPE?",
-                subStats: ["PESSOA PODEROSA", "INFORMAÇÕES INCOMPLETAS"],
-                text: "E se o grande golpe não tiver sido planejado por Jason e Lúcia? Imagine uma pessoa poderosa observando o casal desde o começo e manipulando tudo."
-            },
-            {
-                id: 17, part: 2, start: 106, end: 113,
-                tag: "couple", tagLabel: "⚡ Tensão no Casal", preferredMode: "fullscreen",
-                chapter: "PARTE 2 • DESCONFIANÇA",
-                badge: "⚡ CONFLITO INTERNO",
-                badgeColor: "#00F0FF",
-                sceneType: "couple_trust_meter",
-                cam: "SPLIT CAM TENSÃO",
-                headline: "LÚCIA COMEÇA A DESCONFIAR",
-                subStats: ["CONTATOS SOMEM", "RISCO DE VIDA"],
-                text: "Contatos desaparecem e agem de maneira estranha. No começo Jason não percebe, mas Lúcia começa a desconfiar, criando um conflito entre os dois."
-            },
-            {
-                id: 18, part: 2, start: 113, end: 120,
-                tag: "vice_night", tagLabel: "🎰 Cassino Vice City", preferredMode: "billboard",
-                chapter: "PARTE 2 • O CASSINO DE VICE CITY",
-                badge: "🎰 ALVO DE ALTO RISCO",
-                badgeColor: "#FFB800",
-                sceneType: "casino_vault_heist",
-                cam: "CRANE DOWN NEON",
-                headline: "CASSINO & DINHEIRO ILEGAL",
-                subStats: ["LAVAGEM DE DINHEIRO", "DOCUMENTO SECRETO"],
-                text: "Onde essa missão aconteceria? Imagine um cassino em Vice City usado para movimentar dinheiro ilegal, onde o alvo real é um documento secreto..."
-            },
-
-            // ==================== PARTE 3 ====================
-            {
-                id: 19, part: 3, start: 120, end: 127,
-                tag: "heist_action", tagLabel: "📂 Cofre & Segredo", preferredMode: "billboard",
-                chapter: "PARTE 3 • CONSPIRAÇÃO MAIOR",
-                badge: "📂 ARQUIVO CONFIDENCIAL",
-                badgeColor: "#00F0FF",
-                sceneType: "casino_vault_heist",
-                cam: "CLOSE-UP COFRE",
-                headline: "QUEM FINANCIA O CRIME?",
-                subStats: ["PARTE DE ALGO MAIOR", "REDE CRIMINOSA"],
-                text: "Ou até descobrir quem está financiando uma organização criminosa! Nesse caso, o assalto seria apenas uma parte de algo muito maior."
-            },
-            {
-                id: 20, part: 3, start: 127, end: 134,
-                tag: "npcs_world", tagLabel: "👥 NPCs de Vice City", preferredMode: "fullscreen",
-                chapter: "PARTE 3 • NPCs & SECUNDÁRIOS",
-                badge: "👥 600.000+ ANIMAÇÕES",
-                badgeColor: "#FF2A6D",
-                sceneType: "gas_station_npc_encounter",
-                cam: "TRACKING POSTO MAX MART",
-                headline: "PERSONAGENS SECUNDÁRIOS VIVOS",
-                subStats: ["EXCÊNTRICOS & PERIGOSOS", "FUNÇÃO NA CAMPANHA"],
-                text: "Outra possibilidade envolve os personagens secundários do trailer. Será que estão ali só para preencher cenário ou têm funções importantes na campanha?"
-            },
-            {
-                id: 21, part: 3, start: 134, end: 141,
-                tag: "npcs_world", tagLabel: "⛽ Encontro no Posto", preferredMode: "billboard",
-                chapter: "PARTE 3 • O ENCONTRO NO POSTO",
-                badge: "⛽ ENCONTRO ALEATÓRIO",
-                badgeColor: "#FFB800",
-                sceneType: "gas_station_npc_encounter",
-                cam: "ZOOM NO NPC",
-                headline: "DO POSTO PARA A HISTÓRIA",
-                subStats: ["CONVERSA RÁPIDA", "INFORMAÇÃO CHAVE"],
-                text: "Imagine conversar com alguém aparentemente comum em um posto de gasolina e horas depois descobrir que ele possui informações sobre o assalto de Jason!"
-            },
-            {
-                id: 22, part: 3, start: 141, end: 148,
-                tag: "betrayal_dark", tagLabel: "🗡️ Traição Clássica", preferredMode: "billboard",
-                chapter: "PARTE 3 • A TEORIA MAIS PERIGOSA",
-                badge: "🗡️ ALERTA DE TRAIÇÃO",
-                badgeColor: "#FF2A6D",
-                sceneType: "betrayal_legacy_cards",
-                cam: "PUSH-IN DRAMÁTICO",
-                headline: "PARCERIA QUE TERMINA EM DESASTRE",
-                subStats: ["GTA SAN ANDREAS • GTA 4", "GTA 5 • E AGORA GTA 6"],
-                text: "E agora chegamos a uma das teorias mais perigosas: a traição! Em GTA San Andreas, GTA 4 e GTA 5 vimos aliados se tornando inimigos."
-            },
-            {
-                id: 23, part: 3, start: 148, end: 155,
-                tag: "police_chase", tagLabel: "💔 Emboscada & Fuga", preferredMode: "fullscreen",
-                chapter: "PARTE 3 • RUPTURA DO CASAL",
-                badge: "💔 CONFIANÇA QUEBRADA?",
-                badgeColor: "#FF2A6D",
-                sceneType: "couple_trust_meter",
-                cam: "SHAKE + ZOOM",
-                headline: "JASON VS. LÚCIA: GUERRA TOTAL?",
-                subStats: ["DINHEIRO DESAPARECE", "ACUSAÇÕES MÚTUAS"],
-                text: "No momento mais importante do assalto, a polícia chega antes, alguém some com o dinheiro e a parceria de Jason e Lúcia vira uma verdadeira guerra!"
-            },
-            {
-                id: 24, part: 3, start: 155, end: 162,
-                tag: "planning", tagLabel: "📱 A Ligação", preferredMode: "billboard",
-                chapter: "PARTE 3 • SIMULAÇÃO DE MISSÃO",
-                badge: "📱 PASSO 1: A LIGAÇÃO",
-                badgeColor: "#00F0FF",
-                sceneType: "mission_sim_phone_sms",
-                cam: "ORBIT TELEFONE NEON",
-                headline: "SIMULAÇÃO: A MISSÃO COMPLETA",
-                subStats: ["LIGAÇÃO MISTERIOSA", "SISTEMA DE SEGURANÇA"],
-                text: "Agora vamos imaginar a missão completa: Jason recebe uma ligação oferecendo dinheiro fácil, mas durante a investigação um contato desaparece..."
-            },
-            {
-                id: 25, part: 3, start: 162, end: 169,
-                tag: "heist_action", tagLabel: "🚨 Alarmes & Cilada", preferredMode: "fullscreen",
-                chapter: "PARTE 3 • O AVISO NO CELULAR",
-                badge: "💬 SMS: NÃO CONFIE EM NINGUÉM",
-                badgeColor: "#FFB800",
-                sceneType: "mission_sim_phone_sms",
-                cam: "EXTREME CLOSE-UP SMS",
-                headline: "“NÃO CONFIE EM NINGUÉM”",
-                subStats: ["ALARMES DISPARAM", "CARRO DE FUGA SUMIU"],
-                text: "Uma mensagem chega para Lúcia: 'Não confie em ninguém'. No dia do golpe os alarmes tocam, o carro de fuga some e eles percebem que era uma cilada!"
-            },
-            {
-                id: 26, part: 3, start: 169, end: 175,
-                tag: "city_map", tagLabel: "🌅 Horizonte Vice City", preferredMode: "fullscreen",
-                chapter: "PARTE 3 • O VEREDICTO DE VICE CITY",
-                badge: "🌟 MUNDO VIVO ROCKSTAR",
-                badgeColor: "#00F0FF",
-                sceneType: "vice_city_sunset_outro",
-                cam: "CRANE UP HORIZONTE",
-                headline: "CADA DETALHE É UMA HISTÓRIA",
-                subStats: ["EXPLORAÇÃO INFINITA", "MISTÉRIO ENTRE O CASAL"],
-                text: "GTA não é apenas sobre roubar carros e fugir da polícia: é sobre viver histórias onde qualquer detalhe pode esconder a maior descoberta do jogo."
-            },
-            {
-                id: 27, part: 3, start: 175, end: 180,
-                tag: "couple", tagLabel: "👇 Teoria Final", preferredMode: "billboard",
-                chapter: "ENCERRAMENTO • QUAL A SUA TEORIA?",
-                badge: "👇 COMENTE & INSCREVA-SE",
-                badgeColor: "#FF2A6D",
-                sceneType: "cta_final_scoreboard",
-                cam: "SLOW PULL-BACK",
-                headline: "TRAIÇÃO OU UNIÃO ATÉ O FIM?",
-                subStats: ["DEIXE SEU COMENTÁRIO", "INSCREVA-SE NO CANAL"],
-                text: "Você acredita que Jason e Lúcia vão terminar em traição ou a Rockstar prepara outra reviravolta? Comente sua teoria e inscreva-se no canal!"
-            }
-        ];
+        const STORYBOARD = []; // criado a partir do áudio enviado
 
         // ---------- Text prep: words, syllable weights, char offsets ----------
         function wordWeight(w) {
@@ -874,7 +589,7 @@ SOFTWARE.
         // ---------- ENGINE STATE ----------
         let isPlaying = false;
         let currentTime = 0;
-        let totalDuration = STORYBOARD[STORYBOARD.length - 1].baseEnd;
+        let totalDuration = 6;
         let lastFrameTime = performance.now();
         let fps = 60;
         let currentAspect = '9:16';
@@ -2117,7 +1832,7 @@ SOFTWARE.
                 audioState.env = computeEnvelope(combined);
                 audioState.voiced = computeVoiced(audioState.env);
                 audioState.offset = 0;
-                alignToAudio();
+                buildStoryFromAudioPauses();
 
                 currentTime = 0;
                 scrubber.value = 0;
@@ -2131,6 +1846,7 @@ SOFTWARE.
                 audioState.whisperTried = false;
                 audioState.whisperExpected = !!groqKey;
                 if (groqKey) runWhisper();
+                else showGroqMessage('Sem a chave da Groq o vídeo é dividido pelas pausas da voz, sem legenda e sem cenas pelo conteúdo. Cole a chave e clique em "Criar vídeo a partir do áudio".', 'info');
                 scheduleAutoExport();
             } catch (err) {
                 console.error(err);
@@ -2433,7 +2149,7 @@ SOFTWARE.
             videoListEl.innerHTML = '';
             videos.forEach(v => {
                 const row = document.createElement('div');
-                row.className = "flex items-center justify-between gap-2 bg-[#0A0915] px-2.5 py-1.5 rounded-lg border border-purple-900/50 text-[11px]";
+                row.className = "flex items-center justify-between gap-2 bg-inset px-2.5 py-1.5 rounded-lg border border-purple-900/50 text-[11px]";
                 let status;
                 if (v.status === 'pronto') {
                     const nai = v.scenes.filter(sc => sc.ai).length;
@@ -2492,7 +2208,7 @@ SOFTWARE.
                     const shot = shotAt(t + 0.01);
                     const aff = TAG_AFFINITY[shot.tag] || [];
                     let best = null, bestScore = -1e9;
-                    const needs = SHOT_NEEDS[shot.id];
+                    const needs = shot.needs || null;
                     scenes.forEach(sc => {
                         let s = 0;
                         const ai = aff.indexOf(sc.feature);
@@ -2593,7 +2309,7 @@ SOFTWARE.
             editList.forEach((cut, i) => {
                 const row = document.createElement('div');
                 row.id = `cut-row-${i}`;
-                row.className = "cut-row flex items-center justify-between gap-2 bg-[#0A0915] px-2.5 py-1.5 rounded-lg border border-purple-900/50 hover:border-neonCyan/50 cursor-pointer transition-all";
+                row.className = "cut-row flex items-center justify-between gap-2 bg-inset px-2.5 py-1.5 rounded-lg border border-purple-900/50 hover:border-neonCyan/50 cursor-pointer transition-all";
                 row.innerHTML = `
                     <div class="flex items-center gap-2 truncate">
                         <span class="text-[10px] font-mono-tech text-neonPink font-bold">${formatTime(cut.t0)}</span>
@@ -2760,17 +2476,8 @@ SOFTWARE.
                     ctx.fillRect(V.x, V.y, V.w, V.h);
                 }
             } else {
-                // Placeholder while no reference video is loaded
-                const g = ctx.createLinearGradient(V.x, V.y, V.x + V.w, V.y + V.h);
-                g.addColorStop(0, '#160B30');
-                g.addColorStop(1, '#0E0720');
-                ctx.fillStyle = g;
-                ctx.fillRect(V.x, V.y, V.w, V.h);
-                ctx.fillStyle = 'rgba(255,255,255,0.35)';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.font = `800 ${Math.floor(V.h * 0.07)}px "JetBrains Mono"`;
-                ctx.fillText('ADICIONE VÍDEOS DE REFERÊNCIA', V.x + V.w / 2, V.y + V.h / 2);
+                // No reference video: the scene is drawn as a 2D neon animation
+                renderNeonScene(ctx, V, shot, t, time, energy);
             }
             ctx.restore();
         }
@@ -2858,6 +2565,7 @@ SOFTWARE.
         }
 
         function renderCaptions(L, shot, activeIdx, energy) {
+            if (!captionData(shot).words.length) return;
             const cap = L.cap;
             const M = captionMetrics(L);
             const pages = getCaptionPages(shot, L);
@@ -2996,7 +2704,7 @@ SOFTWARE.
             STORYBOARD.forEach((shot, idx) => {
                 const item = document.createElement('div');
                 item.id = `sb-item-${shot.id}`;
-                item.className = "sb-item p-2 rounded-xl bg-[#0A0915]/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
+                item.className = "sb-item p-2 rounded-xl bg-inset/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
                 item.innerHTML = `
                     <div class="flex items-center gap-2 truncate">
                         <span class="px-1.5 py-0.5 rounded bg-purple-950 text-neonCyan font-mono-tech text-[10px] font-bold">#${String(idx + 1).padStart(2, '0')}</span>
@@ -3018,43 +2726,14 @@ SOFTWARE.
         const GROQ_BASE = 'https://api.groq.com/openai/v1';
         const DEFAULT_VISION_MODEL = 'qwen/qwen3.8-27b';
         const DEFAULT_WHISPER_MODEL = 'whisper-large-v3-turbo';
-        const DEFAULT_TIPOS = "# Tipos de cena — GTA 6\n\nA IA classifica cada trecho dos vídeos em UM destes tipos.\nFormato do título: \"## identificador — Nome\". O identificador não pode ter espaço nem acento.\nVocê pode editar as descrições, apagar tipos ou criar novos.\n\n## perseguicao_noite — Perseguição policial à noite\n- Avenida movimentada de Vice City de madrugada.\n- Carro em alta velocidade desviando de outros veículos.\n- Viaturas policiais perseguindo com sirenes ligadas; luzes vermelhas e azuis refletindo no asfalto molhado.\n- Helicóptero com holofote sobre os prédios.\n- Hotéis, bares e letreiros de neon ao fundo. Clima de perigo, adrenalina e fuga.\n\n## casal_carro — Casal dentro de um carro\n- Um homem e uma mulher dentro de um carro, muitas vezes conversível.\n- O homem dirigindo, sério; a mulher no banco do passageiro olhando pela janela ou conversando.\n- Cidade iluminada ao fundo, palmeiras, prédios e letreiros coloridos; reflexos do painel nos rostos.\n- Clima de parceria, romance e perigo.\n\n## praia_dia — Praia durante o dia\n- Praia tropical com areia clara e mar azul-turquesa, palmeiras.\n- Pessoas tomando sol, caminhando, surfando; guarda-sóis, cadeiras, posto de salva-vidas.\n- Hotéis e prédios ao longe, céu azul e sol forte. Clima descontraído.\n\n## cassino — Cassino\n- Ambiente luxuoso com iluminação dourada, roxa e vermelha.\n- Mesas de pôquer, roleta, máquinas caça-níqueis; pessoas bem-vestidas apostando.\n- Seguranças nas entradas, lustres, pisos brilhantes. Clima de riqueza, tensão e negócios ilegais.\n\n## carro_esportivo — Carro esportivo em Vice City\n- Carro de luxo ou esportivo atravessando uma avenida cercada de palmeiras.\n- Sol se pondo entre os prédios, céu laranja e rosa.\n\n## casal_motel — Casal em frente a um motel\n- Jason e Lucia parados diante de um motel iluminado por letreiros de neon.\n- Expressão de preocupação e mistério, geralmente à noite.\n\n## reuniao_criminosa — Reunião criminosa em um galpão\n- Pessoas reunidas ao redor de uma mesa em local fechado (galpão, sala escura).\n- Dinheiro espalhado, mapas, armas; carros estacionados ao fundo.\n\n## lancha — Lancha de luxo no oceano\n- Lancha ou barco navegando em águas cristalinas.\n- Mansões, ilhas ou a orla de Leonida ao fundo.\n\n## boate — Boate de Vice City\n- Pista lotada, luzes coloridas, DJ, bebidas, pessoas dançando à noite.\n\n## pantano — Pântano de Leonida\n- Barco (ou airboat) atravessando águas escuras com vegetação densa.\n- Jacarés, natureza selvagem, atmosfera de suspense.\n";
-        const DEFAULT_PERSONAGENS = "# Personagens — GTA 6\n\nEste arquivo é enviado para a IA junto com os frames de cada cena.\nCada título \"## Nome\" vira um nome que a IA pode marcar na cena.\nPara reconhecer alguém na imagem, o que mais importa é \"Aparência\" e \"Estilo\".\nOs outros campos são contexto.\n\n## Jason\n- Aparência: homem adulto, branco, cabelo curto castanho, porte físico forte, aparência de alguém acostumado à vida nas ruas.\n- Estilo: roupas casuais, camisetas, bonés, jeans e roupas práticas.\n- Personalidade: tranquilo, confiante, observador e acostumado a situações perigosas.\n- História: cresceu cercado por criminosos, entrou para o Exército tentando mudar de vida e acabou trabalhando para traficantes em Leonida Keys.\n- Relacionamentos: possui uma ligação muito forte com Lucia; aparece muito ao lado dela.\n\n## Lucia\n- Aparência: mulher adulta, latina, cabelos castanhos escuros geralmente presos, porte físico atlético.\n- Estilo: roupas modernas, sensuais e urbanas, com vestidos, tops e roupas casuais. Em cenas da prisão, uniforme de presidiária.\n- Personalidade: determinada, inteligente, corajosa e ambiciosa.\n- História: cresceu aprendendo a lutar com o pai e acabou presa na Penitenciária de Leonida por defender sua família.\n- Relacionamentos: Jason é seu parceiro; aparece muito ao lado dele.\n\n## Cal\n- Nome completo: Cal Hampton.\n- Aparência: homem adulto, cabelos curtos, aparência casual e descontraída.\n- Estilo: roupas simples, camisetas e peças confortáveis. Costuma estar em casa, perto de computadores e rádios.\n- Personalidade: paranoico, desconfiado, curioso e bastante ligado à internet.\n- Relacionamentos: amigo de Jason e associado de Brian.\n\n## Brian\n- Nome completo: Brian Heder.\n- Aparência: homem mais velho, cabeça raspada ou careca, barba grisalha, aparência de quem passou muitos anos nas ruas.\n- Estilo: camisas estampadas, roupas descontraídas e óculos escuros.\n- Personalidade: experiente, calculista e acostumado a mandar nos outros.\n- Relacionamentos: casado com Lori; dono dos imóveis onde Jason vive.\n\n## Boobie Ike\n- Aparência: homem adulto, negro, com presença marcante e estilo de empresário de sucesso.\n- Estilo: roupas elegantes, acessórios chamativos e visual sofisticado.\n- Contexto: dono de imóveis, da casa noturna Jack of Hearts e de um estúdio musical; sócio de Dre'Quan Priest.\n\n## Dre'Quan\n- Nome completo: Dre'Quan Priest.\n- Aparência: homem jovem adulto, negro, visual urbano e moderno.\n- Estilo: roupas de grife, acessórios e estilo inspirado na cultura hip-hop.\n- Contexto: trabalha com Boobie Ike na gravadora Only Raw Records; investe na dupla Real Dimez.\n\n## Raul\n- Nome completo: Raul Bautista.\n- Aparência: homem adulto, cabelo escuro, aparência confiante e postura de criminoso experiente.\n- Estilo: roupas modernas, casuais e elegantes.\n- Contexto: assaltante de bancos experiente que procura pessoas para grandes roubos.\n\n## Bae-Luxe\n- Dupla: Real Dimez (com Roxy).\n- Aparência: mulher jovem adulta, visual urbano e bastante chamativo.\n- Estilo: roupas modernas, acessórios brilhantes e estética de artista de rap.\n- Contexto: costuma aparecer junto com Roxy, em clima de música, festa ou redes sociais.\n\n## Roxy\n- Dupla: Real Dimez (com Bae-Luxe).\n- Aparência: mulher jovem adulta, visual moderno e identidade própria dentro da dupla.\n- Estilo: roupas de moda urbana, acessórios e estética ligada ao hip-hop.\n- Contexto: costuma aparecer junto com Bae-Luxe.\n\n## Outros (sem ficha visual oficial)\n- Lori Heder: esposa de Brian.\n- Stefani: conselheira de Lucia na prisão.\n- DWNPLY: rapper que já trabalhou com a Real Dimez.\n- Wyman: ligado ao universo de carros e colecionismo.\nSó marque esses nomes se houver algo muito claro na cena (por exemplo, legenda com o nome).\n\n## Regras para a IA\n- Só marque um personagem quando a pessoa na imagem combinar com a \"Aparência\" e o \"Estilo\" descritos.\n- Pessoas aleatórias, multidões e figurantes NÃO são personagens principais: use a tag \"multidao\".\n- Se não tiver certeza de quem é, deixe a lista de personagens vazia.\n";
+        const DEFAULT_TIPOS = "# Tipos de cena\n\nA IA classifica cada trecho dos vídeos de referência em UM destes tipos.\nFormato: \"## identificador — Nome\" (sem espaço nem acento no identificador).\n\n## pessoas — Pessoas em cena\n- Uma ou mais pessoas conversando, reagindo ou apresentando.\n\n## cidade — Cidade\n- Ruas, prédios, trânsito, vista urbana.\n\n## natureza — Natureza\n- Paisagens, praia, montanha, floresta, céu.\n\n## objeto — Objeto em destaque\n- Close de um produto, documento, tela ou objeto.\n\n## acao — Ação\n- Movimento rápido, perseguição, esporte, multidão.\n";
+        const DEFAULT_PERSONAGENS = "# Personagens (opcional)\n\nUse só se os vídeos de referência tiverem pessoas que a IA deve reconhecer.\nCada título \"## Nome\" vira um nome que pode ser marcado na cena.\n\n## Exemplo\n- Aparência: descreva rosto, cabelo e porte.\n- Estilo: descreva as roupas e acessórios.\n";
 
         const VISION_TAGS = ['policia', 'perseguicao', 'carro', 'moto', 'barco', 'helicoptero', 'casal', 'cassino', 'festa',
             'noite', 'dia', 'por_do_sol', 'praia', 'cidade', 'luxo', 'loja', 'posto', 'assalto', 'arma', 'dinheiro',
             'celular', 'prisao', 'multidao', 'tensao', 'mapa', 'interior', 'musica'];
 
-        // What each line of the script asks for on screen (p = personagens, t = tags)
-        const SHOT_NEEDS = {
-            1: { p: [], t: ['cidade', 'por_do_sol', 'luxo'], c: ['carro_esportivo',  'praia_dia'] },
-            2: { p: ['Jason', 'Lucia'], t: ['casal', 'assalto'], c: ['casal_carro',  'casal_motel'] },
-            3: { p: [], t: ['cidade', 'mapa', 'praia', 'multidao'], c: ['praia_dia',  'carro_esportivo'] },
-            4: { p: ['Jason', 'Lucia'], t: ['dinheiro', 'policia', 'casal'], c: ['perseguicao_noite',  'casal_carro'] },
-            5: { p: [], t: ['cidade', 'multidao', 'dia'], c: ['praia_dia',  'carro_esportivo',  'lancha'] },
-            6: { p: ['Jason', 'Lucia'], t: ['casal'], c: ['casal_carro',  'casal_motel'] },
-            7: { p: ['Jason', 'Lucia'], t: ['assalto', 'loja', 'dinheiro', 'arma'], c: ['reuniao_criminosa',  'casal_carro'] },
-            8: { p: ['Jason', 'Lucia'], t: ['assalto', 'arma'], c: ['reuniao_criminosa'] },
-            9: { p: [], t: ['arma', 'tensao'], c: ['reuniao_criminosa'] },
-            10: { p: ['Jason', 'Lucia'], t: ['tensao', 'casal'], c: ['casal_motel',  'casal_carro'] },
-            11: { p: [], t: ['cidade', 'luxo', 'praia'], c: ['praia_dia',  'lancha',  'carro_esportivo'] },
-            12: { p: [], t: ['loja', 'noite', 'policia'], c: ['perseguicao_noite',  'boate'] },
-            13: { p: [], t: ['mapa', 'cidade', 'carro'], c: ['carro_esportivo',  'pantano'] },
-            14: { p: [], t: ['policia', 'perseguicao', 'carro'], c: ['perseguicao_noite'] },
-            15: { p: [], t: ['policia', 'perseguicao', 'helicoptero', 'arma'], c: ['perseguicao_noite',  'pantano'] },
-            16: { p: ['Jason', 'Lucia'], t: ['luxo', 'tensao'], c: ['cassino',  'reuniao_criminosa',  'lancha'] },
-            17: { p: ['Jason', 'Lucia'], t: ['casal', 'tensao'], c: ['casal_motel',  'casal_carro'] },
-            18: { p: [], t: ['cassino', 'noite', 'dinheiro', 'luxo'], c: ['cassino',  'boate'] },
-            19: { p: ['Boobie Ike', 'Raul'], t: ['dinheiro', 'luxo', 'interior'], c: ['reuniao_criminosa',  'cassino',  'lancha'] },
-            20: { p: ['Cal', 'Brian', 'Bae-Luxe', 'Roxy', "Dre'Quan"], t: ['multidao', 'praia', 'cidade', 'festa'], c: ['praia_dia',  'boate'] },
-            21: { p: ['Jason'], t: ['posto', 'carro'], c: ['carro_esportivo',  'casal_motel'] },
-            22: { p: [], t: ['arma', 'tensao'], c: ['reuniao_criminosa',  'pantano'] },
-            23: { p: ['Jason', 'Lucia'], t: ['policia', 'assalto', 'dinheiro', 'arma'], c: ['perseguicao_noite'] },
-            24: { p: ['Jason'], t: ['celular', 'carro'], c: ['casal_carro',  'reuniao_criminosa'] },
-            25: { p: ['Lucia'], t: ['celular', 'policia', 'carro', 'tensao'], c: ['perseguicao_noite',  'casal_carro'] },
-            26: { p: [], t: ['carro', 'policia', 'cidade', 'por_do_sol'], c: ['carro_esportivo',  'praia_dia',  'lancha'] },
-            27: { p: ['Jason', 'Lucia'], t: ['casal', 'por_do_sol'], c: ['casal_carro',  'casal_motel'] }
-        };
+        const SHOT_NEEDS = {}; // cada cena gerada traz suas próprias necessidades (shot.needs)
 
         const groqKeyInput = $('groq-key'), groqStatusBadge = $('groq-status-badge');
         const groqVisionModelInput = $('groq-vision-model'), groqWhisperModelInput = $('groq-whisper-model');
@@ -3106,7 +2785,7 @@ SOFTWARE.
             whisperBtn.disabled = groqBusy || !hasKey || !audioState.buffer;
             visionBtn.disabled = groqBusy || !hasKey || !hasScenes;
             exportScenesBtn.disabled = !videos.some(v => v.status === 'pronto');
-            whisperBtnText.textContent = audioState.whisper ? 'Legenda sincronizada (refazer)' : 'Sincronizar legenda com Whisper';
+            whisperBtnText.textContent = audioState.whisper ? 'Recriar vídeo a partir do áudio' : 'Criar vídeo a partir do áudio';
             visionBtnText.textContent = hasScenes && !pendingVision ? 'Cenas analisadas (refazer tudo)' : `Analisar conteúdo das cenas${hasScenes ? ` (${pendingVision})` : ''}`;
             if (!hasKey) {
                 groqStatusBadge.textContent = 'Sem chave';
@@ -3279,18 +2958,15 @@ SOFTWARE.
             showGroqMessage('', '');
             const model = groqWhisperModelInput.value.trim() || DEFAULT_WHISPER_MODEL;
             try {
-                const segs = alignmentSegments();
-                const allWords = [];
+                const allWords = [], allSegs = [];
                 for (let i = 0; i < audioState.files.length; i++) {
                     const file = audioState.files[i];
                     const tr = audioState.tracks[i];
-                    const cacheKey = `vstudio_whisper_${model}_${file.name}_${file.size}`;
-                    let words = null;
-                    try { words = JSON.parse(lsGet(cacheKey, 'null')); } catch (e) { words = null; }
-                    if (!Array.isArray(words) || !words.length) {
-                        setProgress(true, `Whisper: transcrevendo ${file.name} (${i + 1}/${audioState.files.length})...`, (i + 0.3) / audioState.files.length);
-                        const seg = segs.find(sg => sg.tracks.includes(i));
-                        const hint = seg ? seg.shots.map(sh => sh.text).join(' ').slice(0, 600) : '';
+                    const cacheKey = `vstudio_whisper2_${model}_${file.name}_${file.size}`;
+                    let data = null;
+                    try { data = JSON.parse(lsGet(cacheKey, 'null')); } catch (e) { data = null; }
+                    if (!data || !Array.isArray(data.words) || !data.words.length) {
+                        setProgress(true, `Whisper: transcrevendo ${file.name} (${i + 1}/${audioState.files.length})...`, (i + 0.3) / audioState.files.length * 0.45);
                         const json = await groqFetch('/audio/transcriptions', () => {
                             const fd = new FormData();
                             fd.append('file', file, file.name);
@@ -3300,43 +2976,25 @@ SOFTWARE.
                             fd.append('timestamp_granularities[]', 'word');
                             fd.append('timestamp_granularities[]', 'segment');
                             fd.append('temperature', '0');
-                            if (hint) fd.append('prompt', hint);
                             return { method: 'POST', headers: { Authorization: `Bearer ${groqKey}` }, body: fd };
                         }, 'Whisper');
-                        words = (Array.isArray(json.words) && json.words.length) ? json.words.map(w => ({ word: w.word, start: +w.start, end: +w.end })) : wordsFromSegments(json);
+                        const words = (Array.isArray(json.words) && json.words.length) ? json.words.map(w => ({ word: w.word, start: +w.start, end: +w.end })) : wordsFromSegments(json);
+                        const segments = Array.isArray(json.segments) ? json.segments.map(sg => ({ start: +sg.start, end: +sg.end, text: String(sg.text || '').trim() })) : [];
                         if (!words.length) throw new Error(`Whisper não encontrou fala em ${file.name}.`);
-                        lsSet(cacheKey, JSON.stringify(words));
+                        data = { words, segments };
+                        lsSet(cacheKey, JSON.stringify(data));
                     }
-                    words.forEach(w => allWords.push({ word: w.word, start: w.start + tr.offset, end: w.end + tr.offset }));
+                    data.words.forEach(w => allWords.push({ word: w.word, start: w.start + tr.offset, end: w.end + tr.offset }));
+                    (data.segments || []).forEach(sg => allSegs.push({ start: sg.start + tr.offset, end: sg.end + tr.offset, text: sg.text }));
                 }
-                setProgress(true, 'Encaixando o roteiro nas palavras do Whisper...', 0.95);
-                await sleep(20);
-                let matched = 0, total = 0;
-                segs.forEach(seg => {
-                    const ws = allWords.filter(w => w.start >= seg.t0 - 0.05 && w.start < seg.t1);
-                    const res = alignShotsToWhisper(seg.shots, ws, seg.t0, seg.t1);
-                    matched += res.matched;
-                    total += res.total;
-                    // the words actually spoken, grouped by the line of the script they fall into
-                    seg.shots.forEach(sh => {
-                        sh.realWords = ws.filter(w => w.start >= sh.start - 1e-6 && w.start < sh.end)
-                            .map(w => ({ word: String(w.word).trim(), t0: w.start, t1: Math.max(w.end, w.start + 0.05) }))
-                            .filter(w => w.word);
-                        sh._pagesKey = null;
-                    });
-                });
-                const rate = total ? matched / total : 0;
                 audioState.whisper = true;
-                syncModeBadge.textContent = 'Legenda: Whisper';
-                syncModeBadge.className = "text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40";
-                // Whisper gives real word times, so only a small lead is needed
+                setCaptionSource('real');
                 if (Math.abs(captionOffset - 0.15) < 0.001) { captionOffset = 0.05; updateCaptionOffsetUI(); }
-                onTimingChanged();
-                const pct = Math.round(rate * 100);
-                if (rate < 0.7 && captionSource !== 'real') setCaptionSource('real');
-                showGroqMessage(`Whisper ouviu ${allWords.length} palavras. ${pct}% do roteiro escrito bate com a fala.` +
-                    (rate < 0.7 ? ' A narração está bem diferente do roteiro do estúdio, então a legenda mostra a fala real.' : '') +
-                    (captionSource === 'real' ? ' Legenda: fala real (exatamente o que foi dito).' : ' Legenda: roteiro escrito.'), rate < 0.7 ? 'info' : 'ok');
+                syncModeBadge.textContent = 'Vídeo pelo áudio';
+                syncModeBadge.className = "text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40";
+                setProgress(true, 'Dividindo a narração em cenas...', 0.48);
+                await buildStoryFromTranscript(allWords, allSegs);
+                showGroqMessage(`Vídeo montado: ${STORYBOARD.length} cenas criadas a partir de ${allWords.length} palavras da narração.`, 'ok');
             } catch (err) {
                 console.error(err);
                 showGroqMessage(err.message || String(err), 'err');
@@ -3564,7 +3222,7 @@ A imagem é uma grade de cenas${refImages.length ? ' (no topo, separadas por uma
 Há ${batch.length} cenas no total, numeradas de 1 a ${batch.length}.
 
 Responda SOMENTE com um objeto JSON neste formato:
-{"cenas":[{"n":1,"tipo":"perseguicao_noite","personagens":["Jason"],"descricao":"frase curta em português do que acontece","tags":["policia","noite"],"confianca":0.8}]}
+{"cenas":[{"n":1,"tipo":"perseguicao_noite","personagens":["Ana"],"descricao":"frase curta em português do que acontece","tags":["policia","noite"],"confianca":0.8}]}
 Regras:
 - "n": o número amarelo da cena.
 - "tipo": exatamente um destes identificadores: ${[...sceneTypes().map(t => t.id), 'outro'].join(', ')}. Use "outro" se nenhum combinar.
@@ -3844,6 +3502,1365 @@ Regras:
         refreshAvatarUI();
         refreshSceneryUI();
 
+        /********************************************************************
+         * ÍCONES UNIVERSAIS (2D chapado com contorno) — usados pelos 3 estilos
+         * drawIcon(c, nome, x, y, s, st) • s = raio aproximado • st = {ink, sticker}
+         ********************************************************************/
+        const ICON_NAMES = ['dinheiro', 'moeda', 'grafico_sobe', 'grafico_desce', 'casa', 'predio', 'carro', 'caminhao', 'aviao', 'celular',
+            'relogio', 'calendario', 'comida', 'carrinho', 'fabrica', 'livro', 'hospital', 'pin', 'globo', 'lampada', 'coracao', 'estrela',
+            'trofeu', 'cadeado', 'alerta', 'check', 'x', 'interrogacao', 'maleta', 'envelope', 'sol', 'lua', 'arvore', 'bandeira', 'lupa', 'fogo'];
+
+        const ICON_KEYWORDS = [
+            [/sal[aá]rio|dinheiro|reais|\breal\b|r\$|pagar|pago|grana|lucro|renda|pre[cç]o|custo|d[ií]vida|imposto|banco/i, 'dinheiro'],
+            [/moeda|centavo|economi|poupan/i, 'moeda'],
+            [/cresc|aument|sub(iu|ir)|alta|recorde|lucr/i, 'grafico_sobe'],
+            [/ca(iu|ir)|queda|desab|crise|colaps|perd|baix/i, 'grafico_desce'],
+            [/casa|lar|aluguel|moradia|im[oó]vel|apartamento/i, 'casa'],
+            [/cidade|pr[eé]dio|empresa|escrit[oó]rio/i, 'predio'],
+            [/carro|ve[ií]culo|garagem|dirig/i, 'carro'],
+            [/caminh[aã]o|lixo|entrega|transporte|frete/i, 'caminhao'],
+            [/avi[aã]o|viag|voo|aeroporto/i, 'aviao'],
+            [/celular|telefone|app|internet|rede social|v[ií]deo/i, 'celular'],
+            [/hora|tempo|minuto|segundo|madrugada|rel[oó]gio/i, 'relogio'],
+            [/dia|m[eê]s|ano|semana|data|calend/i, 'calendario'],
+            [/comida|comer|fome|prato|almo[cç]o|janta|aliment/i, 'comida'],
+            [/mercado|supermercado|compra|loja|consum/i, 'carrinho'],
+            [/f[aá]brica|ind[uú]stria|produ[cç]|min[eé]rio|petr[oó]leo/i, 'fabrica'],
+            [/escola|estud|livro|aprend|educa/i, 'livro'],
+            [/sa[uú]de|hospital|m[eé]dico|doen/i, 'hospital'],
+            [/lugar|local|mapa|onde|regi[aã]o|endere/i, 'pin'],
+            [/mundo|pa[ií]s|global|planeta|brasil/i, 'globo'],
+            [/ideia|segredo|descobr|solu[cç]/i, 'lampada'],
+            [/amor|cora[cç][aã]o|paix/i, 'coracao'],
+            [/melhor|famos|sucesso|estrela|top/i, 'estrela'],
+            [/vit[oó]ria|venc|campe|pr[eê]mio|ganh/i, 'trofeu'],
+            [/seguran|proteg|bloque|pris|cadeia|trancad/i, 'cadeado'],
+            [/perigo|alerta|cuidado|aten[cç]|risco|problema/i, 'alerta'],
+            [/certo|verdade|sim\b|aprovad|confirm/i, 'check'],
+            [/errado|mentira|n[aã]o\b|proibid|falh/i, 'x'],
+            [/por que|porqu|pergunta|mist[eé]rio|ser[aá]/i, 'interrogacao'],
+            [/trabalh|emprego|neg[oó]cio|carreira/i, 'maleta'],
+            [/fatura|conta|carta|mensagem|e-?mail/i, 'envelope'],
+            [/sol|ver[aã]o|calor|praia/i, 'sol'],
+            [/noite|lua|sonho|dormi/i, 'lua'],
+            [/natureza|floresta|[aá]rvore|planta|verde/i, 'arvore'],
+            [/fogo|queim|inc[eê]ndio|explod/i, 'fogo'],
+            [/investiga|analis|procur|pista/i, 'lupa']
+        ];
+
+        function iconsFromText(text, max) {
+            const out = [];
+            for (const [re, name] of ICON_KEYWORDS) {
+                if (re.test(text) && !out.includes(name)) out.push(name);
+                if (out.length >= (max || 2)) break;
+            }
+            return out;
+        }
+
+        function iconStroke(c, ink, w) { c.lineJoin = 'round'; c.lineCap = 'round'; c.strokeStyle = ink; c.lineWidth = w; c.stroke(); }
+
+        function drawIcon(c, name, x, y, s, st) {
+            st = st || {};
+            const ink = st.ink || '#0A0915';
+            const lw = Math.max(2, s * 0.09);
+            const P = (fill) => { c.fillStyle = fill; c.fill(); iconStroke(c, ink, lw); };
+            c.save();
+            c.translate(x, y);
+            if (st.sticker) {
+                // white die-cut border behind the icon
+                c.save();
+                c.shadowColor = 'rgba(0,0,0,0.45)'; c.shadowBlur = s * 0.25; c.shadowOffsetY = s * 0.08;
+                c.beginPath(); c.arc(0, 0, s * 1.08, 0, Math.PI * 2); c.fillStyle = 'rgba(255,255,255,0.08)'; c.fill();
+                c.restore();
+            }
+            switch (name) {
+                case 'dinheiro': {
+                    c.save(); c.rotate(-0.12);
+                    c.beginPath(); c.rect(-s, -s * 0.55, s * 2, s * 1.1); P('#7ED957');
+                    c.beginPath(); c.arc(0, 0, s * 0.32, 0, Math.PI * 2); P('#B6F09C');
+                    c.fillStyle = ink; c.font = `900 ${s * 0.4}px Inter, Arial`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('$', 0, s * 0.02);
+                    c.restore(); break;
+                }
+                case 'moeda': {
+                    c.beginPath(); c.ellipse(0, s * 0.15, s * 0.85, s * 0.85, 0, 0, Math.PI * 2); P('#F2B705');
+                    c.beginPath(); c.arc(0, 0, s * 0.85, 0, Math.PI * 2); P('#FFD43B');
+                    c.fillStyle = ink; c.font = `900 ${s * 0.8}px Inter, Arial`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('$', 0, s * 0.04);
+                    break;
+                }
+                case 'grafico_sobe':
+                case 'grafico_desce': {
+                    const up = name === 'grafico_sobe';
+                    c.beginPath(); c.rect(-s, -s, s * 2, s * 2); P('#F3F4F6');
+                    [0.5, 0.9, 1.3].forEach((h, i) => { const hh = up ? h : 1.8 - h; c.beginPath(); c.rect(-s * 0.75 + i * s * 0.55, s * 0.85 - hh * s, s * 0.38, hh * s); P(up ? '#34D399' : '#F87171'); });
+                    c.beginPath(); c.moveTo(-s * 0.8, up ? s * 0.4 : -s * 0.6); c.lineTo(s * 0.75, up ? -s * 0.75 : s * 0.55);
+                    iconStroke(c, up ? '#059669' : '#DC2626', lw * 1.3);
+                    break;
+                }
+                case 'casa': {
+                    c.beginPath(); c.rect(-s * 0.75, -s * 0.15, s * 1.5, s * 1.05); P('#FDE68A');
+                    c.beginPath(); c.moveTo(-s, -s * 0.1); c.lineTo(0, -s * 0.95); c.lineTo(s, -s * 0.1); c.closePath(); P('#EF4444');
+                    c.beginPath(); c.rect(-s * 0.2, s * 0.35, s * 0.4, s * 0.55); P('#92400E');
+                    break;
+                }
+                case 'predio': {
+                    c.beginPath(); c.rect(-s * 0.6, -s, s * 1.2, s * 1.95); P('#93C5FD');
+                    for (let r = 0; r < 4; r++) for (let k = 0; k < 2; k++) { c.beginPath(); c.rect(-s * 0.4 + k * s * 0.5, -s * 0.8 + r * s * 0.42, s * 0.3, s * 0.25); P('#FEF08A'); }
+                    break;
+                }
+                case 'carro': {
+                    c.beginPath(); c.moveTo(-s, s * 0.35); c.lineTo(-s, -s * 0.05); c.lineTo(-s * 0.55, -s * 0.15); c.lineTo(-s * 0.3, -s * 0.6); c.lineTo(s * 0.35, -s * 0.6); c.lineTo(s * 0.65, -s * 0.15); c.lineTo(s, -s * 0.05); c.lineTo(s, s * 0.35); c.closePath(); P('#EF4444');
+                    c.beginPath(); c.moveTo(-s * 0.2, -s * 0.5); c.lineTo(s * 0.3, -s * 0.5); c.lineTo(s * 0.5, -s * 0.15); c.lineTo(-s * 0.4, -s * 0.15); c.closePath(); P('#BAE6FD');
+                    [-0.55, 0.55].forEach(k => { c.beginPath(); c.arc(k * s, s * 0.38, s * 0.22, 0, Math.PI * 2); P('#1F2937'); });
+                    break;
+                }
+                case 'caminhao': {
+                    c.beginPath(); c.rect(-s, -s * 0.55, s * 1.25, s * 0.9); P('#F59E0B');
+                    c.beginPath(); c.moveTo(s * 0.3, -s * 0.3); c.lineTo(s * 0.75, -s * 0.3); c.lineTo(s, 0); c.lineTo(s, s * 0.35); c.lineTo(s * 0.3, s * 0.35); c.closePath(); P('#60A5FA');
+                    [-0.6, 0.65].forEach(k => { c.beginPath(); c.arc(k * s, s * 0.4, s * 0.2, 0, Math.PI * 2); P('#1F2937'); });
+                    break;
+                }
+                case 'aviao': {
+                    c.save(); c.rotate(-0.4);
+                    c.beginPath(); c.ellipse(0, 0, s, s * 0.22, 0, 0, Math.PI * 2); P('#E5E7EB');
+                    c.beginPath(); c.moveTo(-s * 0.1, 0); c.lineTo(-s * 0.45, -s * 0.85); c.lineTo(-s * 0.15, -s * 0.85); c.lineTo(s * 0.3, 0); c.closePath(); P('#60A5FA');
+                    c.beginPath(); c.moveTo(-s * 0.1, 0); c.lineTo(-s * 0.45, s * 0.85); c.lineTo(-s * 0.15, s * 0.85); c.lineTo(s * 0.3, 0); c.closePath(); P('#60A5FA');
+                    c.beginPath(); c.moveTo(-s * 0.75, 0); c.lineTo(-s * 0.95, -s * 0.4); c.lineTo(-s * 0.8, -s * 0.4); c.lineTo(-s * 0.55, 0); c.closePath(); P('#60A5FA');
+                    c.restore(); break;
+                }
+                case 'celular': {
+                    drawRoundedRect(c, -s * 0.55, -s, s * 1.1, s * 2, s * 0.18); P('#1F2937');
+                    drawRoundedRect(c, -s * 0.43, -s * 0.82, s * 0.86, s * 1.5, s * 0.08); P('#38BDF8');
+                    c.beginPath(); c.moveTo(-s * 0.12, -s * 0.3); c.lineTo(s * 0.2, -s * 0.08); c.lineTo(-s * 0.12, s * 0.14); c.closePath(); c.fillStyle = '#FFFFFF'; c.fill();
+                    break;
+                }
+                case 'relogio': {
+                    c.beginPath(); c.arc(0, 0, s, 0, Math.PI * 2); P('#F9FAFB');
+                    c.beginPath(); c.moveTo(0, 0); c.lineTo(0, -s * 0.6); c.moveTo(0, 0); c.lineTo(s * 0.45, s * 0.2); iconStroke(c, ink, lw * 1.2);
+                    break;
+                }
+                case 'calendario': {
+                    c.beginPath(); c.rect(-s * 0.85, -s * 0.75, s * 1.7, s * 1.6); P('#FFFFFF');
+                    c.beginPath(); c.rect(-s * 0.85, -s * 0.75, s * 1.7, s * 0.45); P('#EF4444');
+                    c.fillStyle = ink; c.font = `900 ${s * 0.75}px Inter, Arial`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('31', 0, s * 0.32);
+                    break;
+                }
+                case 'comida': {
+                    c.beginPath(); c.ellipse(0, s * 0.25, s, s * 0.45, 0, 0, Math.PI * 2); P('#F3F4F6');
+                    c.beginPath(); c.arc(-s * 0.3, s * 0.05, s * 0.3, 0, Math.PI * 2); P('#F97316');
+                    c.beginPath(); c.arc(s * 0.25, s * 0.08, s * 0.35, 0, Math.PI * 2); P('#84CC16');
+                    c.beginPath(); c.arc(0, -s * 0.15, s * 0.25, 0, Math.PI * 2); P('#EF4444');
+                    break;
+                }
+                case 'carrinho': {
+                    c.beginPath(); c.moveTo(-s, -s * 0.7); c.lineTo(-s * 0.7, -s * 0.7); c.lineTo(-s * 0.45, s * 0.3); c.lineTo(s * 0.8, s * 0.3); c.lineTo(s, -s * 0.4); c.lineTo(-s * 0.6, -s * 0.4); iconStroke(c, ink, lw * 1.3);
+                    c.beginPath(); c.rect(-s * 0.5, -s * 0.75, s * 0.5, s * 0.4); P('#F97316');
+                    c.beginPath(); c.rect(s * 0.05, -s * 0.85, s * 0.5, s * 0.5); P('#22C55E');
+                    [-0.35, 0.6].forEach(k => { c.beginPath(); c.arc(k * s, s * 0.6, s * 0.16, 0, Math.PI * 2); P('#1F2937'); });
+                    break;
+                }
+                case 'fabrica': {
+                    c.beginPath(); c.moveTo(-s, s * 0.85); c.lineTo(-s, -s * 0.1); c.lineTo(-s * 0.4, -s * 0.45); c.lineTo(-s * 0.4, -s * 0.1); c.lineTo(s * 0.2, -s * 0.45); c.lineTo(s * 0.2, -s * 0.1); c.lineTo(s, -s * 0.45); c.lineTo(s, s * 0.85); c.closePath(); P('#9CA3AF');
+                    c.beginPath(); c.rect(s * 0.5, -s, s * 0.3, s * 0.6); P('#6B7280');
+                    c.beginPath(); c.arc(s * 0.75, -s * 1.15, s * 0.18, 0, Math.PI * 2); c.fillStyle = 'rgba(229,231,235,0.85)'; c.fill();
+                    break;
+                }
+                case 'livro': {
+                    c.beginPath(); c.moveTo(0, -s * 0.6); c.quadraticCurveTo(-s * 0.5, -s * 0.85, -s, -s * 0.6); c.lineTo(-s, s * 0.7); c.quadraticCurveTo(-s * 0.5, s * 0.45, 0, s * 0.7); c.closePath(); P('#FFFFFF');
+                    c.beginPath(); c.moveTo(0, -s * 0.6); c.quadraticCurveTo(s * 0.5, -s * 0.85, s, -s * 0.6); c.lineTo(s, s * 0.7); c.quadraticCurveTo(s * 0.5, s * 0.45, 0, s * 0.7); c.closePath(); P('#E0F2FE');
+                    break;
+                }
+                case 'hospital': {
+                    drawRoundedRect(c, -s * 0.9, -s * 0.9, s * 1.8, s * 1.8, s * 0.3); P('#FFFFFF');
+                    c.beginPath(); c.rect(-s * 0.2, -s * 0.6, s * 0.4, s * 1.2); c.rect(-s * 0.6, -s * 0.2, s * 1.2, s * 0.4); c.fillStyle = '#EF4444'; c.fill();
+                    break;
+                }
+                case 'pin': {
+                    c.beginPath(); c.arc(0, -s * 0.3, s * 0.65, Math.PI * 0.82, Math.PI * 0.18); c.lineTo(0, s); c.closePath(); P('#EF4444');
+                    c.beginPath(); c.arc(0, -s * 0.3, s * 0.26, 0, Math.PI * 2); P('#FFFFFF');
+                    break;
+                }
+                case 'globo': {
+                    c.beginPath(); c.arc(0, 0, s, 0, Math.PI * 2); P('#38BDF8');
+                    c.beginPath(); c.moveTo(-s * 0.5, -s * 0.6); c.quadraticCurveTo(0, -s * 0.2, -s * 0.2, s * 0.3); c.quadraticCurveTo(-s * 0.6, s * 0.2, -s * 0.5, -s * 0.6); P('#4ADE80');
+                    c.beginPath(); c.moveTo(s * 0.3, -s * 0.2); c.quadraticCurveTo(s * 0.8, 0, s * 0.4, s * 0.7); c.quadraticCurveTo(s * 0.1, s * 0.3, s * 0.3, -s * 0.2); P('#4ADE80');
+                    break;
+                }
+                case 'lampada': {
+                    c.beginPath(); c.arc(0, -s * 0.25, s * 0.7, Math.PI * 0.8, Math.PI * 0.2); c.lineTo(s * 0.3, s * 0.45); c.lineTo(-s * 0.3, s * 0.45); c.closePath(); P('#FDE047');
+                    c.beginPath(); c.rect(-s * 0.3, s * 0.45, s * 0.6, s * 0.4); P('#9CA3AF');
+                    break;
+                }
+                case 'coracao': {
+                    c.beginPath(); c.moveTo(0, s * 0.85); c.bezierCurveTo(-s * 1.4, -s * 0.1, -s * 0.6, -s * 1.2, 0, -s * 0.4); c.bezierCurveTo(s * 0.6, -s * 1.2, s * 1.4, -s * 0.1, 0, s * 0.85); P('#F43F5E');
+                    break;
+                }
+                case 'estrela': {
+                    c.beginPath();
+                    for (let k = 0; k < 10; k++) { const a = -Math.PI / 2 + k * Math.PI / 5, r = k % 2 ? s * 0.45 : s; c.lineTo(Math.cos(a) * r, Math.sin(a) * r); }
+                    c.closePath(); P('#FACC15');
+                    break;
+                }
+                case 'trofeu': {
+                    c.beginPath(); c.moveTo(-s * 0.6, -s * 0.8); c.lineTo(s * 0.6, -s * 0.8); c.quadraticCurveTo(s * 0.55, s * 0.1, 0, s * 0.2); c.quadraticCurveTo(-s * 0.55, s * 0.1, -s * 0.6, -s * 0.8); P('#FACC15');
+                    c.beginPath(); c.rect(-s * 0.12, s * 0.2, s * 0.24, s * 0.35); P('#EAB308');
+                    c.beginPath(); c.rect(-s * 0.5, s * 0.55, s, s * 0.3); P('#92400E');
+                    break;
+                }
+                case 'cadeado': {
+                    c.beginPath(); c.arc(0, -s * 0.2, s * 0.45, Math.PI, 0); iconStroke(c, ink, lw * 2.2);
+                    c.beginPath(); c.arc(0, -s * 0.2, s * 0.45, Math.PI, 0); iconStroke(c, '#9CA3AF', lw * 1.1);
+                    drawRoundedRect(c, -s * 0.75, -s * 0.2, s * 1.5, s * 1.1, s * 0.15); P('#FACC15');
+                    c.beginPath(); c.arc(0, s * 0.3, s * 0.15, 0, Math.PI * 2); c.fillStyle = ink; c.fill();
+                    break;
+                }
+                case 'alerta': {
+                    c.beginPath(); c.moveTo(0, -s); c.lineTo(s, s * 0.8); c.lineTo(-s, s * 0.8); c.closePath(); P('#FACC15');
+                    c.fillStyle = ink; c.font = `900 ${s * 1.1}px Inter, Arial`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('!', 0, s * 0.2);
+                    break;
+                }
+                case 'check': {
+                    c.beginPath(); c.arc(0, 0, s, 0, Math.PI * 2); P('#22C55E');
+                    c.beginPath(); c.moveTo(-s * 0.45, 0); c.lineTo(-s * 0.1, s * 0.35); c.lineTo(s * 0.5, -s * 0.35); iconStroke(c, '#FFFFFF', lw * 1.8);
+                    break;
+                }
+                case 'x': {
+                    c.beginPath(); c.arc(0, 0, s, 0, Math.PI * 2); P('#EF4444');
+                    c.beginPath(); c.moveTo(-s * 0.4, -s * 0.4); c.lineTo(s * 0.4, s * 0.4); c.moveTo(s * 0.4, -s * 0.4); c.lineTo(-s * 0.4, s * 0.4); iconStroke(c, '#FFFFFF', lw * 1.8);
+                    break;
+                }
+                case 'interrogacao': {
+                    c.beginPath(); c.arc(0, 0, s, 0, Math.PI * 2); P('#A78BFA');
+                    c.fillStyle = '#FFFFFF'; c.font = `900 ${s * 1.3}px Inter, Arial`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('?', 0, s * 0.08);
+                    break;
+                }
+                case 'maleta': {
+                    c.beginPath(); c.rect(-s * 0.3, -s * 0.8, s * 0.6, s * 0.35); iconStroke(c, ink, lw * 1.4);
+                    drawRoundedRect(c, -s, -s * 0.5, s * 2, s * 1.35, s * 0.15); P('#92400E');
+                    c.beginPath(); c.rect(-s, -s * 0.05, s * 2, s * 0.15); P('#78350F');
+                    break;
+                }
+                case 'envelope': {
+                    c.beginPath(); c.rect(-s, -s * 0.65, s * 2, s * 1.3); P('#FDE68A');
+                    c.beginPath(); c.moveTo(-s, -s * 0.65); c.lineTo(0, s * 0.1); c.lineTo(s, -s * 0.65); iconStroke(c, ink, lw);
+                    break;
+                }
+                case 'sol': {
+                    for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; c.beginPath(); c.moveTo(Math.cos(a) * s * 0.7, Math.sin(a) * s * 0.7); c.lineTo(Math.cos(a) * s, Math.sin(a) * s); iconStroke(c, '#F59E0B', lw * 1.4); }
+                    c.beginPath(); c.arc(0, 0, s * 0.55, 0, Math.PI * 2); P('#FACC15');
+                    break;
+                }
+                case 'lua': {
+                    c.beginPath(); c.arc(0, 0, s * 0.85, Math.PI * 0.35, Math.PI * 1.65); c.quadraticCurveTo(-s * 0.1, 0, Math.cos(Math.PI * 0.35) * s * 0.85, Math.sin(Math.PI * 0.35) * s * 0.85); P('#FEF3C7');
+                    break;
+                }
+                case 'arvore': {
+                    c.beginPath(); c.rect(-s * 0.15, s * 0.1, s * 0.3, s * 0.85); P('#92400E');
+                    c.beginPath(); c.arc(0, -s * 0.3, s * 0.65, 0, Math.PI * 2); P('#22C55E');
+                    break;
+                }
+                case 'bandeira': {
+                    c.beginPath(); c.moveTo(-s * 0.7, s); c.lineTo(-s * 0.7, -s); iconStroke(c, ink, lw * 1.3);
+                    c.beginPath(); c.moveTo(-s * 0.7, -s); c.lineTo(s * 0.9, -s * 0.65); c.lineTo(-s * 0.7, -s * 0.25); c.closePath(); P('#22C55E');
+                    break;
+                }
+                case 'lupa': {
+                    c.beginPath(); c.moveTo(s * 0.35, s * 0.35); c.lineTo(s * 0.95, s * 0.95); iconStroke(c, ink, lw * 2.4);
+                    c.beginPath(); c.arc(-s * 0.15, -s * 0.15, s * 0.6, 0, Math.PI * 2); P('rgba(186, 230, 253, 0.85)');
+                    break;
+                }
+                case 'fogo': {
+                    c.beginPath(); c.moveTo(0, -s); c.quadraticCurveTo(s * 0.9, -s * 0.1, s * 0.6, s * 0.5); c.quadraticCurveTo(0, s * 1.1, -s * 0.6, s * 0.5); c.quadraticCurveTo(-s * 0.9, -s * 0.1, 0, -s); P('#F97316');
+                    c.beginPath(); c.moveTo(0, -s * 0.3); c.quadraticCurveTo(s * 0.45, s * 0.2, s * 0.25, s * 0.55); c.quadraticCurveTo(0, s * 0.8, -s * 0.25, s * 0.55); c.quadraticCurveTo(-s * 0.45, s * 0.2, 0, -s * 0.3); P('#FACC15');
+                    break;
+                }
+                default: {
+                    c.beginPath(); c.arc(0, 0, s * 0.8, 0, Math.PI * 2); P('#A78BFA');
+                }
+            }
+            c.restore();
+        }
+
+        /********************************************************************
+         * HISTÓRIA A PARTIR DO ÁUDIO
+         * transcrição (Whisper) → cenas pelas frases → plano visual universal (IA)
+         * Plano = { titulo, tipo, numero, comparacao, itens, objetos, personagens, ambiente, humor, tags }
+         ********************************************************************/
+        const PLAN_TIPOS = ['personagens', 'numero', 'comparacao', 'lista', 'objeto'];
+        const PLAN_AMBIENTES = ['cidade', 'praia', 'casa', 'escritorio', 'natureza', 'noite', 'estrada', 'espaco', 'festa', 'cozinha', 'mercado', 'escola'];
+        const PLAN_EMOCOES = ['neutro', 'feliz', 'triste', 'surpreso', 'bravo', 'preocupado', 'confiante', 'curioso', 'explicando'];
+        const PLAN_ACOES = ['parado', 'apontar', 'acenar', 'andar', 'correr', 'pular', 'pensar', 'comemorar'];
+        const SHOT_COLORS = ['#FF2A6D', '#00F0FF', '#FFB800', '#B388FF'];
+        let storyBusy = false;
+
+        function prepShot(shot) {
+            shot.words = [];
+            shot.charOffsets = [];
+            const re = /\S+/g; let m;
+            while ((m = re.exec(shot.text || '')) !== null) { shot.words.push(m[0]); shot.charOffsets.push(m.index); }
+            shot.weights = shot.words.map(wordWeight);
+        }
+
+        function makeShot(id, start, end, text, plan) {
+            const s = {
+                id, part: 1, start, end, baseStart: start, baseEnd: end,
+                text: text || '', plan: plan || null,
+                headline: (plan && plan.titulo) || (text ? text.split(/\s+/).slice(0, 7).join(' ') : `Cena ${id}`),
+                tag: 'city_map', tagLabel: '', badgeColor: SHOT_COLORS[(id - 1) % SHOT_COLORS.length],
+                needs: plan ? { p: [], t: plan.tags || [], c: [] } : null,
+                realWords: null
+            };
+            prepShot(s);
+            distributeWords(s, start + 0.05, Math.max(start + 0.3, end - 0.1));
+            return s;
+        }
+
+        function setStoryboard(shots, keepDuration) {
+            STORYBOARD.length = 0;
+            shots.forEach(s => STORYBOARD.push(s));
+            if (!keepDuration) totalDuration = Math.max(1, shots[shots.length - 1].end);
+            lastSpokenShotId = -1;
+            lastHighlightedShot = -1;
+            STORYBOARD.forEach(s => { s._pagesKey = null; });
+            if (currentTime > totalDuration) currentTime = 0;
+            onTimingChanged();
+        }
+
+        function placeholderStory() {
+            const s = makeShot(1, 0, 6, '', null);
+            s.headline = 'Suba o áudio para criar o vídeo';
+            s.isPlaceholder = true;
+            setStoryboard([s]);
+        }
+
+        // ---------- heuristic plan (works without AI and as a safety net) ----------
+        function heuristicPlan(text, idx) {
+            const t = String(text || '');
+            const money = t.match(/R\$\s?[\d.,]+(?:\s?(?:mil|milh(?:ão|ões)|bilh(?:ão|ões)))?/i);
+            const pct = t.match(/\d+(?:[.,]\d+)?\s?%/);
+            const num = t.match(/\b\d{2,}(?:[.,]\d+)?\b/);
+            const neg = /crise|problema|perigo|caro|pobreza|colaps|queda|fome|d[ií]vida|pior|ruim|morte|perd|nunca|alerta|medo|infla/i.test(t);
+            const pos = /melhor|sucesso|vit[oó]ria|cresc|ganh|feliz|incr[ií]vel|perfeito|lucro|rico|f[aá]cil/i.test(t);
+            const objetos = iconsFromText(t, 2);
+            const words = t.replace(/[^\p{L}\p{N}$%\s]/gu, ' ').split(/\s+/).filter(w => w.length > 3);
+            const titulo = words.slice(0, 4).join(' ').toUpperCase();
+            let tipo = 'personagens';
+            let numero = null;
+            const valor = money ? money[0] : (pct ? pct[0] : null);
+            if (valor) { tipo = 'numero'; numero = { valor, rotulo: words.slice(0, 3).join(' ') }; }
+            else if (objetos.length && idx % 3 === 1) tipo = 'objeto';
+            else if (num && idx % 2 === 0) { tipo = 'numero'; numero = { valor: num[0], rotulo: words.slice(0, 3).join(' ') }; }
+            const ambientes = ['cidade', 'casa', 'escritorio', 'natureza', 'noite', 'estrada'];
+            return normalizePlan({
+                titulo, tipo, numero, objetos,
+                personagens: [{ emocao: neg ? 'preocupado' : (pos ? 'feliz' : 'explicando'), acao: idx % 2 ? 'apontar' : 'parado' }],
+                ambiente: /praia|mar|areia/i.test(t) ? 'praia' : (/noite|madrugada|escuro/i.test(t) ? 'noite' : ambientes[idx % ambientes.length]),
+                humor: neg ? 'negativo' : (pos ? 'positivo' : 'neutro'),
+                tags: []
+            });
+        }
+
+        function pick(list, v, d) { const k = String(v || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim(); return list.includes(k) ? k : d; }
+        function short(v, n) { return String(v == null ? '' : v).replace(/\s+/g, ' ').trim().slice(0, n); }
+
+        function normalizePlan(p) {
+            p = p || {};
+            const out = {
+                titulo: short(p.titulo, 42),
+                tipo: pick(PLAN_TIPOS, p.tipo, 'personagens'),
+                numero: p.numero && (p.numero.valor || p.numero.rotulo) ? { valor: short(p.numero.valor, 18), rotulo: short(p.numero.rotulo, 34) } : null,
+                comparacao: p.comparacao && p.comparacao.a && p.comparacao.b ? {
+                    a: { texto: short(p.comparacao.a.texto, 22), valor: short(p.comparacao.a.valor, 16) },
+                    b: { texto: short(p.comparacao.b.texto, 22), valor: short(p.comparacao.b.valor, 16) }
+                } : null,
+                itens: (Array.isArray(p.itens) ? p.itens : []).map(x => short(x, 30)).filter(Boolean).slice(0, 3),
+                objetos: (Array.isArray(p.objetos) ? p.objetos : []).map(x => pick(ICON_NAMES, x, '')).filter(Boolean).slice(0, 2),
+                personagens: (Array.isArray(p.personagens) ? p.personagens : []).slice(0, 2).map(x => ({ emocao: pick(PLAN_EMOCOES, x && x.emocao, 'explicando'), acao: pick(PLAN_ACOES, x && x.acao, 'parado') })),
+                ambiente: pick(PLAN_AMBIENTES, p.ambiente, 'cidade'),
+                humor: pick(['positivo', 'negativo', 'neutro'], p.humor, 'neutro'),
+                tags: (Array.isArray(p.tags) ? p.tags : []).map(t => normalizeWord(t)).map(t => VISION_TAGS.find(v => normalizeWord(v) === t)).filter(Boolean).slice(0, 5)
+            };
+            // keep each layout consistent with the data it needs
+            if (out.tipo === 'numero' && !out.numero) out.tipo = out.objetos.length ? 'objeto' : 'personagens';
+            if (out.tipo === 'comparacao' && !out.comparacao) out.tipo = out.itens.length >= 2 ? 'lista' : 'personagens';
+            if (out.tipo === 'lista' && out.itens.length < 2) out.tipo = 'personagens';
+            if (out.tipo === 'objeto' && !out.objetos.length) out.objetos = ['estrela'];
+            if (!out.personagens.length && out.tipo === 'personagens') out.personagens = [{ emocao: 'explicando', acao: 'parado' }];
+            return out;
+        }
+
+        // ---------- split the narration into scenes ----------
+        function scenesFromTranscript(words, segments, duration) {
+            const raw = [];
+            if (segments && segments.length) {
+                segments.forEach(s => raw.push({ start: s.start, end: s.end }));
+            } else {
+                let cur = null;
+                words.forEach((w, i) => {
+                    if (!cur) cur = { start: w.start, end: w.end };
+                    cur.end = w.end;
+                    const next = words[i + 1];
+                    const gap = next ? next.start - w.end : 1;
+                    if (/[.!?…]$/.test(String(w.word).trim()) || gap > 0.55 || cur.end - cur.start > 7) { raw.push(cur); cur = null; }
+                });
+                if (cur) raw.push(cur);
+            }
+            // merge short pieces, split long ones at the biggest pause
+            const merged = [];
+            raw.forEach(r => {
+                const last = merged[merged.length - 1];
+                if (last && (r.end - last.start < 3.2 || last.end - last.start < 2.2)) last.end = r.end;
+                else merged.push({ start: r.start, end: r.end });
+            });
+            const out = [];
+            merged.forEach(r => {
+                let pieces = [r];
+                while (pieces.some(p => p.end - p.start > 9)) {
+                    pieces = pieces.flatMap(p => {
+                        if (p.end - p.start <= 9) return [p];
+                        const inner = words.filter(w => w.start > p.start + 2 && w.end < p.end - 2);
+                        let best = null, bestGap = -1;
+                        inner.forEach((w, k) => {
+                            const nx = inner[k + 1];
+                            if (!nx) return;
+                            const g = nx.start - w.end + (/[,;:]$/.test(String(w.word)) ? 0.3 : 0);
+                            if (g > bestGap) { bestGap = g; best = w.end; }
+                        });
+                        if (best == null) best = (p.start + p.end) / 2;
+                        return [{ start: p.start, end: best }, { start: best, end: p.end }];
+                    });
+                }
+                out.push(...pieces);
+            });
+            // contiguous timeline from 0 to the end of the audio
+            out.forEach((s, i) => {
+                s.start = i === 0 ? 0 : out[i - 1].end;
+                if (i === out.length - 1) s.end = duration;
+            });
+            for (let i = 0; i < out.length - 1; i++) out[i].end = Math.max(out[i].start + 0.5, (out[i].end + out[i + 1].start) / 2), out[i + 1].start = out[i].end;
+            return out.map(s => {
+                const ws = words.filter(w => w.start >= s.start - 1e-6 && w.start < s.end);
+                return { start: s.start, end: s.end, text: ws.map(w => String(w.word).trim()).join(' ').replace(/\s+([,.!?;:])/g, '$1'), words: ws };
+            }).filter(s => s.end - s.start > 0.2);
+        }
+
+        // without transcription: cut at the natural pauses of the voice
+        function scenesFromPauses(duration) {
+            const v = audioState.voiced;
+            if (!v || !v.length) return [{ start: 0, end: duration, text: '', words: [] }];
+            const cuts = [0];
+            let silence = 0, last = 0;
+            for (let i = 0; i < v.length; i++) {
+                if (!v[i]) silence++;
+                else {
+                    const t = i * FR;
+                    if (silence * FR >= 0.35 && t - last >= 3.5) { cuts.push(t - silence * FR / 2); last = t; }
+                    silence = 0;
+                }
+                if (i * FR - last > 8) { cuts.push(i * FR); last = i * FR; }
+            }
+            cuts.push(duration);
+            const out = [];
+            for (let i = 0; i < cuts.length - 1; i++) if (cuts[i + 1] - cuts[i] > 0.3) out.push({ start: cuts[i], end: cuts[i + 1], text: '', words: [] });
+            if (out.length) { out[0].start = 0; out[out.length - 1].end = duration; }
+            return out;
+        }
+
+        function storyFromScenes(scs) {
+            const shots = scs.map((s, i) => {
+                const shot = makeShot(i + 1, s.start, s.end, s.text, s.text ? heuristicPlan(s.text, i) : genericPlan(i));
+                shot.realWords = (s.words || []).map(w => ({ word: String(w.word).trim(), t0: w.start, t1: Math.max(w.end, w.start + 0.05) })).filter(w => w.word);
+                return shot;
+            });
+            setStoryboard(shots);
+        }
+
+        function genericPlan(i) {
+            const amb = ['cidade', 'natureza', 'casa', 'noite', 'estrada', 'escritorio'][i % 6];
+            return normalizePlan({ titulo: '', tipo: 'personagens', personagens: [{ emocao: 'explicando', acao: i % 2 ? 'apontar' : 'parado' }], ambiente: amb, humor: 'neutro' });
+        }
+
+        // ---------- AI plan (Groq text model) ----------
+        async function planScenesWithAI() {
+            if (!groqKey) return false;
+            const shots = STORYBOARD.filter(s => s.text);
+            if (!shots.length) return false;
+            const model = ($('groq-text-model') && $('groq-text-model').value.trim()) || 'llama-3.3-70b-versatile';
+            const BATCH = 18;
+            let ok = 0;
+            for (let b = 0; b < shots.length; b += BATCH) {
+                const batch = shots.slice(b, b + BATCH);
+                setProgress(true, `IA criando as cenas ${b + 1}–${b + batch.length} de ${shots.length}...`, 0.5 + 0.5 * b / shots.length);
+                const lista = batch.map((s, k) => `${k + 1}. "${s.text}"`).join('\n');
+                const text =
+`Você é diretor de arte de vídeos curtos animados (explicativos, estilo 2D).
+Abaixo estão as falas de um vídeo, na ordem. Para CADA fala, planeje o que aparece na tela enquanto ela é dita.
+
+FALAS:
+${lista}
+
+Responda SOMENTE com JSON:
+{"cenas":[{"n":1,"titulo":"","tipo":"personagens","numero":{"valor":"","rotulo":""},"comparacao":{"a":{"texto":"","valor":""},"b":{"texto":"","valor":""}},"itens":[],"objetos":[],"personagens":[{"emocao":"","acao":""}],"ambiente":"","humor":"","tags":[]}]}
+
+Regras:
+- "titulo": 2 a 5 palavras de impacto em português, sem repetir a fala inteira.
+- "tipo": personagens | numero | comparacao | lista | objeto. Use "numero" quando a fala tiver um valor, preço, porcentagem ou quantidade marcante; "comparacao" quando contrastar duas coisas; "lista" para 2-3 itens; "objeto" para destacar uma coisa; senão "personagens".
+- Preencha só os campos que o tipo usa ("numero" no tipo numero, "comparacao" no tipo comparacao, "itens" no tipo lista). Valores curtos (ex.: "R$ 10.000", "71%", "3x").
+- "objetos": 0 a 2 itens desta lista: ${ICON_NAMES.join(', ')}.
+- "personagens": 0 a 2, com "emocao" em: ${PLAN_EMOCOES.join(', ')} e "acao" em: ${PLAN_ACOES.join(', ')}.
+- "ambiente": um de: ${PLAN_AMBIENTES.join(', ')}.
+- "humor": positivo | negativo | neutro (o clima da fala).
+- "tags": 1 a 3 desta lista (para combinar com vídeos de referência): ${VISION_TAGS.join(', ')}.
+- Varie os tipos e ambientes ao longo do vídeo. Inclua exatamente ${batch.length} cenas.`;
+                try {
+                    const call = (json) => groqFetch('/chat/completions', () => ({
+                        method: 'POST',
+                        headers: { Authorization: `Bearer ${groqKey}`, 'Content-Type': 'application/json' },
+                        body: JSON.stringify(Object.assign({ model, temperature: 0.6, max_completion_tokens: 4000, messages: [{ role: 'user', content: text }] }, json ? { response_format: { type: 'json_object' } } : {}))
+                    }), 'Cenas');
+                    let res;
+                    try { res = await call(true); } catch (err) { if (/respondeu 400/.test(err.message)) res = await call(false); else throw err; }
+                    const parsed = parseJsonLoose(res.choices && res.choices[0] && res.choices[0].message && res.choices[0].message.content);
+                    const items = parsed && Array.isArray(parsed.cenas) ? parsed.cenas : [];
+                    items.forEach((it, k) => {
+                        const n = parseInt(it.n);
+                        const shot = batch[(isFinite(n) && n >= 1 && n <= batch.length) ? n - 1 : k];
+                        if (!shot) return;
+                        shot.plan = normalizePlan(it);
+                        shot.headline = shot.plan.titulo || shot.headline;
+                        shot.needs = { p: [], t: shot.plan.tags, c: [] };
+                        ok++;
+                    });
+                } catch (err) {
+                    console.error(err);
+                    showGroqMessage(`Cenas: usei o plano automático porque a IA falhou (${err.message || err}).`, 'info');
+                    if (/401|navegador não conseguiu/.test(err.message || '')) break;
+                }
+            }
+            renderStoryboardList();
+            buildEditList();
+            return ok > 0;
+        }
+
+        // ---------- entry points ----------
+        function buildStoryFromAudioPauses() {
+            storyFromScenes(scenesFromPauses(audioState.buffer.duration));
+        }
+
+        async function buildStoryFromTranscript(words, segments) {
+            const scs = scenesFromTranscript(words, segments, audioState.buffer.duration);
+            storyFromScenes(scs.length ? scs : scenesFromPauses(audioState.buffer.duration));
+            storyBusy = true;
+            try { await planScenesWithAI(); } finally { storyBusy = false; }
+        }
+
+        /********************************************************************
+         * ESTILOS — Neon • Stickman 2D • Infográfico 3D
+         * Cada estilo define as cores do site + como o vídeo é desenhado
+         ********************************************************************/
+        const THEMES = {
+            neon: {
+                nome: 'Neon', desc: 'Cidade retrô neon, apresentador ao lado do vídeo, cenários animados.',
+                ui: { c1: '255 42 109', c2: '0 240 255', c3: '255 184 0', c4: '255 85 0', base: '7 5 16', panel: '22 11 48', panel2: '14 7 32', inset: '10 9 21',
+                    scale: ['243 232 255', '233 213 255', '216 180 254', '192 132 252', '168 85 247', '147 51 234', '126 34 206', '107 33 168', '88 28 135', '59 7 100'] },
+                font: "'Inter', sans-serif"
+            },
+            stickman: {
+                nome: 'Stickman 2D', desc: 'Desenho 2D chapado, bonecos expressivos, faixas e etiquetas coloridas.',
+                ui: { c1: '245 158 11', c2: '56 189 248', c3: '250 204 21', c4: '249 115 22', base: '2 6 23', panel: '15 23 42', panel2: '11 17 32', inset: '9 13 22',
+                    scale: ['241 245 249', '226 232 240', '203 213 225', '148 163 184', '100 116 139', '71 85 105', '51 65 85', '30 41 59', '15 23 42', '2 6 23'] },
+                font: "'Montserrat', 'Inter', sans-serif"
+            },
+            infografico: {
+                nome: 'Infográfico 3D', desc: 'Dados em blocos 3D, painéis com números, fundo azul-marinho.',
+                ui: { c1: '16 185 129', c2: '34 211 238', c3: '241 196 15', c4: '239 68 68', base: '4 10 20', panel: '15 30 51', panel2: '9 22 40', inset: '6 16 29',
+                    scale: ['224 236 255', '196 214 240', '148 178 214', '110 140 180', '78 104 140', '56 78 110', '37 56 84', '23 40 64', '15 30 51', '8 18 33'] },
+                font: "'Inter', sans-serif"
+            }
+        };
+        let currentTheme = (function () { try { const t = localStorage.getItem('vstudio_theme'); return THEMES[t] ? t : null; } catch (e) { return null; } })();
+        let showPresenterAlt = (function () { try { return localStorage.getItem('vstudio_presenter_alt') !== '0'; } catch (e) { return true; } })();
+
+        function applyThemeUI(id) {
+            const th = THEMES[id] || THEMES.neon;
+            const r = document.documentElement.style;
+            Object.entries({ '--c1': th.ui.c1, '--c2': th.ui.c2, '--c3': th.ui.c3, '--c4': th.ui.c4, '--base': th.ui.base, '--panel': th.ui.panel, '--panel2': th.ui.panel2, '--inset': th.ui.inset })
+                .forEach(([k, v]) => r.setProperty(k, v));
+            [100, 200, 300, 400, 500, 600, 700, 800, 900, 950].forEach((n, i) => r.setProperty(`--p${n}`, th.ui.scale[i]));
+            r.setProperty('--font-display', th.font);
+            document.querySelectorAll('[data-theme-only]').forEach(el => {
+                el.classList.toggle('hidden', !el.dataset.themeOnly.split(' ').includes(id));
+            });
+            const lbl = document.getElementById('theme-btn-label');
+            if (lbl) lbl.textContent = th.nome;
+        }
+
+        function setTheme(id) {
+            if (!THEMES[id]) return;
+            currentTheme = id;
+            try { localStorage.setItem('vstudio_theme', id); } catch (e) {}
+            applyThemeUI(id);
+            STORYBOARD.forEach(s => { s._pagesKey = null; });
+            bgState.cur = null; bgState.prev = null;
+            avatarState.key = null; avatarState.prevPose = null;
+            frameCacheHasImage = false;
+            hideThemePicker();
+        }
+
+        /* ---------------- layouts (stickman / infográfico) ---------------- */
+        function altLayout(W, H) {
+            const portrait = H > W;
+            if (currentTheme === 'infografico') {
+                if (portrait) return { W, H, portrait, hud: { y: H * 0.045, h: H * 0.085 }, scene: { x: 0, y: H * 0.15, w: W, h: H * 0.57 }, cap: { x: W * 0.07, y: H * 0.745, w: W * 0.86, h: H * 0.15 }, video: { w: W * 0.86 } };
+                return { W, H, portrait, hud: { y: H * 0.05, h: H * 0.13 }, scene: { x: W * 0.15, y: H * 0.21, w: W * 0.7, h: H * 0.55 }, cap: { x: W * 0.17, y: H * 0.79, w: W * 0.66, h: H * 0.17 }, video: { w: W * 0.5 } };
+            }
+            if (portrait) return { W, H, portrait, scene: { x: 0, y: 0, w: W, h: H * 0.7 }, cap: { x: W * 0.05, y: H * 0.708, w: W * 0.9, h: H * 0.1 }, presenter: { x: W * 0.15, ground: H * 0.99, h: H * 0.15 }, video: { w: W * 0.86 } };
+            return { W, H, portrait, scene: { x: 0, y: 0, w: W, h: H * 0.78 }, cap: { x: W * 0.2, y: H * 0.8, w: W * 0.6, h: H * 0.15 }, presenter: { x: W * 0.085, ground: H * 0.985, h: H * 0.3 }, video: { w: W * 0.5 } };
+        }
+
+        /* ---------------- shared caption engine (stickman / infográfico) ---------------- */
+        const CAP_STYLES = {
+            stickman: {
+                font: fs => `900 ${fs}px Montserrat, Inter, Arial`, upper: true, lines: 2, size: 0.3,
+                box: { fill: 'rgba(9, 13, 22, 0.8)', stroke: null, radius: 0.22 },
+                past: '#FFFFFF', future: '#FFFFFF', cur: '#090D16', pill: '#FACC15', strokeText: '#090D16'
+            },
+            infografico: {
+                font: fs => `italic 700 ${fs}px "Playfair Display", Georgia, serif`, upper: false, lines: 2, size: 0.27,
+                box: { fill: 'rgba(8, 12, 22, 0.86)', stroke: 'rgba(255, 255, 255, 0.16)', radius: 0.18 },
+                past: '#FFFFFF', future: 'rgba(255,255,255,0.78)', cur: '#F1C40F', pill: null, strokeText: null, shadow: true
+            }
+        };
+
+        function altCaptionPages(c, shot, cap, st) {
+            const cd = captionData(shot);
+            const key = `${currentTheme}|${cap.w}x${cap.h}|${fontEpoch}|${cd.key}`;
+            if (shot._altKey === key) return shot._altPages;
+            const padX = cap.w * 0.06;
+            const innerW = cap.w - padX * 2;
+            const base = Math.min(cap.h * st.size, cap.h * 0.9 / (st.lines * 1.25));
+            c.save();
+            c.font = st.font(base);
+            const space = c.measureText(' ').width;
+            const pages = [];
+            let lines = [[]], lineW = 0, count = 0;
+            const flush = () => { const l = lines.filter(x => x.length); if (l.length) pages.push(l); lines = [[]]; lineW = 0; count = 0; };
+            cd.words.forEach((raw, i) => {
+                const text = st.upper ? String(raw).toUpperCase() : String(raw);
+                const w = c.measureText(text).width;
+                let cur = lines[lines.length - 1];
+                if (cur.length && lineW + space + w > innerW) {
+                    if (lines.length >= st.lines) flush(); else lines.push([]);
+                    lineW = 0; cur = lines[lines.length - 1];
+                }
+                cur.push({ i, text, w });
+                lineW = cur.length > 1 ? lineW + space + w : w;
+                count++;
+                if ((/[.!?]$/.test(raw) && count >= 3 && i < cd.words.length - 1) || count >= (st.upper ? 6 : 9)) flush();
+            });
+            flush();
+            const out = pages.map(pl => {
+                let maxW = 0;
+                pl.forEach(line => { maxW = Math.max(maxW, line.reduce((a, it) => a + it.w, 0) + space * (line.length - 1)); });
+                return { lines: pl, scale: Math.min(1, innerW / Math.max(1, maxW)), first: pl[0][0].i, last: pl[pl.length - 1][pl[pl.length - 1].length - 1].i, space };
+            });
+            c.restore();
+            shot._altKey = key;
+            shot._altPages = out;
+            shot._altBase = base;
+            return out;
+        }
+
+        function renderAltCaptions(c, cap, shot, activeIdx) {
+            const st = CAP_STYLES[currentTheme];
+            if (!st) return;
+            const pages = altCaptionPages(c, shot, cap, st);
+            if (!pages.length) return;
+            const page = pages.find(p => activeIdx >= p.first && activeIdx <= p.last) || (activeIdx < 0 ? pages[0] : pages[pages.length - 1]);
+            const fs = shot._altBase * page.scale;
+            const lh = fs * 1.28;
+            const boxH = Math.min(cap.h, lh * page.lines.length + fs * 0.9);
+            const boxY = cap.y + (cap.h - boxH) / 2;
+            c.save();
+            drawRoundedRect(c, cap.x, boxY, cap.w, boxH, Math.min(boxH / 2, cap.h * st.box.radius));
+            c.fillStyle = st.box.fill; c.fill();
+            if (st.box.stroke) { c.lineWidth = 2; c.strokeStyle = st.box.stroke; c.stroke(); }
+            drawRoundedRect(c, cap.x, boxY, cap.w, boxH, Math.min(boxH / 2, cap.h * st.box.radius));
+            c.clip();
+            c.font = st.font(fs);
+            c.textBaseline = 'middle';
+            c.textAlign = 'left';
+            const space = page.space * page.scale;
+            const startY = boxY + boxH / 2 - (lh * (page.lines.length - 1)) / 2;
+            page.lines.forEach((line, li) => {
+                const lineW = line.reduce((a, it) => a + it.w * page.scale, 0) + space * (line.length - 1);
+                let x = cap.x + (cap.w - lineW) / 2;
+                const y = startY + li * lh;
+                line.forEach(it => {
+                    const w = it.w * page.scale;
+                    const isCur = it.i === activeIdx;
+                    if (isCur && st.pill) {
+                        drawRoundedRect(c, x - fs * 0.16, y - fs * 0.6, w + fs * 0.32, fs * 1.2, fs * 0.2);
+                        c.fillStyle = st.pill; c.fill();
+                    }
+                    if (st.shadow) { c.shadowColor = 'rgba(0,0,0,0.95)'; c.shadowBlur = fs * 0.25; c.shadowOffsetY = fs * 0.05; }
+                    if (st.strokeText && !isCur) {
+                        c.lineJoin = 'round'; c.lineWidth = fs * 0.16; c.strokeStyle = st.strokeText; c.strokeText(it.text, x, y);
+                    }
+                    c.fillStyle = isCur ? st.cur : (it.i < activeIdx ? st.past : st.future);
+                    c.fillText(it.text, x, y);
+                    c.shadowBlur = 0; c.shadowOffsetY = 0;
+                    x += w + space;
+                });
+            });
+            c.restore();
+        }
+
+        /* ---------------- reference video inside the alt themes ---------------- */
+        function renderAltVideoWindow(c, L, shot, t, active, styleFn) {
+            if (!active) return false;
+            const vw = L.video.w, vh = vw * 9 / 16;
+            const V = { x: (L.W - vw) / 2, y: L.scene.y + (L.scene.h - vh) / 2 + (L.portrait ? L.H * 0.02 : 0), w: vw, h: vh };
+            const fw = Math.round(V.w), fh = Math.round(V.h);
+            if (frameCache.width !== fw || frameCache.height !== fh) { frameCache.width = fw; frameCache.height = fh; frameCacheHasImage = false; }
+            const el = active.el;
+            if (el.readyState >= 2 && !el.seeking) {
+                frameCacheCtx.fillStyle = '#000'; frameCacheCtx.fillRect(0, 0, fw, fh);
+                drawMediaFit(frameCacheCtx, el, 0, 0, fw, fh);
+                frameCacheHasImage = true;
+            }
+            styleFn(V, () => {
+                if (!frameCacheHasImage) return;
+                const p = Math.min(1, (t - active.cut.t0) / Math.max(0.5, active.cut.t1 - active.cut.t0));
+                const z = 1 + p * 0.035, dw = V.w * z, dh = V.h * z;
+                c.drawImage(frameCache, V.x - (dw - V.w) / 2, V.y - (dh - V.h) / 2, dw, dh);
+                const since = t - active.cut.t0;
+                if (since >= 0 && since < 0.12) { c.fillStyle = `rgba(255,255,255,${(1 - since / 0.12) * 0.25})`; c.fillRect(V.x, V.y, V.w, V.h); }
+            });
+            return true;
+        }
+
+        /* =====================================================================
+         * STICKMAN 2D
+         * ===================================================================== */
+        const SM_INK = '#090D16';
+        const SM_SHIRTS = ['#3B82F6', '#EF4444', '#22C55E', '#EAB308', '#A855F7', '#14B8A6'];
+
+        function smEmotion(e) {
+            return ({ neutro: 'neutral', feliz: 'happy', triste: 'sad', surpreso: 'shocked', bravo: 'angry', preocupado: 'worried', confiante: 'confident', curioso: 'curious', explicando: 'explaining' })[e] || 'neutral';
+        }
+
+        // stick figure (adapted from the Stickman reference: white head, thick ink, colored shirt)
+        function drawStickFigure(c, o) {
+            const { x, y, scale = 1, shirt = '#EF4444', emotion = 'neutral', hat = null, mouthOpen = 0, armL = 0.5, armR = -0.5, walk = 0, facing = 1, time = 0, prop = null } = o;
+            c.save();
+            c.translate(x, y);
+            c.scale(scale * facing, scale);
+            const headR = 82, headY = -230, torsoTop = -148, torsoBottom = 10;
+            c.fillStyle = 'rgba(0,0,0,0.25)';
+            c.beginPath(); c.ellipse(0, 175, 75, 18, 0, 0, Math.PI * 2); c.fill();
+            c.strokeStyle = SM_INK; c.lineCap = 'round'; c.lineJoin = 'round'; c.lineWidth = 14;
+            const sw = Math.sin(walk) * 28;
+            c.beginPath(); c.moveTo(-26, torsoBottom); c.lineTo(-34 + sw, 95); c.lineTo(-38 + sw * 1.2, 168); c.stroke();
+            c.beginPath(); c.moveTo(26, torsoBottom); c.lineTo(34 - sw, 95); c.lineTo(38 - sw * 1.2, 168); c.stroke();
+            c.fillStyle = shirt; c.lineWidth = 9;
+            c.beginPath(); c.moveTo(-48, torsoTop); c.lineTo(48, torsoTop);
+            c.quadraticCurveTo(62, (torsoTop + torsoBottom) / 2, 54, torsoBottom); c.lineTo(-54, torsoBottom);
+            c.quadraticCurveTo(-62, (torsoTop + torsoBottom) / 2, -48, torsoTop); c.closePath(); c.fill(); c.stroke();
+            c.fillStyle = 'rgba(255,255,255,0.14)'; c.fillRect(-36, torsoTop + 10, 22, 130);
+            const shY = torsoTop + 22;
+            const arm = (side, ang) => {
+                const hx = side * (50 + Math.cos(ang) * 95), hy = shY + Math.sin(ang) * 95;
+                c.strokeStyle = SM_INK; c.lineWidth = 13;
+                c.beginPath(); c.moveTo(side * 50, shY); c.quadraticCurveTo(side * 80, shY + 30, hx, hy); c.stroke();
+                c.fillStyle = '#FFFFFF'; c.lineWidth = 7;
+                c.beginPath(); c.arc(hx, hy, 16, 0, Math.PI * 2); c.fill(); c.stroke();
+                return [hx, hy];
+            };
+            arm(-1, armL);
+            const hand = arm(1, armR);
+            if (prop === 'lupa') {
+                c.save(); c.translate(hand[0] + 18, hand[1] - 28); c.strokeStyle = SM_INK; c.lineWidth = 8;
+                c.beginPath(); c.moveTo(-12, 18); c.lineTo(-28, 42); c.stroke();
+                c.fillStyle = 'rgba(186,230,253,0.6)'; c.beginPath(); c.arc(0, 0, 26, 0, Math.PI * 2); c.fill(); c.stroke(); c.restore();
+            }
+            // head
+            c.fillStyle = '#FFFFFF'; c.strokeStyle = SM_INK; c.lineWidth = 9;
+            c.beginPath(); c.arc(0, headY, headR, 0, Math.PI * 2); c.fill(); c.stroke();
+            c.fillStyle = 'rgba(203,213,225,0.45)'; c.beginPath(); c.arc(0, headY, headR - 5, Math.PI * 0.65, Math.PI * 1.35); c.fill();
+            const blink = Math.floor(time * 6.25) % 23 === 0;
+            const ex = 25, ey = headY - 8;
+            if (blink) {
+                c.lineWidth = 7; c.beginPath(); c.moveTo(-ex - 14, ey); c.lineTo(-ex + 14, ey); c.moveTo(ex - 14, ey); c.lineTo(ex + 14, ey); c.stroke();
+            } else {
+                const er = emotion === 'shocked' ? 18 : 14;
+                c.fillStyle = '#FFFFFF'; c.lineWidth = 6;
+                c.beginPath(); c.arc(-ex, ey, er, 0, Math.PI * 2); c.arc(ex, ey, er, 0, Math.PI * 2); c.fill(); c.stroke();
+                c.fillStyle = SM_INK; const pr = emotion === 'shocked' ? 6 : 8;
+                c.beginPath(); c.arc(-ex + 2, ey, pr, 0, Math.PI * 2); c.arc(ex + 2, ey, pr, 0, Math.PI * 2); c.fill();
+            }
+            c.lineWidth = 9; c.beginPath();
+            if (emotion === 'angry') { c.moveTo(-42, ey - 30); c.lineTo(-12, ey - 18); c.moveTo(42, ey - 30); c.lineTo(12, ey - 18); }
+            else if (emotion === 'sad' || emotion === 'worried') { c.moveTo(-42, ey - 18); c.lineTo(-12, ey - 30); c.moveTo(42, ey - 18); c.lineTo(12, ey - 30); }
+            else if (emotion === 'shocked') { c.moveTo(-40, ey - 36); c.quadraticCurveTo(-25, ey - 46, -10, ey - 34); c.moveTo(10, ey - 34); c.quadraticCurveTo(25, ey - 46, 40, ey - 36); }
+            else if (emotion === 'confident' || emotion === 'curious') { c.moveTo(-42, ey - 24); c.lineTo(-10, ey - 20); c.moveTo(10, ey - 34); c.quadraticCurveTo(26, ey - 45, 42, ey - 30); }
+            else { c.moveTo(-40, ey - 26); c.lineTo(-12, ey - 26); c.moveTo(12, ey - 26); c.lineTo(40, ey - 26); }
+            c.stroke();
+            const my = headY + 34;
+            c.fillStyle = SM_INK; c.lineWidth = 6;
+            if (mouthOpen > 0.12) {
+                const oh = 8 + mouthOpen * 26, ow = 22 + mouthOpen * 10;
+                c.beginPath(); c.ellipse(0, my, ow, oh, 0, 0, Math.PI * 2); c.fill();
+                c.fillStyle = '#EF4444'; c.beginPath(); c.ellipse(0, my + oh * 0.35, ow * 0.6, oh * 0.4, 0, 0, Math.PI); c.fill();
+            } else if (emotion === 'happy' || emotion === 'confident') {
+                c.beginPath(); c.arc(0, my - 6, 26, 0.15, Math.PI - 0.15); c.lineTo(-24, my - 6); c.fillStyle = '#FFFFFF'; c.fill(); c.stroke();
+            } else if (emotion === 'sad' || emotion === 'worried') {
+                c.beginPath(); c.arc(0, my + 18, 22, Math.PI + 0.25, -0.25); c.stroke();
+            } else if (emotion === 'shocked') {
+                c.beginPath(); c.ellipse(0, my + 4, 18, 24, 0, 0, Math.PI * 2); c.fill();
+            } else { c.beginPath(); c.moveTo(-20, my); c.lineTo(20, my); c.stroke(); }
+            if (emotion === 'worried' || emotion === 'shocked') {
+                c.fillStyle = '#38BDF8'; c.lineWidth = 4;
+                c.beginPath(); c.moveTo(58, headY - 35); c.quadraticCurveTo(68, headY - 15, 58, headY - 10); c.quadraticCurveTo(48, headY - 15, 58, headY - 35); c.fill(); c.stroke();
+            }
+            c.strokeStyle = SM_INK; c.lineWidth = 8;
+            if (hat === 'explorer') {
+                c.fillStyle = '#B45309'; c.beginPath(); c.arc(0, headY - 46, 62, Math.PI, 0); c.fill(); c.stroke();
+                c.fillStyle = '#78350F'; c.fillRect(-58, headY - 56, 116, 12);
+                c.fillStyle = '#D97706'; c.beginPath(); c.ellipse(0, headY - 44, 105, 20, -0.05, 0, Math.PI * 2); c.fill(); c.stroke();
+            } else if (hat === 'hardhat') {
+                c.fillStyle = '#FACC15'; c.beginPath(); c.arc(0, headY - 42, 68, Math.PI, 0); c.closePath(); c.fill(); c.stroke();
+                c.fillRect(-82, headY - 46, 164, 14); c.strokeRect(-82, headY - 46, 164, 14);
+            } else if (hat === 'bone') {
+                c.fillStyle = '#2563EB'; c.beginPath(); c.arc(0, headY - 40, 66, Math.PI * 1.02, Math.PI * 1.98); c.closePath(); c.fill(); c.stroke();
+                c.fillStyle = '#1D4ED8'; c.beginPath(); c.ellipse(55, headY - 44, 58, 14, 0, 0, Math.PI * 2); c.fill(); c.stroke();
+            } else if (hat === 'tophat') {
+                c.fillStyle = '#1E293B'; c.fillRect(-48, headY - 135, 96, 85); c.strokeRect(-48, headY - 135, 96, 85);
+                c.beginPath(); c.ellipse(0, headY - 50, 84, 16, 0, 0, Math.PI * 2); c.fill(); c.stroke();
+            }
+            c.restore();
+        }
+
+        function smBanner(c, text, x, y, fs, bg, fg) {
+            if (!text) return;
+            c.save();
+            c.font = `900 ${fs}px Montserrat, Inter, Arial`;
+            const tw = c.measureText(text).width;
+            const w = tw + fs * 1.2, h = fs * 1.55;
+            c.shadowColor = 'rgba(0,0,0,0.35)'; c.shadowOffsetY = fs * 0.12; c.shadowBlur = 0;
+            drawRoundedRect(c, x - w / 2, y - h / 2, w, h, fs * 0.35);
+            c.fillStyle = bg; c.fill();
+            c.shadowOffsetY = 0;
+            c.lineWidth = Math.max(3, fs * 0.12); c.strokeStyle = SM_INK; c.stroke();
+            c.fillStyle = fg; c.textAlign = 'center'; c.textBaseline = 'middle';
+            c.fillText(text, x, y + fs * 0.04);
+            c.restore();
+        }
+
+        function smFitText(c, text, maxW, fs) {
+            c.font = `900 ${fs}px Montserrat, Inter, Arial`;
+            const w = c.measureText(text).width;
+            return w > maxW ? fs * maxW / w : fs;
+        }
+
+        function smBackground(c, S, plan, time) {
+            const neg = plan && plan.humor === 'negativo';
+            const amb = (plan && plan.ambiente) || 'cidade';
+            const ground = S.y + S.h * 0.74;
+            const sky = { cidade: '#38BDF8', praia: '#38BDF8', natureza: '#7DD3FC', estrada: '#60A5FA', noite: '#1E293B', espaco: '#0B1023', festa: '#3B0764', casa: '#8B5E3C', escritorio: '#334155', cozinha: '#E2E8F0', mercado: '#FDE68A', escola: '#14532D' }[amb] || '#38BDF8';
+            const floor = { cidade: '#475569', praia: '#FCD34D', natureza: '#22C55E', estrada: '#374151', noite: '#0F172A', espaco: '#111827', festa: '#581C87', casa: '#5B4636', escritorio: '#1E293B', cozinha: '#94A3B8', mercado: '#B45309', escola: '#78350F' }[amb] || '#475569';
+            c.fillStyle = sky; c.fillRect(S.x, S.y, S.w, S.h);
+            if (amb === 'cidade' || amb === 'noite') {
+                const n = 6;
+                for (let i = 0; i < n; i++) {
+                    const bw = S.w / n * 0.72, bx = S.x + i * S.w / n + S.w / n * 0.14;
+                    const bh = S.h * (0.22 + ((i * 37) % 5) * 0.05);
+                    c.fillStyle = amb === 'noite' ? '#334155' : '#E5E7EB'; c.fillRect(bx, ground - bh, bw, bh);
+                    c.lineWidth = 6; c.strokeStyle = SM_INK; c.strokeRect(bx, ground - bh, bw, bh);
+                    if (amb === 'noite') { c.fillStyle = '#FDE047'; for (let k = 0; k < 3; k++) c.fillRect(bx + bw * 0.2, ground - bh + S.h * 0.04 + k * S.h * 0.06, bw * 0.25, S.h * 0.025); }
+                }
+                if (amb === 'noite') { c.fillStyle = '#FEF3C7'; c.beginPath(); c.arc(S.x + S.w * 0.82, S.y + S.h * 0.14, S.h * 0.05, 0, Math.PI * 2); c.fill(); }
+            } else if (amb === 'praia') {
+                c.fillStyle = '#0EA5E9'; c.fillRect(S.x, S.y + S.h * 0.55, S.w, S.h * 0.19);
+                c.fillStyle = '#FDE047'; c.beginPath(); c.arc(S.x + S.w * 0.8, S.y + S.h * 0.18, S.h * 0.06, 0, Math.PI * 2); c.fill();
+            } else if (amb === 'natureza' || amb === 'estrada') {
+                c.fillStyle = amb === 'estrada' ? '#4ADE80' : '#16A34A';
+                c.beginPath(); c.moveTo(S.x, ground); c.quadraticCurveTo(S.x + S.w * 0.25, ground - S.h * 0.2, S.x + S.w * 0.5, ground); c.quadraticCurveTo(S.x + S.w * 0.75, ground - S.h * 0.25, S.x + S.w, ground); c.closePath(); c.fill();
+                c.lineWidth = 6; c.strokeStyle = SM_INK; c.stroke();
+            } else if (amb === 'espaco') {
+                c.fillStyle = '#FFFFFF'; for (let i = 0; i < 40; i++) c.fillRect(S.x + ((i * 97) % 100) / 100 * S.w, S.y + ((i * 61) % 100) / 100 * S.h * 0.7, 4, 4);
+            } else if (amb === 'festa') {
+                ['#F472B6', '#FACC15', '#22D3EE'].forEach((col, k) => { c.fillStyle = col; c.globalAlpha = 0.25; c.beginPath(); c.moveTo(S.x + S.w * (0.2 + k * 0.3), S.y); c.lineTo(S.x + S.w * (0.05 + k * 0.3 + Math.sin(time + k) * 0.05), ground); c.lineTo(S.x + S.w * (0.35 + k * 0.3), ground); c.closePath(); c.fill(); c.globalAlpha = 1; });
+            } else if (amb === 'escola') {
+                c.fillStyle = '#166534'; c.fillRect(S.x + S.w * 0.12, S.y + S.h * 0.2, S.w * 0.76, S.h * 0.35); c.lineWidth = 10; c.strokeStyle = '#78350F'; c.strokeRect(S.x + S.w * 0.12, S.y + S.h * 0.2, S.w * 0.76, S.h * 0.35);
+            } else if (amb === 'cozinha' || amb === 'mercado') {
+                c.strokeStyle = 'rgba(0,0,0,0.12)'; c.lineWidth = 2;
+                for (let x = 0; x < S.w; x += S.w / 12) { c.beginPath(); c.moveTo(S.x + x, S.y); c.lineTo(S.x + x, ground); c.stroke(); }
+            } else {
+                c.fillStyle = 'rgba(255,255,255,0.06)'; c.fillRect(S.x + S.w * 0.62, S.y + S.h * 0.14, S.w * 0.26, S.h * 0.26);
+                c.lineWidth = 8; c.strokeStyle = SM_INK; c.strokeRect(S.x + S.w * 0.62, S.y + S.h * 0.14, S.w * 0.26, S.h * 0.26);
+            }
+            c.fillStyle = floor; c.fillRect(S.x, ground, S.w, S.y + S.h - ground);
+            c.lineWidth = 8; c.strokeStyle = SM_INK; c.beginPath(); c.moveTo(S.x, ground); c.lineTo(S.x + S.w, ground); c.stroke();
+            if (neg) { c.fillStyle = 'rgba(127, 29, 29, 0.28)'; c.fillRect(S.x, S.y, S.w, S.h); }
+            return ground;
+        }
+
+        function renderStickmanScene(c, L, shot, t, time, energy) {
+            const S = L.scene, W = L.W, H = L.H;
+            const plan = shot.plan;
+            const p = Math.max(0, Math.min(1, (t - shot.start) / Math.max(0.5, shot.end - shot.start)));
+            const u = Math.min(S.w, S.h) / 100;
+            c.save();
+            c.beginPath(); c.rect(S.x, S.y, S.w, S.h); c.clip();
+            // camera push-in
+            const z = 1 + p * 0.04;
+            c.translate(S.x + S.w / 2, S.y + S.h * 0.6); c.scale(z, z); c.translate(-(S.x + S.w / 2), -(S.y + S.h * 0.6));
+            const ground = smBackground(c, S, plan, time);
+            if (!plan) {
+                smBanner(c, shot.isPlaceholder ? 'SUBA O ÁUDIO' : '', S.x + S.w / 2, S.y + S.h * 0.12, u * 6, '#FACC15', SM_INK);
+                drawStickFigure(c, { x: S.x + S.w / 2, y: ground - 172 * u * 0.09, scale: u * 0.09, shirt: '#F97316', emotion: 'happy', hat: 'explorer', time, armR: -1.2 + Math.sin(time * 6) * 0.3 });
+                c.restore();
+                return;
+            }
+            const enter = k => Math.min(1, Math.max(0, (p * (shot.end - shot.start) - k * 0.35) / 0.35));
+            const pop = k => { const e = enter(k); return e < 1 ? 0.6 + 0.4 * (1 - Math.pow(1 - e, 3)) + Math.sin(e * Math.PI) * 0.12 : 1; };
+            const sc = u * 0.088;
+            const figY = ground - 172 * sc;
+            const people = plan.personagens.length ? plan.personagens : [{ emocao: 'explicando', acao: 'apontar' }];
+            const drawPerson = (pp, x, idx, facing) => {
+                const walking = pp.acao === 'andar' || pp.acao === 'correr';
+                const jump = pp.acao === 'pular' || pp.acao === 'comemorar' ? Math.abs(Math.sin(time * 5)) * u * 4 : 0;
+                const armR = pp.acao === 'apontar' ? -0.15 : (pp.acao === 'acenar' || pp.acao === 'comemorar' ? -1.3 + Math.sin(time * 8) * 0.3 : (pp.acao === 'pensar' ? -2.2 : -0.5 + Math.sin(time * 3 + idx) * 0.08));
+                const armL = pp.acao === 'comemorar' ? -1.3 : 0.5;
+                drawStickFigure(c, { x: x + (walking ? Math.sin(time * 1.5) * u * 4 : 0), y: figY - jump, scale: sc, shirt: SM_SHIRTS[(shot.id + idx) % SM_SHIRTS.length], emotion: smEmotion(pp.emocao), hat: idx === 0 && shot.id % 3 === 0 ? 'bone' : null, armR, armL, walk: walking ? time * (pp.acao === 'correr' ? 14 : 7) : 0, facing, time, prop: pp.acao === 'pensar' ? 'lupa' : null });
+            };
+            const cx = S.x + S.w / 2;
+            const fs = u * 5.6;
+            if (plan.titulo) {
+                const tfs = smFitText(c, plan.titulo.toUpperCase(), S.w * 0.84, fs);
+                c.save(); c.globalAlpha = enter(0); smBanner(c, plan.titulo.toUpperCase(), cx, S.y + S.h * 0.1, tfs, '#FACC15', SM_INK); c.restore();
+            }
+            if (plan.tipo === 'numero' && plan.numero) {
+                const k = pop(1);
+                c.save(); c.translate(S.x + S.w * 0.6, S.y + S.h * 0.34); c.scale(k, k);
+                const vfs = smFitText(c, plan.numero.valor, S.w * 0.62, u * 12);
+                smBanner(c, plan.numero.valor, 0, 0, vfs, '#FFFFFF', plan.humor === 'negativo' ? '#B91C1C' : '#15803D');
+                if (plan.numero.rotulo) smBanner(c, plan.numero.rotulo.toUpperCase(), 0, u * 13, smFitText(c, plan.numero.rotulo.toUpperCase(), S.w * 0.62, u * 4.2), '#38BDF8', SM_INK);
+                c.restore();
+                drawPerson(people[0], S.x + S.w * 0.2, 0, 1);
+            } else if (plan.tipo === 'comparacao' && plan.comparacao) {
+                const cols = [[plan.comparacao.a, '#22C55E', 0.27], [plan.comparacao.b, '#EF4444', 0.73]];
+                cols.forEach(([it, col, fx], i) => {
+                    const k = pop(1 + i);
+                    c.save(); c.translate(S.x + S.w * fx, S.y + S.h * 0.3); c.scale(k, k);
+                    smBanner(c, (it.texto || '').toUpperCase(), 0, -u * 6, smFitText(c, (it.texto || '').toUpperCase(), S.w * 0.4, u * 4.2), col, '#FFFFFF');
+                    if (it.valor) smBanner(c, it.valor, 0, u * 5, smFitText(c, it.valor, S.w * 0.4, u * 7), '#FFFFFF', SM_INK);
+                    c.restore();
+                });
+                c.save(); c.globalAlpha = enter(2); c.font = `900 ${u * 7}px Montserrat, Inter`; c.fillStyle = '#FFFFFF'; c.strokeStyle = SM_INK; c.lineWidth = u * 1.2; c.textAlign = 'center'; c.textBaseline = 'middle';
+                c.strokeText('VS', cx, S.y + S.h * 0.3); c.fillText('VS', cx, S.y + S.h * 0.3); c.restore();
+                drawPerson(people[0], S.x + S.w * 0.3, 0, 1);
+                if (people[1]) drawPerson(people[1], S.x + S.w * 0.72, 1, -1);
+            } else if (plan.tipo === 'lista' && plan.itens.length) {
+                plan.itens.forEach((it, i) => {
+                    const e = enter(1 + i);
+                    if (e <= 0) return;
+                    const y = S.y + S.h * (0.22 + i * 0.1);
+                    c.save(); c.globalAlpha = e; c.translate((1 - e) * S.w * 0.3, 0);
+                    const txt = it.toUpperCase();
+                    smBanner(c, `${i + 1}. ${txt}`, S.x + S.w * 0.58, y, smFitText(c, `${i + 1}. ${txt}`, S.w * 0.62, u * 4.4), ['#FFFFFF', '#FDE68A', '#BAE6FD'][i % 3], SM_INK);
+                    c.restore();
+                });
+                drawPerson(people[0], S.x + S.w * 0.2, 0, 1);
+            } else if (plan.tipo === 'objeto' && plan.objetos.length) {
+                const k = pop(1);
+                plan.objetos.forEach((ob, i) => {
+                    const ox = plan.objetos.length > 1 ? S.x + S.w * (0.48 + i * 0.26) : S.x + S.w * 0.62;
+                    c.save(); c.translate(ox, S.y + S.h * 0.38 + Math.sin(time * 2 + i) * u * 1.2); c.scale(k, k);
+                    drawIcon(c, ob, 0, 0, u * (plan.objetos.length > 1 ? 10 : 14), { ink: SM_INK });
+                    c.restore();
+                });
+                drawPerson(people[0], S.x + S.w * 0.22, 0, 1);
+            } else {
+                const xs = people.length > 1 ? [0.3, 0.7] : [0.42];
+                people.forEach((pp, i) => drawPerson(pp, S.x + S.w * xs[i], i, xs[i] < 0.5 ? 1 : -1));
+                plan.objetos.forEach((ob, i) => {
+                    const k = pop(1 + i);
+                    c.save(); c.translate(S.x + S.w * (people.length > 1 ? 0.5 : 0.76), S.y + S.h * (0.3 + i * 0.16) + Math.sin(time * 2 + i) * u); c.scale(k, k);
+                    drawIcon(c, ob, 0, 0, u * 8, { ink: SM_INK });
+                    c.restore();
+                });
+            }
+            c.restore();
+        }
+
+        function renderStickmanFrame(c, L, shot, t, time, energy, active, speaking, captionShot, wordIdx) {
+            const S = L.scene;
+            c.fillStyle = '#0F172A'; c.fillRect(0, 0, L.W, L.H);
+            if (active) {
+                smBackground(c, S, shot.plan || { ambiente: 'cidade' }, time);
+                if (shot.plan && shot.plan.titulo) smBanner(c, shot.plan.titulo.toUpperCase(), L.W / 2, S.y + S.h * 0.1, smFitText(c, shot.plan.titulo.toUpperCase(), S.w * 0.84, Math.min(S.w, S.h) / 100 * 5.6), '#FACC15', SM_INK);
+                renderAltVideoWindow(c, L, shot, t, active, (V, draw) => {
+                    c.save();
+                    drawRoundedRect(c, V.x - 10, V.y - 10, V.w + 20, V.h + 20, 26); c.fillStyle = '#FFFFFF'; c.fill();
+                    c.lineWidth = 10; c.strokeStyle = SM_INK; c.stroke();
+                    drawRoundedRect(c, V.x, V.y, V.w, V.h, 18); c.clip(); c.fillStyle = '#000'; c.fillRect(V.x, V.y, V.w, V.h);
+                    draw();
+                    c.restore();
+                });
+            } else {
+                renderStickmanScene(c, L, shot, t, time, energy);
+            }
+            // lower area
+            const g = c.createLinearGradient(0, S.y + S.h, 0, L.H);
+            g.addColorStop(0, '#475569'); g.addColorStop(1, '#1E293B');
+            c.fillStyle = g; c.fillRect(0, S.y + S.h, L.W, L.H - S.y - S.h);
+            c.fillStyle = '#FACC15'; c.fillRect(0, S.y + S.h, L.W, Math.max(4, L.H * 0.004));
+            if (showPresenterAlt && L.presenter) {
+                const P = L.presenter;
+                const sc = P.h / 410;
+                const mouth = speaking ? Math.min(1, energy * 1.2) : 0;
+                drawStickFigure(c, { x: P.x, y: P.ground - 175 * sc + Math.sin(time * 4) * sc * 6, scale: sc, shirt: avatar.corRoupa || '#F97316', emotion: 'explaining', hat: avatar.chapeu === 'nenhum' ? null : (avatar.chapeu === 'bone' ? 'bone' : (avatar.chapeu === 'panama' ? 'tophat' : 'explorer')), mouthOpen: mouth, armR: -0.45 + Math.sin(time * 6) * 0.15, time });
+            }
+            renderAltCaptions(c, L.cap, captionShot, wordIdx);
+        }
+
+        /* =====================================================================
+         * INFOGRÁFICO 3D
+         * ===================================================================== */
+        function ifBox(c, x, y, w, h, d, top, front, side) {
+            c.fillStyle = 'rgba(0,0,0,0.35)'; c.fillRect(x + d * 0.4, y + h - 6, w + d * 0.7, 18);
+            c.fillStyle = front; c.fillRect(x, y, w, h);
+            c.beginPath(); c.moveTo(x, y); c.lineTo(x + d, y - d * 0.6); c.lineTo(x + w + d, y - d * 0.6); c.lineTo(x + w, y); c.closePath(); c.fillStyle = top; c.fill();
+            c.beginPath(); c.moveTo(x + w, y); c.lineTo(x + w + d, y - d * 0.6); c.lineTo(x + w + d, y + h - d * 0.6); c.lineTo(x + w, y + h); c.closePath(); c.fillStyle = side; c.fill();
+        }
+        function ifCylinder(c, cx, cy, r, h, body, top) {
+            const ry = r * 0.38;
+            c.fillStyle = 'rgba(0,0,0,0.35)'; c.beginPath(); c.ellipse(cx + 10, cy + 8, r, ry, 0, 0, Math.PI * 2); c.fill();
+            c.fillStyle = body; c.beginPath(); c.ellipse(cx, cy, r, ry, 0, 0, Math.PI); c.lineTo(cx - r, cy - h); c.ellipse(cx, cy - h, r, ry, 0, Math.PI, 0, true); c.lineTo(cx + r, cy); c.closePath(); c.fill();
+            c.fillStyle = top; c.beginPath(); c.ellipse(cx, cy - h, r, ry, 0, 0, Math.PI * 2); c.fill();
+            c.strokeStyle = 'rgba(255,255,255,0.35)'; c.lineWidth = 2; c.stroke();
+        }
+        const IF_COLORS = {
+            positivo: ['#34D399', '#059669', '#064E3B'],
+            negativo: ['#F87171', '#DC2626', '#7F1D1D'],
+            neutro: ['#60A5FA', '#2563EB', '#1E3A8A'],
+            alerta: ['#FBBF24', '#D97706', '#78350F']
+        };
+        function ifText(c, text, x, y, fs, color, font, maxW) {
+            c.font = `${font || '900'} ${fs}px ${/mono/.test(font || '') ? '' : ''}Inter, Arial`;
+            if (font === 'mono') c.font = `800 ${fs}px "JetBrains Mono", monospace`;
+            let w = c.measureText(text).width;
+            if (maxW && w > maxW) { fs = fs * maxW / w; c.font = font === 'mono' ? `800 ${fs}px "JetBrains Mono", monospace` : `${font || '900'} ${fs}px Inter, Arial`; }
+            c.fillStyle = color; c.textAlign = 'center'; c.textBaseline = 'middle';
+            c.fillText(text, x, y);
+        }
+        function ifHud(c, L, shot) {
+            const plan = shot.plan;
+            const y = L.hud.y, h = L.hud.h;
+            const pad = L.W * 0.06, gap = L.W * 0.035;
+            const w = (L.W - pad * 2 - gap) / 2;
+            const cards = [];
+            if (plan && plan.tipo === 'comparacao' && plan.comparacao) {
+                cards.push([plan.comparacao.a.texto, plan.comparacao.a.valor || '—', '#2ECC71']);
+                cards.push([plan.comparacao.b.texto, plan.comparacao.b.valor || '—', '#EF4444']);
+            } else {
+                cards.push([plan && plan.numero ? (plan.numero.rotulo || 'DESTAQUE') : 'TEMA', plan && plan.numero ? plan.numero.valor : ((plan && plan.titulo) || 'MUUNDO MAKER'), '#2ECC71']);
+                const hum = plan ? plan.humor : 'neutro';
+                cards.push(['CENÁRIO', hum === 'negativo' ? 'ALERTA ▼' : (hum === 'positivo' ? 'EM ALTA ▲' : 'ANÁLISE'), hum === 'negativo' ? '#EF4444' : (hum === 'positivo' ? '#2ECC71' : '#38BDF8')]);
+            }
+            cards.forEach(([lab, val, col], i) => {
+                const x = pad + i * (w + gap);
+                c.save();
+                drawRoundedRect(c, x, y, w, h, h * 0.16);
+                c.fillStyle = 'rgba(15, 23, 42, 0.86)'; c.fill();
+                c.lineWidth = 2; c.strokeStyle = 'rgba(255,255,255,0.14)'; c.stroke();
+                ifText(c, String(lab || '').toUpperCase(), x + w / 2, y + h * 0.3, h * 0.15, '#94A3B8', '800', w * 0.9);
+                ifText(c, String(val || ''), x + w / 2, y + h * 0.68, h * 0.3, col, 'mono', w * 0.9);
+                c.restore();
+            });
+        }
+        function ifBackground(c, L, plan) {
+            const neg = plan && plan.humor === 'negativo';
+            const g = c.createRadialGradient(L.W / 2, L.H * 0.45, L.W * 0.08, L.W / 2, L.H * 0.5, Math.max(L.W, L.H) * 0.6);
+            if (neg) { g.addColorStop(0, '#2B161B'); g.addColorStop(0.65, '#140C12'); g.addColorStop(1, '#070508'); }
+            else { g.addColorStop(0, '#132A46'); g.addColorStop(0.65, '#091628'); g.addColorStop(1, '#040A14'); }
+            c.fillStyle = g; c.fillRect(0, 0, L.W, L.H);
+            c.strokeStyle = neg ? 'rgba(239,68,68,0.06)' : 'rgba(56,189,248,0.06)'; c.lineWidth = 1;
+            const step = Math.min(L.W, L.H) / 18;
+            for (let x = 0; x < L.W; x += step) { c.beginPath(); c.moveTo(x, 0); c.lineTo(x, L.H); c.stroke(); }
+            for (let y = 0; y < L.H; y += step) { c.beginPath(); c.moveTo(0, y); c.lineTo(L.W, y); c.stroke(); }
+        }
+        function renderInfoScene(c, L, shot, t, time) {
+            const S = L.scene;
+            const plan = shot.plan;
+            const p = Math.max(0, Math.min(1, (t - shot.start) / Math.max(0.5, shot.end - shot.start)));
+            const u = Math.min(S.w, S.h) / 100;
+            const cx = S.x + S.w / 2, cy = S.y + S.h * 0.5;
+            c.save();
+            const z = 1 + p * 0.045;
+            c.translate(cx + Math.sin(time * 0.65) * u, cy + Math.cos(time * 0.5) * u * 0.8); c.scale(z, z); c.translate(-cx, -cy);
+            const grow = k => { const e = Math.min(1, Math.max(0, (p * (shot.end - shot.start) - k * 0.3) / 0.45)); return 1 - Math.pow(1 - e, 3); };
+            if (!plan) {
+                ifBox(c, cx - S.w * 0.36, cy - u * 14, S.w * 0.72, u * 28, u * 4, '#60A5FA', '#2563EB', '#1E3A8A');
+                ifText(c, shot.isPlaceholder ? 'SUBA O ÁUDIO' : '', cx, cy - u * 2, u * 7, '#FFFFFF', '900', S.w * 0.62);
+                ifText(c, shot.isPlaceholder ? 'O VÍDEO É CRIADO A PARTIR DA NARRAÇÃO' : '', cx, cy + u * 6, u * 2.8, '#BFDBFE', '800', S.w * 0.62);
+                c.restore();
+                return;
+            }
+            const pal = IF_COLORS[plan.humor] || IF_COLORS.neutro;
+            const title = (plan.titulo || '').toUpperCase();
+            if (plan.tipo === 'numero' && plan.numero) {
+                const g = grow(0);
+                const bw = S.w * 0.74, bh = u * 30 * g + 1;
+                ifBox(c, cx - bw / 2, cy - u * 6 - bh / 2, bw, bh, u * 4, pal[0], pal[1], pal[2]);
+                if (g > 0.6) {
+                    ifText(c, plan.numero.valor, cx, cy - u * 10, u * 11, '#FDE047', 'mono', bw * 0.86);
+                    ifText(c, (plan.numero.rotulo || '').toUpperCase(), cx, cy + u * 1.5, u * 2.9, '#FFFFFF', '800', bw * 0.86);
+                }
+                if (title) ifText(c, title, cx, cy + u * 20, u * 4.4, '#FFFFFF', '900', S.w * 0.85);
+            } else if (plan.tipo === 'comparacao' && plan.comparacao) {
+                const items = [[plan.comparacao.a, IF_COLORS.positivo], [plan.comparacao.b, IF_COLORS.negativo]];
+                const bw = S.w * 0.33;
+                items.forEach(([it, col], i) => {
+                    const g = grow(i * 1.5);
+                    const bh = u * (26 + i * 10) * g + 1;
+                    const x = i ? cx + u * 6 : cx - u * 6 - bw;
+                    ifBox(c, x, cy + u * 14 - bh, bw, bh, u * 3.5, col[0], col[1], col[2]);
+                    if (g > 0.7) {
+                        ifText(c, (it.texto || '').toUpperCase(), x + bw / 2, cy + u * 14 - bh + u * 7, u * 3, '#FFFFFF', '900', bw * 0.85);
+                        if (it.valor) ifText(c, it.valor, x + bw / 2, cy + u * 14 - bh + u * 15, u * 5, '#FDE047', 'mono', bw * 0.85);
+                    }
+                });
+                c.save(); c.globalAlpha = grow(1); ifText(c, '➔', cx, cy + u * 4, u * 9, '#FFFFFF', '900'); c.restore();
+                if (title) ifText(c, title, cx, cy - u * 30, u * 4.6, '#FFFFFF', '900', S.w * 0.88);
+            } else if (plan.tipo === 'lista' && plan.itens.length) {
+                if (title) ifText(c, title, cx, cy - u * 32, u * 4.6, '#FFFFFF', '900', S.w * 0.88);
+                plan.itens.forEach((it, i) => {
+                    const g = grow(i);
+                    if (g <= 0) return;
+                    const bw = S.w * 0.74, bh = u * 12;
+                    const y = cy - u * 22 + i * u * 17;
+                    c.save(); c.globalAlpha = g; c.translate((1 - g) * -S.w * 0.2, 0);
+                    const col = [IF_COLORS.neutro, IF_COLORS.positivo, IF_COLORS.alerta][i % 3];
+                    ifBox(c, cx - bw / 2, y, bw, bh, u * 3, col[0], col[1], col[2]);
+                    ifText(c, `${i + 1}. ${it.toUpperCase()}`, cx, y + bh / 2, u * 3.6, '#FFFFFF', '900', bw * 0.88);
+                    c.restore();
+                });
+            } else {
+                // pedestal with the objects (or a title box)
+                const g = grow(0);
+                ifCylinder(c, cx, cy + u * 22, u * 22, u * 14 * g + 1, pal[1], pal[0]);
+                const obs = plan.objetos.length ? plan.objetos : ['estrela'];
+                obs.forEach((ob, i) => {
+                    const ox = obs.length > 1 ? cx + (i ? u * 13 : -u * 13) : cx;
+                    drawIcon(c, ob, ox, cy - u * 4 + Math.sin(time * 2 + i) * u * 1.4 - (1 - g) * u * 10, u * (obs.length > 1 ? 10 : 13), { ink: '#0A0F1C' });
+                });
+                if (title) {
+                    c.save(); drawRoundedRect(c, S.x + S.w * 0.1, cy - u * 34, S.w * 0.8, u * 12, u * 2.5);
+                    c.fillStyle = 'rgba(15,23,42,0.9)'; c.fill(); c.lineWidth = 3; c.strokeStyle = pal[0]; c.stroke(); c.restore();
+                    ifText(c, title, cx, cy - u * 28, u * 4.6, '#FFFFFF', '900', S.w * 0.74);
+                }
+            }
+            c.restore();
+        }
+
+        function renderInfoFrame(c, L, shot, t, time, energy, active, speaking, captionShot, wordIdx) {
+            ifBackground(c, L, shot.plan);
+            if (active) {
+                renderAltVideoWindow(c, L, shot, t, active, (V, draw) => {
+                    c.save();
+                    drawRoundedRect(c, V.x - 6, V.y - 6, V.w + 12, V.h + 12, 24); c.fillStyle = 'rgba(15,23,42,0.9)'; c.fill();
+                    c.lineWidth = 3; c.strokeStyle = 'rgba(255,255,255,0.22)'; c.stroke();
+                    drawRoundedRect(c, V.x, V.y, V.w, V.h, 18); c.clip(); draw();
+                    c.restore();
+                });
+                if (shot.plan && shot.plan.titulo) ifText(c, shot.plan.titulo.toUpperCase(), L.W / 2, L.scene.y + L.scene.h * 0.1, Math.min(L.W, L.H) * 0.045, '#FFFFFF', '900', L.W * 0.86);
+            } else {
+                renderInfoScene(c, L, shot, t, time);
+            }
+            ifHud(c, L, shot);
+            renderAltCaptions(c, L.cap, captionShot, wordIdx);
+        }
+
+        /* =====================================================================
+         * NEON — cena animada 2D dentro da moldura (quando não há vídeo)
+         * ===================================================================== */
+        function neonLabel(c, text, x, y, fs, col) {
+            c.save(); c.font = `700 ${fs}px Caveat, "Segoe Print", cursive`; c.fillStyle = col; c.textAlign = 'center'; c.textBaseline = 'middle';
+            c.shadowColor = col; c.shadowBlur = fs * 0.2; c.fillText(text, x, y); c.restore();
+        }
+        function neonBackdrop(c, V, plan, time) {
+            const u = V.h / 100;
+            c.fillStyle = '#0E0A1F'; c.fillRect(V.x, V.y, V.w, V.h);
+            const gy = V.y + V.h * 0.82;
+            c.lineWidth = Math.max(2, u * 0.5); c.lineCap = 'round';
+            const amb = plan ? plan.ambiente : 'cidade';
+            const line = (col) => { c.strokeStyle = col; c.shadowColor = col; c.shadowBlur = u; c.stroke(); c.shadowBlur = 0; };
+            if (amb === 'praia') {
+                c.beginPath(); c.arc(V.x + V.w * 0.75, gy - u * 40, u * 9, 0, Math.PI * 2); line('#FFB800');
+                for (let k = 0; k < 3; k++) { c.beginPath(); for (let x = 0; x <= V.w; x += u * 2) { const y = gy - u * (6 + k * 5) + Math.sin(x / (u * 4) + k + time) * u * 0.8; if (!x) c.moveTo(V.x + x, y); else c.lineTo(V.x + x, y); } line('#00F0FF'); }
+            } else if (amb === 'natureza' || amb === 'estrada') {
+                c.beginPath(); c.moveTo(V.x, gy - u * 10); c.lineTo(V.x + V.w * 0.25, gy - u * 40); c.lineTo(V.x + V.w * 0.45, gy - u * 15); c.lineTo(V.x + V.w * 0.7, gy - u * 45); c.lineTo(V.x + V.w, gy - u * 12); line('#B388FF');
+            } else if (amb === 'casa' || amb === 'escritorio' || amb === 'cozinha' || amb === 'escola' || amb === 'mercado') {
+                c.beginPath(); c.rect(V.x + V.w * 0.62, V.y + V.h * 0.14, V.w * 0.26, V.h * 0.36); line('#00F0FF');
+                c.beginPath(); c.moveTo(V.x + V.w * 0.75, V.y + V.h * 0.14); c.lineTo(V.x + V.w * 0.75, V.y + V.h * 0.5); line('#00F0FF');
+            } else if (amb === 'espaco' || amb === 'noite') {
+                for (let i = 0; i < 30; i++) { c.fillStyle = 'rgba(255,255,255,0.7)'; c.fillRect(V.x + ((i * 97) % 100) / 100 * V.w, V.y + ((i * 53) % 70) / 100 * V.h, 2, 2); }
+                c.beginPath(); c.arc(V.x + V.w * 0.8, V.y + V.h * 0.25, u * 7, Math.PI * 0.3, Math.PI * 1.7); line('#00F0FF');
+            } else if (amb === 'festa') {
+                ['#FF2A6D', '#00F0FF', '#FFB800'].forEach((col, k) => { c.beginPath(); c.moveTo(V.x + V.w * (0.2 + k * 0.3), V.y); c.lineTo(V.x + V.w * (0.1 + k * 0.3 + Math.sin(time + k) * 0.05), gy); line(col); });
+            } else {
+                let x = V.x + u * 2, i = 0;
+                while (x < V.x + V.w - u * 4) {
+                    const w = u * (6 + (i % 3) * 2), h = u * (14 + ((i * 7) % 5) * 6);
+                    c.beginPath(); c.rect(x, gy - h, w, h); line(i % 2 ? '#00F0FF' : '#B388FF');
+                    x += w + u * 1.6; i++;
+                }
+            }
+            c.fillStyle = '#191233'; c.fillRect(V.x, gy, V.w, V.y + V.h - gy);
+            c.beginPath(); c.moveTo(V.x, gy); c.lineTo(V.x + V.w, gy); line('#FF2A6D');
+            if (plan && plan.humor === 'negativo') { c.fillStyle = 'rgba(255, 23, 68, 0.08)'; c.fillRect(V.x, V.y, V.w, V.h); }
+            return gy;
+        }
+        function neonFigure(c, x, gy, r, emo, acao, time, idx) {
+            const saved = avatar;
+            avatar = Object.assign({}, saved, { corRoupa: SM_SHIRTS[idx % SM_SHIRTS.length], roupa: idx ? 'camiseta' : saved.roupa, chapeu: idx ? 'nenhum' : saved.chapeu, fone: false, microfone: false, corrente: false });
+            c.save();
+            const jump = (acao === 'pular' || acao === 'comemorar') ? Math.abs(Math.sin(time * 5)) * r * 0.8 : 0;
+            c.translate(x, gy - r * 4.4 - jump);
+            const step = (acao === 'andar' || acao === 'correr') ? Math.sin(time * 8) * r * 0.12 : 0;
+            drawLegs(c, r, time, step); drawTorso(c, r);
+            drawArm(c, r, -1, 'rest', time, 0.4, false);
+            drawArm(c, r, 1, (acao === 'apontar' || acao === 'acenar' || acao === 'comemorar') ? 'gesture' : 'rest', time + idx, 0.6, true);
+            drawHead(c, r, time, emo === 'surpreso' ? 0.6 : 0.1, emo === 'surpreso' || emo === 'explicando', 1);
+            c.restore();
+            avatar = saved;
+        }
+        function renderNeonScene(c, V, shot, t, time, energy) {
+            const plan = shot.plan;
+            const u = V.h / 100;
+            const p = Math.max(0, Math.min(1, (t - shot.start) / Math.max(0.5, shot.end - shot.start)));
+            const enter = k => Math.min(1, Math.max(0, (p * (shot.end - shot.start) - k * 0.3) / 0.35));
+            const gy = neonBackdrop(c, V, plan, time);
+            const ink = { ink: '#F5F3FF' };
+            if (!plan) {
+                neonLabel(c, shot.isPlaceholder ? 'suba o áudio para começar' : '', V.x + V.w / 2, V.y + V.h * 0.42, u * 9, '#FFB800');
+                return;
+            }
+            const cx = V.x + V.w / 2;
+            const r = u * 6.5;
+            const people = plan.personagens.length ? plan.personagens : [{ emocao: 'explicando', acao: 'apontar' }];
+            if (plan.tipo === 'numero' && plan.numero) {
+                const e = enter(1);
+                c.save(); c.globalAlpha = e; c.translate(0, (1 - e) * -u * 10);
+                c.save(); c.font = `900 ${u * 16}px Inter, Arial`; let fs = u * 16; const w0 = c.measureText(plan.numero.valor).width; if (w0 > V.w * 0.55) fs *= V.w * 0.55 / w0; c.restore();
+                c.save(); c.font = `900 ${fs}px Inter, Arial`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#FFB800'; c.shadowColor = '#FF2A6D'; c.shadowBlur = u * 2;
+                c.fillText(plan.numero.valor, V.x + V.w * 0.62, V.y + V.h * 0.42); c.restore();
+                if (plan.numero.rotulo) neonLabel(c, plan.numero.rotulo, V.x + V.w * 0.62, V.y + V.h * 0.6, u * 7, '#00F0FF');
+                c.restore();
+                neonFigure(c, V.x + V.w * 0.2, gy, r, people[0].emocao, 'apontar', time, 0);
+            } else if (plan.tipo === 'comparacao' && plan.comparacao) {
+                [[plan.comparacao.a, 0.27, '#00F0FF'], [plan.comparacao.b, 0.73, '#FF2A6D']].forEach(([it, fx, col], i) => {
+                    const e = enter(1 + i);
+                    c.save(); c.globalAlpha = e;
+                    neonLabel(c, it.texto || '', V.x + V.w * fx, V.y + V.h * 0.3, u * 7, col);
+                    if (it.valor) neonLabel(c, it.valor, V.x + V.w * fx, V.y + V.h * 0.46, u * 10, '#FFB800');
+                    c.restore();
+                });
+                neonLabel(c, 'vs', cx, V.y + V.h * 0.38, u * 9, '#FFFFFF');
+            } else if (plan.tipo === 'lista' && plan.itens.length) {
+                plan.itens.forEach((it, i) => {
+                    const e = enter(1 + i);
+                    if (e <= 0) return;
+                    c.save(); c.globalAlpha = e;
+                    drawIcon(c, 'check', V.x + V.w * 0.42, V.y + V.h * (0.25 + i * 0.16), u * 4, ink);
+                    c.textAlign = 'left';
+                    c.restore();
+                    c.save(); c.globalAlpha = e;
+                    c.font = `700 ${u * 7}px Caveat, cursive`; c.fillStyle = '#FFFFFF'; c.textBaseline = 'middle'; c.textAlign = 'left';
+                    c.fillText(it, V.x + V.w * 0.48, V.y + V.h * (0.25 + i * 0.16));
+                    c.restore();
+                });
+                neonFigure(c, V.x + V.w * 0.2, gy, r, people[0].emocao, 'apontar', time, 0);
+            } else {
+                const xs = people.length > 1 ? [0.22, 0.5] : [0.24];
+                people.forEach((pp, i) => neonFigure(c, V.x + V.w * xs[i], gy, r, pp.emocao, pp.acao, time, i));
+                plan.objetos.forEach((ob, i) => {
+                    const e = enter(1 + i);
+                    const s = 1 - Math.pow(1 - e, 3);
+                    c.save(); c.globalAlpha = e;
+                    drawIcon(c, ob, V.x + V.w * (people.length > 1 ? 0.78 : 0.66 + i * 0.16), V.y + V.h * 0.42 - (1 - s) * u * 20 + Math.sin(time * 2 + i) * u, u * (plan.tipo === 'objeto' ? 13 : 9), ink);
+                    c.restore();
+                });
+            }
+            if (plan.titulo) {
+                c.save();
+                c.font = `900 ${u * 6}px Inter, Arial`;
+                let fs = u * 6; const tw = c.measureText(plan.titulo.toUpperCase()).width;
+                if (tw > V.w * 0.8) fs *= V.w * 0.8 / tw;
+                c.font = `900 ${fs}px Inter, Arial`;
+                const w = c.measureText(plan.titulo.toUpperCase()).width + fs * 1.4;
+                drawRoundedRect(c, V.x + (V.w - w) / 2, V.y + V.h * 0.05, w, fs * 1.6, fs * 0.35);
+                c.fillStyle = '#0A0915'; c.fill(); c.lineWidth = Math.max(2, fs * 0.08); c.strokeStyle = '#FFB800'; c.stroke();
+                c.fillStyle = '#FFFFFF'; c.textAlign = 'center'; c.textBaseline = 'middle';
+                c.fillText(plan.titulo.toUpperCase(), V.x + V.w / 2, V.y + V.h * 0.05 + fs * 0.82);
+                c.restore();
+            }
+        }
+
+        /* ---------------- dispatcher used by the live loop and the MP4 export ---------------- */
+        function renderThemeFrame(t, time, nowMs, energy, speaking, active, shot, captionShot, wordIdx) {
+            const W = canvas.width, H = canvas.height;
+            ctx.clearRect(0, 0, W, H);
+            if (currentTheme === 'stickman' || currentTheme === 'infografico') {
+                const L = altLayout(W, H);
+                if (currentTheme === 'stickman') renderStickmanFrame(ctx, L, shot, t, time, energy, active, speaking, captionShot, wordIdx);
+                else renderInfoFrame(ctx, L, shot, t, time, energy, active, speaking, captionShot, wordIdx);
+                return;
+            }
+            const L = computeLayout(W, H);
+            renderScenery(L, shot, t, time, energy, nowMs);
+            renderVideoFrame(L, shot, t, time, energy, active);
+            renderPresenter(L, shot, time, energy, speaking, nowMs);
+            renderCaptions(L, captionShot, wordIdx, energy);
+        }
+
+        /* ---------------- style picker ---------------- */
+        function sampleShotFor(id) {
+            const s = makeShot(99, 0, 6, 'Se o salário mínimo fosse de dez mil reais, o que mudaria na sua vida?', normalizePlan({
+                titulo: 'Salário de R$ 10 mil?', tipo: 'numero', numero: { valor: 'R$ 10.000', rotulo: 'salário mínimo' }, objetos: ['dinheiro'],
+                personagens: [{ emocao: 'surpreso', acao: 'apontar' }], ambiente: 'cidade', humor: 'positivo'
+            }));
+            s.realWords = s.words.map((w, i) => ({ word: w, t0: s.wordTimes[i].t0, t1: s.wordTimes[i].t1 }));
+            return s;
+        }
+        function drawThemePreview(id, target) {
+            const prevTheme = currentTheme, prevW = canvas.width, prevH = canvas.height;
+            const saved = { cur: bgState.cur, prev: bgState.prev };
+            const prevStory = STORYBOARD.slice();
+            currentTheme = id;
+            canvas.width = 540; canvas.height = 960;
+            const shot = sampleShotFor(id);
+            STORYBOARD.length = 0; STORYBOARD.push(shot);
+            bgState.cur = null; bgState.prev = null; avatarState.key = null; avatarState.prevPose = null;
+            const savedSrc = captionSource; captionSource = 'real';
+            const savedWhisper = audioState.whisper; audioState.whisper = true;
+            try { renderThemeFrame(2.4, 2.4, 2400, 0.6, true, null, shot, shot, 6); } catch (e) { console.error(e); }
+            const tc = target.getContext('2d');
+            tc.drawImage(canvas, 0, 0, target.width, target.height);
+            captionSource = savedSrc; audioState.whisper = savedWhisper;
+            STORYBOARD.length = 0; prevStory.forEach(s => STORYBOARD.push(s));
+            currentTheme = prevTheme; canvas.width = prevW; canvas.height = prevH;
+            bgState.cur = saved.cur; bgState.prev = saved.prev; avatarState.key = null; frameCacheHasImage = false;
+        }
+        function showThemePicker() {
+            const m = document.getElementById('theme-picker');
+            m.classList.remove('hidden');
+            document.querySelectorAll('[data-theme-preview]').forEach(cv => drawThemePreview(cv.dataset.themePreview, cv));
+        }
+        function hideThemePicker() { document.getElementById('theme-picker').classList.add('hidden'); }
+
         // ---------- UI EVENTS ----------
         mainPlayBtn.addEventListener('click', togglePlay);
         $('canvas-stage').addEventListener('click', togglePlay);
@@ -3976,7 +4993,7 @@ Regras:
             }
             if (activeShot.id !== lastHighlightedShot) {
                 const old = $(`sb-item-${lastHighlightedShot}`);
-                if (old) old.className = "sb-item p-2 rounded-xl bg-[#0A0915]/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
+                if (old) old.className = "sb-item p-2 rounded-xl bg-inset/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
                 const el = $(`sb-item-${activeShot.id}`);
                 if (el) el.className = "sb-item p-2 rounded-xl bg-neonPink/25 border border-neonPink cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
                 lastHighlightedShot = activeShot.id;
@@ -3984,9 +5001,7 @@ Regras:
 
             // --- DRAW ---
             const W = canvas.width, H = canvas.height;
-            const L = computeLayout(W, H);
             const time = now * 0.001;
-            ctx.clearRect(0, 0, W, H);
 
             const active = syncVideo(currentTime);
             if (active) {
@@ -3996,10 +5011,7 @@ Regras:
                 cutHud.textContent = videos.length ? 'ANALISANDO VÍDEOS...' : 'SEM VÍDEO';
             }
 
-            renderScenery(L, activeShot, currentTime, time, energy, now);
-            renderVideoFrame(L, activeShot, currentTime, time, energy, active);
-            renderPresenter(L, activeShot, time, energy, speaking, now);
-            renderCaptions(L, captionShot, wordIdx, energy);
+            renderThemeFrame(currentTime, time, now, energy, speaking, active, activeShot, captionShot, wordIdx);
 
             requestAnimationFrame(animateLoop);
         }
@@ -4196,11 +5208,7 @@ Regras:
             const tc = t + captionOffset;
             const captionShot = getActiveShot(Math.max(0, tc));
             const wordIdx = activeWordIndex(captionShot, tc);
-            ctx.clearRect(0, 0, W, H);
-            renderScenery(L, shot, t, time, energy, nowMs);
-            renderVideoFrame(L, shot, t, time, energy, active);
-            renderPresenter(L, shot, time, energy, speaking, nowMs);
-            renderCaptions(L, captionShot, wordIdx, energy);
+            renderThemeFrame(t, time, nowMs, energy, speaking, active, shot, captionShot, wordIdx);
         }
 
         function setExportUI(on, text, frac) {
@@ -4353,14 +5361,14 @@ Regras:
                 audioState.files.map(f => f.name + f.size),
                 videos.map(v => v.id),
                 scenes.filter(s => s.ai).length,
-                editSeed, cutLimit, currentAspect, audioState.whisper
+                editSeed, cutLimit, currentAspect, audioState.whisper, currentTheme, STORYBOARD.length
             ]);
         }
         function exportReady() {
             const whisperPending = !!audioState.whisperExpected && !audioState.whisper && !audioState.whisperTried;
-            return !!audioState.buffer && videos.length > 0 && scenes.length > 0 &&
+            return !!audioState.buffer && !(STORYBOARD[0] && STORYBOARD[0].isPlaceholder) &&
                 videos.every(v => v.status === 'pronto' || v.status === 'erro') &&
-                !groqBusy && !whisperPending && !exporting && !isRecording;
+                !groqBusy && !storyBusy && !whisperPending && !exporting && !isRecording;
         }
         function cancelAutoExport(markDone) {
             if (autoExportTimer) clearInterval(autoExportTimer);
@@ -4372,14 +5380,14 @@ Regras:
             if (!autoExportChk.checked || !exportReady() || autoExportTimer) return;
             const sig = exportSignature();
             if (sig === lastAutoExportSig) return;
-            let left = 5;
+            let left = 8;
             autoBanner.classList.remove('hidden');
-            autoBannerText.textContent = `Áudio e vídeos prontos: o MP4 começa a ser montado em ${left}s...`;
+            autoBannerText.textContent = `Vídeo pronto: o MP4 começa a ser montado em ${left}s (para usar vídeos de referência, adicione antes ou cancele).`;
             autoExportTimer = setInterval(() => {
                 left--;
                 if (!exportReady()) { cancelAutoExport(false); return; }
                 if (left > 0) {
-                    autoBannerText.textContent = `Áudio e vídeos prontos: o MP4 começa a ser montado em ${left}s...`;
+                    autoBannerText.textContent = `Vídeo pronto: o MP4 começa a ser montado em ${left}s (para usar vídeos de referência, adicione antes ou cancele).`;
                     return;
                 }
                 cancelAutoExport(false);
@@ -4402,8 +5410,20 @@ Regras:
         }
 
         // ---------- BOOT ----------
-        applyFixedTimings();
-        onTimingChanged();
+        applyThemeUI(currentTheme || 'neon');
+        placeholderStory();
+        const groqTextModelInput = $('groq-text-model');
+        groqTextModelInput.value = lsGet('vstudio_groq_text_model', 'llama-3.3-70b-versatile');
+        groqTextModelInput.addEventListener('change', () => lsSet('vstudio_groq_text_model', groqTextModelInput.value.trim()));
+        $('presenter-alt').checked = showPresenterAlt;
+        $('presenter-alt').addEventListener('change', e => { showPresenterAlt = e.target.checked; lsSet('vstudio_presenter_alt', showPresenterAlt ? '1' : '0'); });
+        $('theme-btn').addEventListener('click', showThemePicker);
+        $('theme-picker-close').addEventListener('click', () => { if (currentTheme) hideThemePicker(); });
+        document.querySelectorAll('[data-pick-theme]').forEach(b => b.addEventListener('click', () => setTheme(b.dataset.pickTheme)));
+        if (!currentTheme) {
+            const openPicker = () => setTimeout(showThemePicker, 50);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(openPicker); else openPicker();
+        }
         window.addEventListener('load', () => {
             lastFrameTime = performance.now();
             requestAnimationFrame(animateLoop);
