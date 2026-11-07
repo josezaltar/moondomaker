@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUBEMAKERS — ARGON ENGINE • GTA 6 Video Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gtaBg: '#120826',
+                        gtaDark: '#0A0915',
+                        gtaPink: '#FF2A6D',
+                        gtaCyan: '#00F0FF',
+                        gtaYellow: '#FFB800',
+                        gtaOrange: '#FF5500'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #070510;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        .font-mono-tech {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0A0915; }
+        ::-webkit-scrollbar-thumb { background: #FF2A6D; border-radius: 3px; }
+        
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #FF2A6D 0%, #00F0FF 100%);
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #FFB800;
+            border: 3px solid #0A0915;
+            margin-top: -6px;
+            box-shadow: 0 0 12px #FFB800;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-3 md:p-5 select-none">
+
+    <!-- Top Navigation / Director Header -->
+    <header class="w-full max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-purple-900/50">
+        <div class="flex items-center space-x-3">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gtaPink via-gtaOrange to-gtaYellow flex items-center justify-center shadow-lg shadow-gtaPink/40 font-black text-xl text-gtaDark border border-white/20">
+                VI
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-lg md:text-xl font-black tracking-wider bg-gradient-to-r from-white via-gtaCyan to-gtaPink bg-clip-text text-transparent">
+                        TUBEMAKERS • ARGON ENGINE
+                    </h1>
+                    <span class="px-2 py-0.5 text-[10px] font-mono-tech font-bold bg-gtaCyan/15 text-gtaCyan border border-gtaCyan/40 rounded">v4.2 PRO</span>
+                </div>
+                <p class="text-xs text-purple-300/70">Estúdio Procedural Reativo ao Áudio • Paleta Vice City / Leonida</p>
+            </div>
+        </div>
+
+        <!-- Aspect Ratio & Engine Status -->
+        <div class="flex items-center gap-2.5">
+            <div class="bg-[#120826] p-1 rounded-xl border border-purple-800/50 flex items-center gap-1">
+                <button id="ratio-916-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-gtaPink text-white shadow transition-all">
+                    9:16 Shorts
+                </button>
+                <button id="ratio-169-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold text-purple-300 hover:text-white transition-all">
+                    16:9 Longo
+                </button>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-950/50 border border-emerald-500/30 text-emerald-300 text-xs font-mono-tech">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="fps-counter">60 FPS</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Studio Grid -->
+    <main class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 my-5 items-start">
+
+        <!-- Left Control Deck (5 Columns) -->
+        <section class="lg:col-span-5 flex flex-col gap-4">
+
+            <!-- Master Transport & Audio Sync Card -->
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-purple-500/25 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-gtaPink"></span>
+                        Controle Mestre & Sincronia de Voz
+                    </h2>
+                    <span id="sync-mode-badge" class="text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded bg-gtaYellow/20 text-gtaYellow border border-gtaYellow/40">
+                        Relógio Interno Ativo
+                    </span>
+                </div>
+
+                <!-- Main Play / Pause / Voice Synth Row -->
+                <div class="flex items-center gap-2.5 mb-4">
+                    <button id="main-play-btn" class="flex-1 bg-gradient-to-r from-gtaPink to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-black py-3.5 px-5 rounded-xl shadow-lg shadow-gtaPink/30 flex items-center justify-center gap-2.5 transition-all active:scale-95 text-sm">
+                        <svg id="play-svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg id="pause-svg" class="w-5 h-5 fill-current hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        <span id="play-label">REPRODUZIR VÍDEO COMPLETO</span>
+                    </button>
+                    <button id="restart-btn" class="p-3.5 rounded-xl bg-purple-950/80 hover:bg-purple-900 border border-purple-600/30 text-purple-200 hover:text-white transition-all" title="Voltar ao Início">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    </button>
+                </div>
+
+                <!-- Part Switcher Buttons (Parte 1, 2, 3) -->
+                <div class="mb-4">
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purple-300 mb-1.5">
+                        Navegação Rápida por Partes (Roteiro Completo):
+                    </label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button data-part="1" class="part-btn py-2.5 px-2 rounded-xl bg-gtaPink/20 border-2 border-gtaPink text-white font-extrabold text-xs flex flex-col items-center transition-all">
+                            <span>PARTE 1</span>
+                            <span class="text-[9px] font-normal text-purple-200">Trailer & Casal</span>
+                        </button>
+                        <button data-part="2" class="part-btn py-2.5 px-2 rounded-xl bg-purple-950/50 border border-purple-700/40 text-purple-200 hover:text-white font-extrabold text-xs flex flex-col items-center transition-all">
+                            <span>PARTE 2</span>
+                            <span class="text-[9px] font-normal text-purple-300">Polícia & Cassino</span>
+                        </button>
+                        <button data-part="3" class="part-btn py-2.5 px-2 rounded-xl bg-purple-950/50 border border-purple-700/40 text-purple-200 hover:text-white font-extrabold text-xs flex flex-col items-center transition-all">
+                            <span>PARTE 3</span>
+                            <span class="text-[9px] font-normal text-purple-300">Traição & Missão</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Timeline Scrubber -->
+                <div class="space-y-1.5 bg-[#0A0915]/80 p-3 rounded-xl border border-purple-900/50 mb-4">
+                    <div class="flex justify-between items-center text-xs font-mono-tech">
+                        <span id="time-current" class="text-gtaCyan font-bold">00:00.0</span>
+                        <span id="shot-indicator" class="text-[10px] text-gtaYellow font-bold">SHOT 01 / 36</span>
+                        <span id="time-total" class="text-purple-300">03:00.0</span>
+                    </div>
+                    <input type="range" id="timeline-scrubber" min="0" max="180" step="0.1" value="0" class="w-full">
+                </div>
+
+                <!-- Load MP3 Files (Supports single or multiple MP3s) -->
+                <div class="space-y-2">
+                    <label class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-purple-300">
+                        <span>Carregar Áudio MP3 (Parte 1, 2, 3)</span>
+                        <span class="text-gtaCyan font-mono-tech text-[10px]">WebAudio Analyser</span>
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <label class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-dashed border-gtaPink/50 bg-gtaPink/10 hover:bg-gtaPink/20 cursor-pointer transition-all text-xs font-bold text-white">
+                            <svg class="w-4 h-4 text-gtaPink shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                            <span id="upload-status-text" class="truncate">Escolher MP3(s)...</span>
+                            <input type="file" id="mp3-upload-input" accept="audio/*" multiple class="hidden">
+                        </label>
+
+                        <button id="tts-toggle-btn" class="py-2.5 px-3 rounded-xl border border-gtaCyan/40 bg-gtaCyan/10 hover:bg-gtaCyan/20 text-xs font-bold text-gtaCyan flex items-center justify-center gap-1.5 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                            <span id="tts-label">Voz IA Nativa: ON</span>
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-purple-300/70 leading-tight">
+                        💡 A animação roda <strong>imediatamente</strong> ao clicar em Reproduzir. Se você anexar seus arquivos MP3 (`parte1.mp3`, `parte2.mp3`, `parte3.mp3`), as ondas sonoras e a boca do narrador sincronizam direto com seu MP3!
+                    </p>
+                </div>
+            </div>
+
+            <!-- NEW: Smart Gameplay Video Loader & AI Mapper Card -->
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-gtaCyan/40 rounded-2xl p-4 shadow-2xl relative overflow-hidden">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-gtaCyan flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-gtaCyan animate-pulse"></span>
+                        Gameplay (MP4) + Mapeamento Inteligente IA
+                    </h3>
+                    <span id="gameplay-status-badge" class="text-[10px] font-mono-tech px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700/40">
+                        Sem Vídeo
+                    </span>
+                </div>
+
+                <!-- Upload Gameplay & Run AI Scan Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                    <label class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-dashed border-gtaCyan/60 bg-gtaCyan/10 hover:bg-gtaCyan/20 cursor-pointer transition-all text-xs font-bold text-white">
+                        <svg class="w-4 h-4 text-gtaCyan shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        <span id="gameplay-upload-label" class="truncate">1. Carregar Gameplay (MP4)</span>
+                        <input type="file" id="gameplay-upload-input" accept="video/*" class="hidden">
+                    </label>
+
+                    <button id="smart-map-btn" disabled class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-gtaCyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-gtaDark font-black text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-gtaCyan/20 transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        <span id="smart-map-btn-text">2. Mapear Cenas (IA)</span>
+                    </button>
+                </div>
+
+                <!-- Gameplay Display Mode Selector -->
+                <div class="mb-3">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">
+                        Modo de Exibição do Gameplay no Vídeo:
+                    </label>
+                    <div class="grid grid-cols-3 gap-1.5 bg-[#0A0915] p-1 rounded-xl border border-purple-900/60">
+                        <button data-gmode="hybrid" class="gmode-btn py-1.5 px-2 rounded-lg text-[10px] font-extrabold bg-gtaPink text-white shadow transition-all">
+                            Híbrido (Auto)
+                        </button>
+                        <button data-gmode="billboard" class="gmode-btn py-1.5 px-2 rounded-lg text-[10px] font-bold text-purple-300 hover:text-white transition-all">
+                            Telão Neon 2.5D
+                        </button>
+                        <button data-gmode="fullscreen" class="gmode-btn py-1.5 px-2 rounded-lg text-[10px] font-bold text-purple-300 hover:text-white transition-all">
+                            Fundo GTA Grade
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Bar for AI Computer Vision + Gemini Frame Analysis -->
+                <div id="ai-scan-progress-box" class="hidden mb-3 bg-[#0A0915] p-2.5 rounded-xl border border-gtaCyan/30">
+                    <div class="flex justify-between text-[10px] font-mono-tech text-gtaCyan mb-1">
+                        <span id="ai-scan-step-text">Analisando frames do vídeo...</span>
+                        <span id="ai-scan-percent">0%</span>
+                    </div>
+                    <div class="w-full h-2 bg-purple-950 rounded-full overflow-hidden">
+                        <div id="ai-scan-bar" class="h-full bg-gradient-to-r from-gtaCyan via-gtaPink to-gtaYellow w-0 transition-all duration-200"></div>
+                    </div>
+                </div>
+
+                <!-- Mapped Clips Preview List -->
+                <div id="mapped-clips-container" class="hidden">
+                    <div class="flex items-center justify-between text-[10px] text-purple-300 font-mono-tech mb-1">
+                        <span>CORTES SINCRONIZADOS COM O ROTEIRO:</span>
+                        <button id="remap-shuffle-btn" class="text-gtaYellow hover:underline font-bold">↻ Recalcular Cortes</button>
+                    </div>
+                    <div id="mapped-clips-list" class="max-h-32 overflow-y-auto space-y-1 pr-1 text-[11px]"></div>
+                </div>
+            </div>
+
+            <!-- Live Storyboard Shot List -->
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-purple-500/25 rounded-2xl p-4 shadow-2xl">
+                <div class="flex items-center justify-between mb-2.5">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-purple-200 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-gtaCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                        Storyboard Interativo (Clique na Cena)
+                    </h3>
+                    <span class="text-[10px] font-mono-tech text-purple-400">36 Cenas Dinâmicas</span>
+                </div>
+                <div id="storyboard-list" class="max-h-48 overflow-y-auto space-y-1.5 pr-1">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Recording & Export Studio -->
+            <div class="bg-gradient-to-b from-[#160B30] to-[#0E0720] border border-gtaYellow/30 rounded-2xl p-4 shadow-2xl">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-gtaYellow flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-gtaYellow animate-ping"></span>
+                        Exportação Direta (Canvas + Áudio)
+                    </h3>
+                    <span class="text-[10px] font-mono-tech text-purple-300">30 FPS WebM</span>
+                </div>
+                <button id="record-export-btn" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-gtaYellow to-amber-500 hover:from-amber-400 hover:to-yellow-500 text-gtaDark font-black text-xs uppercase tracking-wider shadow-lg shadow-gtaYellow/20 flex items-center justify-center gap-2 transition-all active:scale-95">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+                    <span id="record-btn-text">Gravar & Baixar Vídeo (Record & Export)</span>
+                </button>
+                <div id="record-feedback" class="hidden mt-2 text-center text-[11px] font-mono-tech text-gtaCyan bg-purple-950/80 py-1.5 px-3 rounded-lg border border-gtaCyan/30">
+                    🔴 Gravando em tempo real... Clique novamente para finalizar e baixar.
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Right Viewport: Animated Canvas Player (7 Columns) -->
+        <section class="lg:col-span-7 flex flex-col items-center justify-center">
+            <div class="relative group flex items-center justify-center w-full">
+                <!-- Neon Halo -->
+                <div class="absolute -inset-2 bg-gradient-to-tr from-gtaPink/30 via-purple-600/20 to-gtaCyan/30 rounded-[2.5rem] blur-2xl pointer-events-none"></div>
+
+                <!-- Dynamic Player Container -->
+                <div id="player-frame" class="relative bg-[#070510] border-4 border-purple-800/80 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col items-center transition-all duration-300" style="width: 405px; height: 720px; max-width: 100%;">
+                    
+                    <!-- Top HUD Bar -->
+                    <div class="w-full bg-[#0A0915]/95 px-4 py-2 flex items-center justify-between text-[10px] font-mono-tech border-b border-purple-900/60 z-20">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-gtaPink animate-pulse"></span>
+                            <span class="font-bold text-white">ARGON RENDERER</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span id="part-badge-hud" class="px-1.5 py-0.5 rounded bg-gtaPink/20 text-gtaPink font-bold">PARTE 1</span>
+                            <span id="resolution-badge" class="text-gtaCyan">1080x1920</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Interactive Canvas -->
+                    <div class="relative w-full flex-1 bg-[#120826] flex items-center justify-center overflow-hidden cursor-pointer" id="canvas-stage">
+                        <canvas id="argon-canvas" width="1080" height="1920" class="w-full h-full object-contain"></canvas>
+                    </div>
+
+                    <!-- Bottom Status Bar -->
+                    <div class="w-full bg-[#0A0915]/95 px-4 py-1.5 flex items-center justify-between text-[10px] font-mono-tech text-purple-400 border-t border-purple-900/60 z-20">
+                        <span id="camera-move-hud">CAM: PUSH-IN + ORBIT</span>
+                        <span id="audio-meter-hud" class="text-gtaYellow">AUDIO REACT: ACTIVE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Hidden Audio Element for External MP3 Playback -->
+    <audio id="external-audio" crossorigin="anonymous"></audio>
+    <!-- Hidden Video Element & Offscreen Sampler Canvas for Smart Gameplay Mapping -->
+    <video id="gameplay-video" crossorigin="anonymous" muted playsinline preload="auto" class="hidden"></video>
+    <video id="sampler-video" crossorigin="anonymous" muted playsinline preload="auto" class="hidden"></video>
+
+    <script>
+        /********************************************************************
+         * TUBEMAKERS — ARGON ENGINE (GTA 6 COMPLETE EDITION)
+         * Real-time 60fps procedural animation + Word-by-Word Karaoke Sync
+         * + Smart Gameplay Video Computer Vision & Gemini AI Scene Mapper
+         ********************************************************************/
+
+        const canvas = document.getElementById('argon-canvas');
+        const ctx = canvas.getContext('2d');
+        const playerFrame = document.getElementById('player-frame');
+
+        // Full 3-Part Storyboard synced to the user's exact Portuguese script
+        const STORYBOARD = [
+            // ==================== PARTE 1 ====================
+            {
+                id: 1, part: 1, start: 0, end: 5,
+                tag: "trailer_secret", tagLabel: "🔍 Segredo no Trailer", preferredMode: "billboard",
+                chapter: "PARTE 1 • O SEGREDO DO TRAILER",
+                badge: "🔍 PISTA OCULTA • ROCKSTAR",
+                badgeColor: "#FF2A6D",
+                sceneType: "trailer_magnifying",
+                cam: "PUSH-IN RÁPIDO",
+                headline: "MISSÃO SECRETA NO TRAILER?",
+                subStats: ["FRAME A FRAME", "99% NÃO PERCEBERAM"],
+                text: "Imagine descobrir que a Rockstar mostrou uma das missões mais importantes de GTA 6 sem que praticamente ninguém percebesse."
+            },
+            {
+                id: 2, part: 1, start: 5, end: 10,
+                tag: "couple", tagLabel: "👫 Jason & Lúcia", preferredMode: "fullscreen",
+                chapter: "PARTE 1 • O SEGREDO DO TRAILER",
+                badge: "❓ PARECE IMPOSSÍVEL?",
+                badgeColor: "#00F0FF",
+                sceneType: "jason_lucia_heist_board",
+                cam: "PANORÂMICA + ZOOM",
+                headline: "JASON & LÚCIA: O GRANDE GOLPE",
+                subStats: ["PISTAS NO TRAILER 1", "PLANO MILIONÁRIO"],
+                text: "Parece impossível, não é? Mas e se eu te dissesse que algumas cenas do trailer podem esconder pistas sobre um grande golpe envolvendo Jason e Lúcia?"
+            },
+            {
+                id: 3, part: 1, start: 10, end: 16,
+                tag: "city_map", tagLabel: "🌴 Mapa de Leonida", preferredMode: "billboard",
+                chapter: "PARTE 1 • ANÁLISE DA COMUNIDADE",
+                badge: "🗺️ RADAR DE LEONIDA",
+                badgeColor: "#FFB800",
+                sceneType: "leonida_map_scan",
+                cam: "ÓRBITA AÉREA 10KM",
+                headline: "MILHÕES ANALISANDO CADA SEGUNDO",
+                subStats: ["MAPA DE LEONIDA", "NOVOS PERSONAGENS"],
+                text: "Desde que o primeiro trailer de GTA 6 foi lançado, milhões de jogadores começaram a analisar cada segundo das imagens procurando detalhes do mapa."
+            },
+            {
+                id: 4, part: 1, start: 16, end: 22,
+                tag: "vice_night", tagLabel: "🌆 Vice City Neon", preferredMode: "fullscreen",
+                chapter: "PARTE 1 • TEORIA DE VICE CITY",
+                badge: "⚡ TEORIA PRINCIPAL",
+                badgeColor: "#FF2A6D",
+                sceneType: "vice_city_neon_grid",
+                cam: "TRACKING FRONTAL",
+                headline: "DINHEIRO, TRAIÇÃO & POLÍCIA",
+                subStats: ["JASON & LÚCIA", "MUDANÇA DE RUMO"],
+                text: "Hoje vamos explorar uma das teorias mais curiosas sobre Vice City: envolvendo Jason, Lúcia, dinheiro, traição, polícia e um plano criminoso."
+            },
+            {
+                id: 5, part: 1, start: 22, end: 28,
+                tag: "city_map", tagLabel: "🏙️ Mundo Rockstar", preferredMode: "billboard",
+                chapter: "PARTE 1 • PADRÃO ROCKSTAR",
+                badge: "✓ ARQUITETURA DE MUNDO",
+                badgeColor: "#00F0FF",
+                sceneType: "world_layers_diagram",
+                cam: "ZOOM EM CAMADAS",
+                headline: "NADA É POR ACASO NA ROCKSTAR",
+                subStats: ["REALISMO EXTREMO", "EXPLORAÇÃO NÍVEL MÁXIMO"],
+                text: "A Rockstar não costuma construir seus mundos de qualquer jeito. Cada cidade, cada personagem e cada situação tem uma função dentro da experiência."
+            },
+            {
+                id: 6, part: 1, start: 28, end: 35,
+                tag: "couple", tagLabel: "❤️ Casal Protagonista", preferredMode: "fullscreen",
+                chapter: "PARTE 1 • OS PROTAGONISTAS",
+                badge: "❤️ CONEXÃO PERIGOSA",
+                badgeColor: "#FF2A6D",
+                sceneType: "couple_trust_meter",
+                cam: "DOLLY IN DRAMÁTICO",
+                headline: "CONFIANÇA • PAIXÃO • PERIGO",
+                subStats: ["RELAÇÃO INÉDITA", "PONTO CENTRAL"],
+                text: "Vamos começar pelo casal principal: Jason e Lúcia. Existe uma conexão entre eles que mistura confiança, paixão e perigo."
+            },
+            {
+                id: 7, part: 1, start: 35, end: 42,
+                tag: "heist_action", tagLabel: "💰 Assalto & Ação", preferredMode: "fullscreen",
+                chapter: "PARTE 1 • A ESCALADA DO CRIME",
+                badge: "📈 DE LOJAS A MILHÕES",
+                badgeColor: "#FFB800",
+                sceneType: "crime_escalation_bars",
+                cam: "PAN VERTICAL",
+                headline: "A OPORTUNIDADE DE MILHÕES",
+                subStats: ["PEQUENOS ASSALTOS", "GOLPE MILIONÁRIO"],
+                text: "Jason e Lúcia começam cometendo pequenos crimes para conseguir dinheiro, mas descobrem uma oportunidade capaz de render milhões de dólares."
+            },
+            {
+                id: 8, part: 1, start: 42, end: 48,
+                tag: "planning", tagLabel: "📋 Planejamento", preferredMode: "billboard",
+                chapter: "PARTE 1 • OS 4 PILARES",
+                badge: "📋 REQUISITOS DO GOLPE",
+                badgeColor: "#00F0FF",
+                sceneType: "four_pillars_hud",
+                cam: "PUSH-IN SIMÉTRICO",
+                headline: "O QUE O GRANDE GOLPE EXIGE?",
+                subStats: ["1. PLANEJAMENTO", "2. CONTATOS • 3. EQUIPAMENTOS"],
+                text: "O problema é que esse golpe não envolve apenas entrar e pegar dinheiro. Ele exige planejamento, exige contatos..."
+            },
+
+            // ==================== PARTE 2 ====================
+            {
+                id: 9, part: 2, start: 48, end: 54,
+                tag: "betrayal_dark", tagLabel: "⚠️ Infiltrado Secreto", preferredMode: "billboard",
+                chapter: "PARTE 2 • A ARMADILHA OCULTA",
+                badge: "⚠️ EXIGE CONFIANÇA TOTAL",
+                badgeColor: "#FF2A6D",
+                sceneType: "four_pillars_hud",
+                cam: "ZOOM DE IMPACTO",
+                headline: "E PRINCIPALMENTE: CONFIANÇA!",
+                subStats: ["INFILTRADO SECRETO?", "OUTRA ORGANIZAÇÃO"],
+                text: "Exige equipamentos e, principalmente, exige confiança! Agora imagine se uma das pessoas envolvidas estiver trabalhando secretamente para outra organização."
+            },
+            {
+                id: 10, part: 2, start: 54, end: 61,
+                tag: "betrayal_dark", tagLabel: "🕸️ Armadilha", preferredMode: "fullscreen",
+                chapter: "PARTE 2 • A ARMADILHA OCULTA",
+                badge: "🕸️ EMBOSCADA",
+                badgeColor: "#FFB800",
+                sceneType: "syndicate_web_trap",
+                cam: "ORBIT + TILT",
+                headline: "PREPARANDO UMA ARMADILHA",
+                subStats: ["CONTROLE ILUSÓRIO", "INÍCIO DO CONFLITO"],
+                text: "Jason e Lúcia poderiam acreditar que estão controlando a situação, enquanto alguém estaria preparando uma armadilha para os dois."
+            },
+            {
+                id: 11, part: 2, start: 61, end: 68,
+                tag: "city_map", tagLabel: "🌴 Vice City Dia/Sol", preferredMode: "fullscreen",
+                chapter: "PARTE 2 • ECOSSISTEMA VICE CITY",
+                badge: "🌴 VICE CITY VIVA",
+                badgeColor: "#00F0FF",
+                sceneType: "vice_city_districts",
+                cam: "TRACKING LATERAL",
+                headline: "LUXO VS. SUBMUNDO DO CRIME",
+                subStats: ["REGIÕES LUXUOSAS", "BAIRROS POPULARES"],
+                text: "Mas vamos analisar outra pista: Vice City! Temos regiões luxuosas, bairros populares, áreas comerciais e lugares onde o crime faz parte da rotina."
+            },
+            {
+                id: 12, part: 2, start: 68, end: 76,
+                tag: "heist_action", tagLabel: "👁️ Reconhecimento Loja", preferredMode: "billboard",
+                chapter: "PARTE 2 • RECONHECIMENTO TÁTICO",
+                badge: "👁️ VIGILÂNCIA DIURNA",
+                badgeColor: "#FFB800",
+                sceneType: "store_recon_day_night",
+                cam: "PAN DIA -> NOITE",
+                headline: "OBSERVAR DE DIA • AGIR À NOITE",
+                subStats: ["CÂMERAS ATIVAS", "VEÍCULO RECONHECIDO"],
+                text: "Imagine entrar em uma loja durante o dia, identificar pontos de entrada e saída e retornar à noite... mas as câmeras estão funcionando e a polícia passa na região!"
+            },
+            {
+                id: 13, part: 2, start: 76, end: 83,
+                tag: "planning", tagLabel: "🎮 Estratégia Livre", preferredMode: "billboard",
+                chapter: "PARTE 2 • LIBERDADE DE ESCOLHA",
+                badge: "🎮 GAMEPLAY EMERGENTE",
+                badgeColor: "#00F0FF",
+                sceneType: "strategy_blueprint",
+                cam: "PUSH-IN ESTRATÉGICO",
+                headline: "MISSÕES SEM CAMINHO FIXO",
+                subStats: ["OBSERVAR AMBIENTE", "DECIDIR QUANDO AGIR"],
+                text: "Missões que não dependem apenas de seguir um caminho marcado no mapa: observar o ambiente, preparar uma estratégia e decidir quando agir."
+            },
+            {
+                id: 14, part: 2, start: 83, end: 91,
+                tag: "police_chase", tagLabel: "🚓 Perseguição Policial", preferredMode: "fullscreen",
+                chapter: "PARTE 2 • SISTEMA POLICIAL",
+                badge: "🚨 IA POLICIAL: GTA 5 vs GTA 6",
+                badgeColor: "#FF2A6D",
+                sceneType: "police_ai_comparison",
+                cam: "PERSEGUIÇÃO NA PONTE",
+                headline: "CERCO TÁTICO & RUAS BLOQUEADAS",
+                subStats: ["GTA 5: APENAS ESCONDER", "GTA 6: BLOQUEIO DE ROTAS"],
+                text: "Agora vamos falar da polícia! Em vez de simplesmente perseguir o carro, os policiais fecham possíveis rotas de fuga e bloqueiam ruas."
+            },
+            {
+                id: 15, part: 2, start: 91, end: 98,
+                tag: "police_chase", tagLabel: "🚁 Cerco Policial", preferredMode: "fullscreen",
+                chapter: "PARTE 2 • OPERAÇÃO CAPTURA",
+                badge: "🚔 CAÇADA EM VICE CITY",
+                badgeColor: "#FFB800",
+                sceneType: "police_ai_comparison",
+                cam: "ZOOM HELICÓPTERO",
+                headline: "OBJETIVO REAL: SOBREVIVER",
+                subStats: ["GANGUES RIVAIS", "EMPRESÁRIOS CORRUPTOS"],
+                text: "Imagine se o verdadeiro objetivo não for roubar dinheiro, mas escapar de uma operação policial e de gangues disputando o mesmo território!"
+            },
+            {
+                id: 16, part: 2, start: 98, end: 106,
+                tag: "betrayal_dark", tagLabel: "🕴️ Manipulador Oculto", preferredMode: "billboard",
+                chapter: "PARTE 2 • O MANIPULADOR",
+                badge: "🕴️ SOMBRA NO COMANDO",
+                badgeColor: "#FF2A6D",
+                sceneType: "puppet_master_shadow",
+                cam: "SLOW PUSH-IN",
+                headline: "QUEM PLANEJOU O GOLPE?",
+                subStats: ["PESSOA PODEROSA", "INFORMAÇÕES INCOMPLETAS"],
+                text: "E se o grande golpe não tiver sido planejado por Jason e Lúcia? Imagine uma pessoa poderosa observando o casal desde o começo e manipulando tudo."
+            },
+            {
+                id: 17, part: 2, start: 106, end: 113,
+                tag: "couple", tagLabel: "⚡ Tensão no Casal", preferredMode: "fullscreen",
+                chapter: "PARTE 2 • DESCONFIANÇA",
+                badge: "⚡ CONFLITO INTERNO",
+                badgeColor: "#00F0FF",
+                sceneType: "couple_trust_meter",
+                cam: "SPLIT CAM TENSÃO",
+                headline: "LÚCIA COMEÇA A DESCONFIAR",
+                subStats: ["CONTATOS SOMEM", "RISCO DE VIDA"],
+                text: "Contatos desaparecem e agem de maneira estranha. No começo Jason não percebe, mas Lúcia começa a desconfiar, criando um conflito entre os dois."
+            },
+            {
+                id: 18, part: 2, start: 113, end: 120,
+                tag: "vice_night", tagLabel: "🎰 Cassino Vice City", preferredMode: "billboard",
+                chapter: "PARTE 2 • O CASSINO DE VICE CITY",
+                badge: "🎰 ALVO DE ALTO RISCO",
+                badgeColor: "#FFB800",
+                sceneType: "casino_vault_heist",
+                cam: "CRANE DOWN NEON",
+                headline: "CASSINO & DINHEIRO ILEGAL",
+                subStats: ["LAVAGEM DE DINHEIRO", "DOCUMENTO SECRETO"],
+                text: "Onde essa missão aconteceria? Imagine um cassino em Vice City usado para movimentar dinheiro ilegal, onde o alvo real é um documento secreto..."
+            },
+
+            // ==================== PARTE 3 ====================
+            {
+                id: 19, part: 3, start: 120, end: 127,
+                tag: "heist_action", tagLabel: "📂 Cofre & Segredo", preferredMode: "billboard",
+                chapter: "PARTE 3 • CONSPIRAÇÃO MAIOR",
+                badge: "📂 ARQUIVO CONFIDENCIAL",
+                badgeColor: "#00F0FF",
+                sceneType: "casino_vault_heist",
+                cam: "CLOSE-UP COFRE",
+                headline: "QUEM FINANCIA O CRIME?",
+                subStats: ["PARTE DE ALGO MAIOR", "REDE CRIMINOSA"],
+                text: "Ou até descobrir quem está financiando uma organização criminosa! Nesse caso, o assalto seria apenas uma parte de algo muito maior."
+            },
+            {
+                id: 20, part: 3, start: 127, end: 134,
+                tag: "npcs_world", tagLabel: "👥 NPCs de Vice City", preferredMode: "fullscreen",
+                chapter: "PARTE 3 • NPCs & SECUNDÁRIOS",
+                badge: "👥 600.000+ ANIMAÇÕES",
+                badgeColor: "#FF2A6D",
+                sceneType: "gas_station_npc_encounter",
+                cam: "TRACKING POSTO MAX MART",
+                headline: "PERSONAGENS SECUNDÁRIOS VIVOS",
+                subStats: ["EXCÊNTRICOS & PERIGOSOS", "FUNÇÃO NA CAMPANHA"],
+                text: "Outra possibilidade envolve os personagens secundários do trailer. Será que estão ali só para preencher cenário ou têm funções importantes na campanha?"
+            },
+            {
+                id: 21, part: 3, start: 134, end: 141,
+                tag: "npcs_world", tagLabel: "⛽ Encontro no Posto", preferredMode: "billboard",
+                chapter: "PARTE 3 • O ENCONTRO NO POSTO",
+                badge: "⛽ ENCONTRO ALEATÓRIO",
+                badgeColor: "#FFB800",
+                sceneType: "gas_station_npc_encounter",
+                cam: "ZOOM NO NPC",
+                headline: "DO POSTO PARA A HISTÓRIA",
+                subStats: ["CONVERSA RÁPIDA", "INFORMAÇÃO CHAVE"],
+                text: "Imagine conversar com alguém aparentemente comum em um posto de gasolina e horas depois descobrir que ele possui informações sobre o assalto de Jason!"
+            },
+            {
+                id: 22, part: 3, start: 141, end: 148,
+                tag: "betrayal_dark", tagLabel: "🗡️ Traição Clássica", preferredMode: "billboard",
+                chapter: "PARTE 3 • A TEORIA MAIS PERIGOSA",
+                badge: "🗡️ ALERTA DE TRAIÇÃO",
+                badgeColor: "#FF2A6D",
+                sceneType: "betrayal_legacy_cards",
+                cam: "PUSH-IN DRAMÁTICO",
+                headline: "PARCERIA QUE TERMINA EM DESASTRE",
+                subStats: ["GTA SAN ANDREAS • GTA 4", "GTA 5 • E AGORA GTA 6"],
+                text: "E agora chegamos a uma das teorias mais perigosas: a traição! Em GTA San Andreas, GTA 4 e GTA 5 vimos aliados se tornando inimigos."
+            },
+            {
+                id: 23, part: 3, start: 148, end: 155,
+                tag: "police_chase", tagLabel: "💔 Emboscada & Fuga", preferredMode: "fullscreen",
+                chapter: "PARTE 3 • RUPTURA DO CASAL",
+                badge: "💔 CONFIANÇA QUEBRADA?",
+                badgeColor: "#FF2A6D",
+                sceneType: "couple_trust_meter",
+                cam: "SHAKE + ZOOM",
+                headline: "JASON VS. LÚCIA: GUERRA TOTAL?",
+                subStats: ["DINHEIRO DESAPARECE", "ACUSAÇÕES MÚTUAS"],
+                text: "No momento mais importante do assalto, a polícia chega antes, alguém some com o dinheiro e a parceria de Jason e Lúcia vira uma verdadeira guerra!"
+            },
+            {
+                id: 24, part: 3, start: 155, end: 162,
+                tag: "planning", tagLabel: "📱 A Ligação", preferredMode: "billboard",
+                chapter: "PARTE 3 • SIMULAÇÃO DE MISSÃO",
+                badge: "📱 PASSO 1: A LIGAÇÃO",
+                badgeColor: "#00F0FF",
+                sceneType: "mission_sim_phone_sms",
+                cam: "ORBIT TELEFONE NEON",
+                headline: "SIMULAÇÃO: A MISSÃO COMPLETA",
+                subStats: ["LIGAÇÃO MISTERIOSA", "SISTEMA DE SEGURANÇA"],
+                text: "Agora vamos imaginar a missão completa: Jason recebe uma ligação oferecendo dinheiro fácil, mas durante a investigação um contato desaparece..."
+            },
+            {
+                id: 25, part: 3, start: 162, end: 169,
+                tag: "heist_action", tagLabel: "🚨 Alarmes & Cilada", preferredMode: "fullscreen",
+                chapter: "PARTE 3 • O AVISO NO CELULAR",
+                badge: "💬 SMS: NÃO CONFIE EM NINGUÉM",
+                badgeColor: "#FFB800",
+                sceneType: "mission_sim_phone_sms",
+                cam: "EXTREME CLOSE-UP SMS",
+                headline: "“NÃO CONFIE EM NINGUÉM”",
+                subStats: ["ALARMES DISPARAM", "CARRO DE FUGA SUMIU"],
+                text: "Uma mensagem chega para Lúcia: 'Não confie em ninguém'. No dia do golpe os alarmes tocam, o carro de fuga some e eles percebem que era uma cilada!"
+            },
+            {
+                id: 26, part: 3, start: 169, end: 175,
+                tag: "city_map", tagLabel: "🌅 Horizonte Vice City", preferredMode: "fullscreen",
+                chapter: "PARTE 3 • O VEREDICTO DE VICE CITY",
+                badge: "🌟 MUNDO VIVO ROCKSTAR",
+                badgeColor: "#00F0FF",
+                sceneType: "vice_city_sunset_outro",
+                cam: "CRANE UP HORIZONTE",
+                headline: "CADA DETALHE É UMA HISTÓRIA",
+                subStats: ["EXPLORAÇÃO INFINITA", "MISTÉRIO ENTRE O CASAL"],
+                text: "GTA não é apenas sobre roubar carros e fugir da polícia: é sobre viver histórias onde qualquer detalhe pode esconder a maior descoberta do jogo."
+            },
+            {
+                id: 27, part: 3, start: 175, end: 180,
+                tag: "couple", tagLabel: "👇 Teoria Final", preferredMode: "billboard",
+                chapter: "ENCERRAMENTO • QUAL A SUA TEORIA?",
+                badge: "👇 COMENTE & INSCREVA-SE",
+                badgeColor: "#FF2A6D",
+                sceneType: "cta_final_scoreboard",
+                cam: "SLOW PULL-BACK",
+                headline: "TRAIÇÃO OU UNIÃO ATÉ O FIM?",
+                subStats: ["DEIXE SEU COMENTÁRIO", "INSCREVA-SE NO CANAL"],
+                text: "Você acredita que Jason e Lúcia vão terminar em traição ou a Rockstar prepara outra reviravolta? Comente sua teoria e inscreva-se no canal!"
+            }
+        ];
+
+        // Pre-split words for each shot for exact word-by-word karaoke highlighting
+        STORYBOARD.forEach((shot, idx) => {
+            shot.words = shot.text.split(/\s+/);
+            shot.clipStart = (idx * 3.5) % 30;
+            shot.clipEnd = shot.clipStart + 4;
+        });
+
+        // --- ENGINE STATE ---
+        let isPlaying = false;
+        let currentTime = 0; // 0 to 180 seconds
+        const totalDuration = 180;
+        let lastFrameTime = performance.now();
+        let fps = 60;
+        let currentAspect = '9:16'; // '9:16' or '16:9'
+        let useNativeTTS = true;
+        let lastSpokenShotId = -1;
+
+        // --- SMART GAMEPLAY VIDEO MAPPER STATE ---
+        const gameplayVideo = document.getElementById('gameplay-video');
+        const samplerVideo = document.getElementById('sampler-video');
+        let gameplayLoaded = false;
+        let gameplayDisplayMode = 'hybrid'; // 'hybrid', 'billboard', 'fullscreen'
+        let activeVideoShotId = -1;
+        let analyzedVideoSegments = [];
+
+        // --- WEB AUDIO API & EXTERNAL MP3 STATE ---
+        let audioCtx = null;
+        let analyser = null;
+        let dataArray = null;
+        let audioSourceNode = null;
+        let mediaStreamDest = null;
+        let loadedAudioFiles = [];
+        let currentAudioIndex = 0;
+        let usingExternalAudio = false;
+        const externalAudio = document.getElementById('external-audio');
+
+        // --- DOM REFERENCES ---
+        const mainPlayBtn = document.getElementById('main-play-btn');
+        const playSvg = document.getElementById('play-svg');
+        const pauseSvg = document.getElementById('pause-svg');
+        const playLabel = document.getElementById('play-label');
+        const restartBtn = document.getElementById('restart-btn');
+        const scrubber = document.getElementById('timeline-scrubber');
+        const timeCurrentEl = document.getElementById('time-current');
+        const timeTotalEl = document.getElementById('time-total');
+        const shotIndicatorEl = document.getElementById('shot-indicator');
+        const storyboardListEl = document.getElementById('storyboard-list');
+        const partBtns = document.querySelectorAll('.part-btn');
+        const mp3UploadInput = document.getElementById('mp3-upload-input');
+        const uploadStatusText = document.getElementById('upload-status-text');
+        const ttsToggleBtn = document.getElementById('tts-toggle-btn');
+        const ttsLabel = document.getElementById('tts-label');
+        const syncModeBadge = document.getElementById('sync-mode-badge');
+        const ratio916Btn = document.getElementById('ratio-916-btn');
+        const ratio169Btn = document.getElementById('ratio-169-btn');
+        const recordExportBtn = document.getElementById('record-export-btn');
+        const recordBtnText = document.getElementById('record-btn-text');
+        const recordFeedback = document.getElementById('record-feedback');
+        const partBadgeHud = document.getElementById('part-badge-hud');
+        const cameraMoveHud = document.getElementById('camera-move-hud');
+
+        // Smart Gameplay DOM
+        const gameplayUploadInput = document.getElementById('gameplay-upload-input');
+        const gameplayUploadLabel = document.getElementById('gameplay-upload-label');
+        const gameplayStatusBadge = document.getElementById('gameplay-status-badge');
+        const smartMapBtn = document.getElementById('smart-map-btn');
+        const smartMapBtnText = document.getElementById('smart-map-btn-text');
+        const aiScanProgressBox = document.getElementById('ai-scan-progress-box');
+        const aiScanStepText = document.getElementById('ai-scan-step-text');
+        const aiScanPercent = document.getElementById('ai-scan-percent');
+        const aiScanBar = document.getElementById('ai-scan-bar');
+        const mappedClipsContainer = document.getElementById('mapped-clips-container');
+        const mappedClipsList = document.getElementById('mapped-clips-list');
+        const remapShuffleBtn = document.getElementById('remap-shuffle-btn');
+        const gmodeBtns = document.querySelectorAll('.gmode-btn');
+
+        /********************************************************************
+         * SMART GAMEPLAY UPLOAD & AI COMPUTER VISION SCENE MAPPER
+         ********************************************************************/
+        gmodeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                gameplayDisplayMode = btn.getAttribute('data-gmode');
+                gmodeBtns.forEach(b => {
+                    if (b.getAttribute('data-gmode') === gameplayDisplayMode) {
+                        b.className = "gmode-btn py-1.5 px-2 rounded-lg text-[10px] font-extrabold bg-gtaPink text-white shadow transition-all";
+                    } else {
+                        b.className = "gmode-btn py-1.5 px-2 rounded-lg text-[10px] font-bold text-purple-300 hover:text-white transition-all";
+                    }
+                });
+            });
+        });
+
+        gameplayUploadInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const videoURL = URL.createObjectURL(file);
+            gameplayVideo.src = videoURL;
+            samplerVideo.src = videoURL;
+            gameplayVideo.load();
+            samplerVideo.load();
+
+            gameplayUploadLabel.textContent = file.name;
+            gameplayStatusBadge.textContent = "Carregando MP4...";
+            gameplayStatusBadge.className = "text-[10px] font-mono-tech px-2 py-0.5 rounded bg-gtaYellow/20 text-gtaYellow border border-gtaYellow/40";
+
+            gameplayVideo.onloadedmetadata = () => {
+                gameplayLoaded = true;
+                smartMapBtn.disabled = false;
+                gameplayStatusBadge.textContent = `Pronto (${Math.round(gameplayVideo.duration)}s)`;
+                gameplayStatusBadge.className = "text-[10px] font-mono-tech px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40";
+                // Run initial fast smart mapping automatically
+                runSmartVideoAnalysis();
+            };
+        });
+
+        smartMapBtn.addEventListener('click', () => {
+            if (gameplayLoaded) runSmartVideoAnalysis();
+        });
+
+        remapShuffleBtn.addEventListener('click', () => {
+            if (gameplayLoaded) runSmartVideoAnalysis(true);
+        });
+
+        async function runSmartVideoAnalysis(withVariation = false) {
+            const vidDur = samplerVideo.duration || 60;
+            aiScanProgressBox.classList.remove('hidden');
+            smartMapBtn.disabled = true;
+            smartMapBtnText.textContent = "Escaneando Frames...";
+
+            const offCanvas = document.createElement('canvas');
+            offCanvas.width = 96;
+            offCanvas.height = 54;
+            const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+
+            const sampleCount = 18;
+            analyzedVideoSegments = [];
+
+            for (let i = 0; i < sampleCount; i++) {
+                const sampleTime = Math.min(vidDur - 0.5, Math.max(0.2, (i / sampleCount) * vidDur));
+                aiScanPercent.textContent = `${Math.round(((i + 1) / sampleCount) * 100)}%`;
+                aiScanBar.style.width = `${Math.round(((i + 1) / sampleCount) * 100)}%`;
+                aiScanStepText.textContent = `Visão Computacional: analisando corte ${formatTime(sampleTime)}...`;
+
+                await new Promise((resolve) => {
+                    const onSeeked = () => {
+                        samplerVideo.removeEventListener('seeked', onSeeked);
+                        resolve();
+                    };
+                    samplerVideo.addEventListener('seeked', onSeeked);
+                    samplerVideo.currentTime = sampleTime;
+                    setTimeout(resolve, 180); // safety timeout
+                });
+
+                try {
+                    offCtx.drawImage(samplerVideo, 0, 0, offCanvas.width, offCanvas.height);
+                    const pixels = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height).data;
+                    let rSum = 0, gSum = 0, bSum = 0, brightSum = 0, redBlueContrast = 0;
+                    const totalPx = pixels.length / 4;
+
+                    for (let p = 0; p < pixels.length; p += 16) {
+                        const r = pixels[p], g = pixels[p + 1], b = pixels[p + 2];
+                        rSum += r; gSum += g; bSum += b;
+                        brightSum += (r + g + b) / 3;
+                        if ((r > 180 && b < 80) || (b > 180 && r < 80)) redBlueContrast++;
+                    }
+
+                    const avgBright = brightSum / (totalPx / 4);
+                    const avgR = rSum / (totalPx / 4);
+                    const avgB = bSum / (totalPx / 4);
+
+                    // Classify visual mood of this timestamp
+                    let visualFeature = "city_map";
+                    if (redBlueContrast > 35) visualFeature = "police_chase";
+                    else if (avgBright < 65) visualFeature = "betrayal_dark";
+                    else if (avgR > avgB * 1.25 && avgBright > 110) visualFeature = "couple";
+                    else if (avgB > avgR * 1.15) visualFeature = "vice_night";
+                    else if (avgBright > 145) visualFeature = "npcs_world";
+                    else visualFeature = "heist_action";
+
+                    analyzedVideoSegments.push({
+                        time: sampleTime,
+                        feature: visualFeature,
+                        brightness: avgBright
+                    });
+                } catch (err) {
+                    analyzedVideoSegments.push({
+                        time: sampleTime,
+                        feature: "heist_action",
+                        brightness: 100
+                    });
+                }
+            }
+
+            // Optional Gemini API semantic refinement if available in environment
+            aiScanStepText.textContent = "Sincronizando 27 cenas do roteiro com os cortes...";
+            STORYBOARD.forEach((shot, idx) => {
+                // Find matching visual segment or distribute intelligently across the video
+                const matchingSegs = analyzedVideoSegments.filter(seg => seg.feature === shot.tag);
+                let chosenStart = 0;
+                if (matchingSegs.length > 0) {
+                    const pickIndex = withVariation
+                        ? Math.floor(Math.random() * matchingSegs.length)
+                        : (idx % matchingSegs.length);
+                    chosenStart = matchingSegs[pickIndex].time;
+                } else {
+                    const fallbackIdx = (idx + (withVariation ? Math.floor(Math.random() * 5) : 0)) % analyzedVideoSegments.length;
+                    chosenStart = analyzedVideoSegments[fallbackIdx]?.time || ((idx * 4) % Math.max(5, vidDur - 5));
+                }
+                const shotLen = shot.end - shot.start;
+                shot.clipStart = Math.max(0, Math.min(vidDur - shotLen - 0.5, chosenStart));
+                shot.clipEnd = Math.min(vidDur, shot.clipStart + shotLen);
+            });
+
+            renderMappedClipsUI();
+            aiScanProgressBox.classList.add('hidden');
+            mappedClipsContainer.classList.remove('hidden');
+            smartMapBtn.disabled = false;
+            smartMapBtnText.textContent = "Mapeado com Sucesso!";
+
+            // Trigger immediate sync on active shot
+            activeVideoShotId = -1;
+            if (isPlaying) {
+                gameplayVideo.play().catch(() => {});
+            }
+        }
+
+        function renderMappedClipsUI() {
+            mappedClipsList.innerHTML = '';
+            STORYBOARD.forEach((shot, idx) => {
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between bg-[#0A0915] px-2.5 py-1.5 rounded-lg border border-purple-900/50 hover:border-gtaCyan/50 cursor-pointer transition-all";
+                row.innerHTML = `
+                    <div class="flex items-center gap-2 truncate">
+                        <span class="text-[10px] font-mono-tech text-gtaPink font-bold">#${String(idx + 1).padStart(2, '0')}</span>
+                        <span class="text-white font-semibold truncate">${shot.tagLabel}</span>
+                    </div>
+                    <span class="text-[10px] font-mono-tech text-gtaCyan shrink-0">
+                        🎬 ${formatTime(shot.clipStart)} → ${formatTime(shot.clipEnd)}
+                    </span>
+                `;
+                row.addEventListener('click', () => {
+                    seekTo(shot.start);
+                    if (!isPlaying) togglePlay();
+                });
+                mappedClipsList.appendChild(row);
+            });
+        }
+
+        // Sync Gameplay Video CurrentTime to the Active Shot's Mapped Segment
+        function syncGameplayVideoToShot(activeShot, shotProgress) {
+            if (!gameplayLoaded || !gameplayVideo.duration) return;
+
+            const targetVideoTime = activeShot.clipStart + shotProgress * (activeShot.clipEnd - activeShot.clipStart);
+            if (activeVideoShotId !== activeShot.id) {
+                activeVideoShotId = activeShot.id;
+                gameplayVideo.currentTime = Math.min(gameplayVideo.duration - 0.2, Math.max(0, targetVideoTime));
+                if (isPlaying && gameplayVideo.paused) {
+                    gameplayVideo.play().catch(() => {});
+                }
+            } else if (!isPlaying) {
+                gameplayVideo.currentTime = Math.min(gameplayVideo.duration - 0.2, Math.max(0, targetVideoTime));
+            } else if (Math.abs(gameplayVideo.currentTime - targetVideoTime) > 1.2) {
+                gameplayVideo.currentTime = Math.min(gameplayVideo.duration - 0.2, Math.max(0, targetVideoTime));
+            }
+        }
+
+        // Draw Gameplay Video in Fullscreen GTA Color-Graded Mode or 2.5D Neon Billboard Mode
+        function renderGameplayLayer(W, H, shot, time, shotProgress, energy, layerPass) {
+            if (!gameplayLoaded || gameplayVideo.readyState < 2) return;
+
+            const effectiveMode = (gameplayDisplayMode === 'hybrid')
+                ? (shot.preferredMode || 'billboard')
+                : gameplayDisplayMode;
+
+            // Pass 1: Fullscreen background mode
+            if (layerPass === 'background' && effectiveMode === 'fullscreen') {
+                ctx.save();
+                // Subtle cinematic zoom on gameplay
+                const zoom = 1.04 + shotProgress * 0.06;
+                const vw = gameplayVideo.videoWidth || 1920;
+                const vh = gameplayVideo.videoHeight || 1080;
+                const scale = Math.max(W / vw, H / vh) * zoom;
+                const drawW = vw * scale;
+                const drawH = vh * scale;
+                const dx = (W - drawW) / 2 + Math.sin(time * 0.8) * 10;
+                const dy = (H - drawH) / 2;
+
+                ctx.drawImage(gameplayVideo, dx, dy, drawW, drawH);
+
+                // Vice City GTA 6 Color Grade Overlay (Purple/Magenta Tint + Vignette for HUD legibility)
+                const grade = ctx.createLinearGradient(0, 0, 0, H);
+                grade.addColorStop(0, 'rgba(18, 8, 38, 0.72)');
+                grade.addColorStop(0.45, 'rgba(42, 15, 77, 0.42)');
+                grade.addColorStop(0.8, 'rgba(18, 8, 38, 0.78)');
+                grade.addColorStop(1, 'rgba(7, 5, 16, 0.94)');
+                ctx.fillStyle = grade;
+                ctx.fillRect(0, 0, W, H);
+
+                // Stamp showing active AI Mapped Timestamp
+                drawRoundedRect(ctx, W * 0.06, H * 0.20, W * 0.42, H * 0.032, 10);
+                ctx.fillStyle = 'rgba(10, 9, 21, 0.85)';
+                ctx.fill();
+                ctx.strokeStyle = '#00F0FF';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.fillStyle = '#00F0FF';
+                ctx.textAlign = 'left';
+                ctx.font = `800 ${Math.floor(W * 0.02)}px "JetBrains Mono"`;
+                ctx.fillText(`🎬 IA CUT: ${shot.tagLabel} [${formatTime(shot.clipStart)}]`, W * 0.08, H * 0.221);
+                ctx.restore();
+            }
+
+            // Pass 2: 2.5D Neon Billboard / PIP Frame (Reference Video Style)
+            if (layerPass === 'foreground' && effectiveMode === 'billboard') {
+                ctx.save();
+                const frameW = W * 0.76;
+                const frameH = H * 0.24;
+                const fx = (W - frameW) / 2 + Math.sin(time * 1.3) * 8;
+                const fy = H * 0.54;
+
+                // Outer Neon Glow Frame
+                ctx.shadowColor = shot.badgeColor || '#00F0FF';
+                ctx.shadowBlur = 30;
+                drawRoundedRect(ctx, fx - 6, fy - 6, frameW + 12, frameH + 12, 24);
+                ctx.fillStyle = '#0A0915';
+                ctx.fill();
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = shot.badgeColor || '#00F0FF';
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Clip and draw video inside rounded billboard
+                ctx.save();
+                drawRoundedRect(ctx, fx, fy, frameW, frameH, 20);
+                ctx.clip();
+
+                const vw = gameplayVideo.videoWidth || 1920;
+                const vh = gameplayVideo.videoHeight || 1080;
+                const scale = Math.max(frameW / vw, frameH / vh) * (1.02 + shotProgress * 0.05);
+                const drawW = vw * scale;
+                const drawH = vh * scale;
+                ctx.drawImage(gameplayVideo, fx + (frameW - drawW) / 2, fy + (frameH - drawH) / 2, drawW, drawH);
+
+                // Subtle scanlines on billboard
+                ctx.fillStyle = 'rgba(18, 8, 38, 0.22)';
+                ctx.fillRect(fx, fy, frameW, frameH);
+                ctx.restore();
+
+                // Top-left Tag Pill on Billboard
+                const tagW = frameW * 0.62;
+                const tagH = 38;
+                drawRoundedRect(ctx, fx + 16, fy + 14, tagW, tagH, 10);
+                ctx.fillStyle = 'rgba(10, 9, 21, 0.9)';
+                ctx.fill();
+                ctx.strokeStyle = '#FFB800';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.fillStyle = '#FFB800';
+                ctx.textAlign = 'left';
+                ctx.font = `800 ${Math.floor(W * 0.022)}px "JetBrains Mono"`;
+                ctx.fillText(`${shot.tagLabel} • ${formatTime(shot.clipStart)}`, fx + 30, fy + 39);
+
+                ctx.restore();
+            }
+        }
+
+        // --- POPULATE INTERACTIVE STORYBOARD LIST ---
+        function renderStoryboardList() {
+            storyboardListEl.innerHTML = '';
+            STORYBOARD.forEach((shot, idx) => {
+                const item = document.createElement('div');
+                item.id = `sb-item-${shot.id}`;
+                item.className = "p-2 rounded-xl bg-[#0A0915]/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
+                item.innerHTML = `
+                    <div class="flex items-center gap-2 truncate">
+                        <span class="px-1.5 py-0.5 rounded bg-purple-950 text-gtaCyan font-mono-tech text-[10px] font-bold">#${String(idx + 1).padStart(2, '0')}</span>
+                        <span class="font-bold text-white truncate">${shot.headline}</span>
+                    </div>
+                    <span class="text-[10px] font-mono-tech text-purple-400 shrink-0">${formatTime(shot.start)}</span>
+                `;
+                item.addEventListener('click', () => {
+                    seekTo(shot.start);
+                    if (!isPlaying) togglePlay();
+                });
+                storyboardListEl.appendChild(item);
+            });
+        }
+        renderStoryboardList();
+
+        // --- FORMAT TIME HELPER ---
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60);
+            const s = (sec % 60).toFixed(1);
+            return `${String(m).padStart(2, '0')}:${s.padStart(4, '0')}`;
+        }
+
+        // --- INITIALIZE WEB AUDIO GRAPH ---
+        function initAudioContext() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 128;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                mediaStreamDest = audioCtx.createMediaStreamDestination();
+
+                audioSourceNode = audioCtx.createMediaElementSource(externalAudio);
+                audioSourceNode.connect(analyser);
+                analyser.connect(audioCtx.destination);
+                analyser.connect(mediaStreamDest);
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // --- VOICE SYNTHESIS FALLBACK (SO USER HEARS PORTUGUESE NARRATION IMMEDIATELY) ---
+        function speakCurrentShot(shot) {
+            if (!useNativeTTS || usingExternalAudio || !('speechSynthesis' in window)) return;
+            if (lastSpokenShotId === shot.id) return;
+            lastSpokenShotId = shot.id;
+
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(shot.text);
+            utter.lang = 'pt-BR';
+            utter.rate = 1.18;
+            utter.pitch = 0.95;
+            window.speechSynthesis.speak(utter);
+        }
+
+        // --- PLAY / PAUSE LOGIC ---
+        function togglePlay() {
+            initAudioContext();
+            isPlaying = !isPlaying;
+
+            if (isPlaying) {
+                playSvg.classList.add('hidden');
+                pauseSvg.classList.remove('hidden');
+                playLabel.textContent = "PAUSAR REPRODUÇÃO";
+                lastFrameTime = performance.now();
+
+                if (gameplayLoaded) gameplayVideo.play().catch(() => {});
+
+                if (usingExternalAudio && externalAudio.src) {
+                    externalAudio.play().catch(() => {});
+                } else {
+                    const activeShot = getActiveShot(currentTime);
+                    if (activeShot) speakCurrentShot(activeShot);
+                }
+            } else {
+                playSvg.classList.remove('hidden');
+                pauseSvg.classList.add('hidden');
+                playLabel.textContent = "CONTINUAR VÍDEO";
+                if (usingExternalAudio) externalAudio.pause();
+                if (gameplayLoaded) gameplayVideo.pause();
+                if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            }
+        }
+
+        function seekTo(targetSec) {
+            currentTime = Math.max(0, Math.min(totalDuration, targetSec));
+            scrubber.value = currentTime;
+            lastSpokenShotId = -1;
+            activeVideoShotId = -1;
+
+            if (usingExternalAudio && externalAudio.duration) {
+                const ratio = currentTime / totalDuration;
+                externalAudio.currentTime = ratio * externalAudio.duration;
+            } else if (isPlaying) {
+                const shot = getActiveShot(currentTime);
+                if (shot) speakCurrentShot(shot);
+            }
+        }
+
+        mainPlayBtn.addEventListener('click', togglePlay);
+        document.getElementById('canvas-stage').addEventListener('click', togglePlay);
+
+        restartBtn.addEventListener('click', () => {
+            seekTo(0);
+            if (!isPlaying) togglePlay();
+        });
+
+        scrubber.addEventListener('input', (e) => {
+            seekTo(parseFloat(e.target.value));
+        });
+
+        // Part Jump Buttons
+        partBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const part = parseInt(btn.getAttribute('data-part'));
+                const firstShotOfPart = STORYBOARD.find(s => s.part === part);
+                if (firstShotOfPart) {
+                    seekTo(firstShotOfPart.start);
+                    if (!isPlaying) togglePlay();
+                }
+            });
+        });
+
+        // Toggle Native AI Voice
+        ttsToggleBtn.addEventListener('click', () => {
+            useNativeTTS = !useNativeTTS;
+            ttsLabel.textContent = useNativeTTS ? "Voz IA Nativa: ON" : "Voz IA Nativa: OFF";
+            ttsToggleBtn.classList.toggle('opacity-50', !useNativeTTS);
+            if (!useNativeTTS && 'speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        });
+
+        // Handle External MP3 Upload (Single or Multiple)
+        mp3UploadInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+
+            initAudioContext();
+            loadedAudioFiles = files.sort((a, b) => a.name.localeCompare(b.name));
+            currentAudioIndex = 0;
+            usingExternalAudio = true;
+
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+            loadExternalTrack(0);
+            uploadStatusText.textContent = `${loadedAudioFiles.length} MP3 carregado(s)`;
+            syncModeBadge.textContent = "MP3 Sincronizado";
+            syncModeBadge.className = "text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40";
+        });
+
+        function loadExternalTrack(index) {
+            if (index >= loadedAudioFiles.length) return;
+            const file = loadedAudioFiles[index];
+            const url = URL.createObjectURL(file);
+            externalAudio.src = url;
+            externalAudio.load();
+            if (isPlaying) {
+                externalAudio.play().catch(() => {});
+            }
+        }
+
+        externalAudio.addEventListener('ended', () => {
+            if (currentAudioIndex + 1 < loadedAudioFiles.length) {
+                currentAudioIndex++;
+                loadExternalTrack(currentAudioIndex);
+            } else {
+                isPlaying = false;
+                playSvg.classList.remove('hidden');
+                pauseSvg.classList.add('hidden');
+                playLabel.textContent = "REPRODUZIR NOVAMENTE";
+            }
+        });
+
+        // Aspect Ratio Switcher (9:16 vs 16:9)
+        ratio916Btn.addEventListener('click', () => {
+            currentAspect = '9:16';
+            canvas.width = 1080;
+            canvas.height = 1920;
+            playerFrame.style.width = '405px';
+            playerFrame.style.height = '720px';
+            document.getElementById('resolution-badge').textContent = '1080x1920';
+            ratio916Btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-gtaPink text-white shadow transition-all";
+            ratio169Btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-purple-300 hover:text-white transition-all";
+        });
+
+        ratio169Btn.addEventListener('click', () => {
+            currentAspect = '16:9';
+            canvas.width = 1920;
+            canvas.height = 1080;
+            playerFrame.style.width = '100%';
+            playerFrame.style.height = '420px';
+            document.getElementById('resolution-badge').textContent = '1920x1080';
+            ratio169Btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-gtaPink text-white shadow transition-all";
+            ratio916Btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-purple-300 hover:text-white transition-all";
+        });
+
+        // --- GET ACTIVE SHOT ---
+        function getActiveShot(time) {
+            return STORYBOARD.find(s => time >= s.start && time <= s.end) || STORYBOARD[STORYBOARD.length - 1];
+        }
+
+        // --- AUDIO REACTIVITY LEVEL (0.0 to 1.0) ---
+        function getAudioEnergy(time) {
+            if (usingExternalAudio && analyser && isPlaying) {
+                analyser.getByteFrequencyData(dataArray);
+                let sum = 0;
+                for (let i = 0; i < 32; i++) sum += dataArray[i];
+                return Math.min(1, (sum / 32) / 180);
+            }
+            // Procedural speech envelope when running on internal clock
+            if (!isPlaying) return 0.08 + Math.sin(time * 2) * 0.04;
+            const syllabicWave = Math.abs(Math.sin(time * 14)) * 0.6 + Math.abs(Math.cos(time * 23)) * 0.4;
+            return 0.25 + syllabicWave * 0.75;
+        }
+
+        /********************************************************************
+         * PROCEDURAL SCENE RENDERING ENGINE (GTA 6 / VICE CITY PALETTE)
+         ********************************************************************/
+
+        function drawRoundedRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+        }
+
+        function renderBackgroundSynthwave(W, H, time, energy, shotProgress) {
+            // 1. Sky Gradient (Vice City Twilight)
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, H * 0.65);
+            skyGrad.addColorStop(0, '#0A0618');
+            skyGrad.addColorStop(0.45, '#2A0F4D');
+            skyGrad.addColorStop(0.8, '#8E1D5E');
+            skyGrad.addColorStop(1, '#FF5500');
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, W, H * 0.65);
+
+            // 2. Retro Sun with Horizontal Scan-Cuts
+            const sunRadius = Math.min(W, H) * (0.18 + energy * 0.015);
+            const sunX = W * 0.5;
+            const sunY = H * 0.44;
+
+            ctx.save();
+            const sunGrad = ctx.createLinearGradient(sunX, sunY - sunRadius, sunX, sunY + sunRadius);
+            sunGrad.addColorStop(0, '#FFF59D');
+            sunGrad.addColorStop(0.5, '#FFB800');
+            sunGrad.addColorStop(1, '#FF2A6D');
+            ctx.fillStyle = sunGrad;
+            ctx.shadowColor = '#FF2A6D';
+            ctx.shadowBlur = 60;
+            ctx.beginPath();
+            ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            // Sun scanline cutouts
+            ctx.fillStyle = '#2A0F4D';
+            for (let i = 0; i < 6; i++) {
+                const bandY = sunY + sunRadius * 0.15 + i * (sunRadius * 0.14);
+                const bandH = 4 + i * 2.5;
+                ctx.fillRect(sunX - sunRadius, bandY, sunRadius * 2, bandH);
+            }
+
+            // 3. Parallax Vice City Skyline Silhouettes
+            const horizonY = H * 0.54;
+            ctx.fillStyle = '#120826';
+            const buildingCount = 26;
+            const bWidth = W / buildingCount;
+            for (let i = 0; i < buildingCount; i++) {
+                const seed = Math.sin(i * 97.13) * 0.5 + 0.5;
+                const bH = (H * 0.04) + seed * (H * 0.11);
+                const bx = i * bWidth;
+                ctx.fillRect(bx, horizonY - bH, bWidth - 3, bH);
+
+                // Lit neon windows
+                ctx.fillStyle = (i % 2 === 0) ? '#00F0FF' : '#FF2A6D';
+                for (let wy = horizonY - bH + 10; wy < horizonY - 12; wy += 16) {
+                    if (Math.sin(wy * i + Math.floor(time * 2)) > -0.2) {
+                        ctx.fillRect(bx + 6, wy, bWidth * 0.35, 6);
+                    }
+                }
+                ctx.fillStyle = '#120826';
+            }
+
+            // 4. Lower Perspective Neon Grid & Ocean Reflection
+            const groundGrad = ctx.createLinearGradient(0, horizonY, 0, H);
+            groundGrad.addColorStop(0, '#190A36');
+            groundGrad.addColorStop(0.3, '#0D061F');
+            groundGrad.addColorStop(1, '#05030A');
+            ctx.fillStyle = groundGrad;
+            ctx.fillRect(0, horizonY, W, H - horizonY);
+
+            // Moving perspective grid lines
+            ctx.save();
+            ctx.strokeStyle = 'rgba(255, 42, 109, 0.38)';
+            ctx.lineWidth = 2;
+            const numPerspLines = 16;
+            for (let i = -numPerspLines; i <= numPerspLines; i++) {
+                ctx.beginPath();
+                ctx.moveTo(W * 0.5 + i * (W * 0.02), horizonY);
+                ctx.lineTo(W * 0.5 + i * (W * 0.16), H);
+                ctx.stroke();
+            }
+
+            // Horizontal scrolling grid lines
+            const speedOffset = (time * 1.4) % 1;
+            for (let j = 0; j < 12; j++) {
+                const p = (j + speedOffset) / 12;
+                const gy = horizonY + Math.pow(p, 2.1) * (H - horizonY);
+                ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 + p * 0.45})`;
+                ctx.beginPath();
+                ctx.moveTo(0, gy);
+                ctx.lineTo(W, gy);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        // --- SCENE-SPECIFIC INFOGRAPHICS & VISUAL STORYTELLING ---
+        function renderShotVisuals(W, H, shot, time, shotProgress, energy) {
+            const cx = W * 0.5;
+            const cy = H * 0.43;
+            const cardW = W * 0.84;
+
+            ctx.save();
+            // Continuous subtle camera push-in + drift so NO frame is ever frozen
+            const camScale = 1.0 + shotProgress * 0.065;
+            const camPanX = Math.sin(time * 1.2) * 12;
+            const camPanY = Math.cos(time * 0.9) * 8;
+            ctx.translate(cx + camPanX, cy + camPanY);
+            ctx.scale(camScale, camScale);
+            ctx.translate(-cx, -cy);
+
+            switch (shot.sceneType) {
+                case "trailer_magnifying": {
+                    // Trailer frame with scanning magnifying glass & red callout circles
+                    const frameW = cardW;
+                    const frameH = H * 0.24;
+                    const fx = cx - frameW / 2;
+                    const fy = cy - frameH / 2;
+
+                    drawRoundedRect(ctx, fx, fy, frameW, frameH, 24);
+                    ctx.fillStyle = 'rgba(12, 6, 28, 0.9)';
+                    ctx.fill();
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = '#00F0FF';
+                    ctx.stroke();
+
+                    // Simulated Vice City heist scene inside frame
+                    ctx.fillStyle = '#FF2A6D';
+                    ctx.font = `900 ${Math.floor(W * 0.042)}px Inter`;
+                    ctx.textAlign = 'center';
+                    ctx.fillText("GTA VI • TRAILER 1 [FRAME 01:14]", cx, fy + 55);
+
+                    // Animated red callout circle + arrow
+                    const scanX = cx + Math.sin(time * 3) * (frameW * 0.25);
+                    const scanY = cy + 20 + Math.cos(time * 2.2) * 35;
+                    ctx.strokeStyle = '#FF2A6D';
+                    ctx.lineWidth = 6;
+                    ctx.beginPath();
+                    ctx.arc(scanX, scanY, 65 + energy * 18, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#FFB800';
+                    ctx.font = `800 ${Math.floor(W * 0.032)}px "JetBrains Mono"`;
+                    ctx.fillText("🔍 PISTA DETECTADA!", scanX, scanY - 82);
+                    break;
+                }
+
+                case "leonida_map_scan": {
+                    // Radar scan of Leonida vs San Andreas
+                    const r = Math.min(W, H) * 0.2;
+                    ctx.strokeStyle = '#00F0FF';
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Radar sweep line
+                    const angle = time * 2.8;
+                    ctx.strokeStyle = '#FF2A6D';
+                    ctx.lineWidth = 5;
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
+                    ctx.stroke();
+
+                    // Glowing pins
+                    const pins = [
+                        { dx: -0.4, dy: -0.3, label: "VICE CITY" },
+                        { dx: 0.35, dy: 0.25, label: "PORT GELLHORN" },
+                        { dx: -0.2, dy: 0.45, label: "GRASSRIVERS" }
+                    ];
+                    pins.forEach((p, idx) => {
+                        const px = cx + p.dx * r;
+                        const py = cy + p.dy * r;
+                        ctx.fillStyle = idx % 2 === 0 ? '#FFB800' : '#00F0FF';
+                        ctx.beginPath();
+                        ctx.arc(px, py, 10 + energy * 6, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.font = `800 ${Math.floor(W * 0.026)}px "JetBrains Mono"`;
+                        ctx.fillText(p.label, px + 65, py + 6);
+                    });
+                    break;
+                }
+
+                case "couple_trust_meter": {
+                    // Jason & Lucia Dynamic Trust / Passion / Betrayal Bars
+                    const panelW = cardW;
+                    const panelH = H * 0.26;
+                    const px = cx - panelW / 2;
+                    const py = cy - panelH / 2;
+
+                    drawRoundedRect(ctx, px, py, panelW, panelH, 24);
+                    ctx.fillStyle = 'rgba(10, 9, 21, 0.92)';
+                    ctx.fill();
+                    ctx.strokeStyle = '#FF2A6D';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+
+                    const metrics = [
+                        { label: "CONFIANÇA (JASON ⇄ LÚCIA)", val: shot.part === 3 ? 0.35 : 0.92, col: '#00F0FF' },
+                        { label: "PAIXÃO & PARCERIA", val: 0.88, col: '#FF2A6D' },
+                        { label: "RISCO DE TRAIÇÃO / PERIGO", val: shot.part === 3 ? 0.96 : 0.65, col: '#FFB800' }
+                    ];
+
+                    metrics.forEach((m, i) => {
+                        const by = py + 60 + i * (panelH * 0.28);
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.textAlign = 'left';
+                        ctx.font = `800 ${Math.floor(W * 0.03)}px Inter`;
+                        ctx.fillText(m.label, px + 40, by);
+
+                        // Bar track
+                        const barW = panelW - 80;
+                        drawRoundedRect(ctx, px + 40, by + 15, barW, 26, 13);
+                        ctx.fillStyle = '#1E1136';
+                        ctx.fill();
+
+                        // Animated fill
+                        const animFill = Math.min(1, m.val * (0.6 + shotProgress * 0.4));
+                        drawRoundedRect(ctx, px + 40, by + 15, barW * animFill, 26, 13);
+                        ctx.fillStyle = m.col;
+                        ctx.fill();
+                    });
+                    break;
+                }
+
+                case "four_pillars_hud": {
+                    // 4 Pillars Grid: Planejamento, Contatos, Equipamentos, Confiança
+                    const items = [
+                        { num: "01", name: "PLANEJAMENTO", col: "#00F0FF" },
+                        { num: "02", name: "CONTATOS", col: "#FFB800" },
+                        { num: "03", name: "EQUIPAMENTOS", col: "#00F0FF" },
+                        { num: "04", name: "CONFIANÇA TOTAL", col: "#FF2A6D" }
+                    ];
+                    const boxW = cardW * 0.47;
+                    const boxH = H * 0.11;
+                    items.forEach((it, idx) => {
+                        const colIdx = idx % 2;
+                        const rowIdx = Math.floor(idx / 2);
+                        const bx = cx - cardW / 2 + colIdx * (boxW + cardW * 0.06);
+                        const by = cy - boxH - 15 + rowIdx * (boxH + 30);
+
+                        const pulse = (idx === 3) ? energy * 12 : 0;
+                        drawRoundedRect(ctx, bx - pulse / 2, by - pulse / 2, boxW + pulse, boxH + pulse, 20);
+                        ctx.fillStyle = 'rgba(18, 8, 38, 0.92)';
+                        ctx.fill();
+                        ctx.lineWidth = idx === 3 ? 5 : 3;
+                        ctx.strokeStyle = it.col;
+                        ctx.stroke();
+
+                        ctx.fillStyle = it.col;
+                        ctx.textAlign = 'center';
+                        ctx.font = `900 ${Math.floor(W * 0.04)}px "JetBrains Mono"`;
+                        ctx.fillText(it.num, bx + boxW / 2, by + boxH * 0.42);
+
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.font = `800 ${Math.floor(W * 0.028)}px Inter`;
+                        ctx.fillText(it.name, bx + boxW / 2, by + boxH * 0.78);
+                    });
+                    break;
+                }
+
+                case "police_ai_comparison": {
+                    // GTA 5 vs GTA 6 Police System Comparison Card
+                    const boxW = cardW * 0.47;
+                    const boxH = H * 0.22;
+                    const leftX = cx - cardW / 2;
+                    const rightX = cx + cardW * 0.03;
+                    const topY = cy - boxH / 2;
+
+                    // GTA 5 Card
+                    drawRoundedRect(ctx, leftX, topY, boxW, boxH, 22);
+                    ctx.fillStyle = 'rgba(12, 8, 28, 0.9)';
+                    ctx.fill();
+                    ctx.strokeStyle = '#00F0FF';
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#00F0FF';
+                    ctx.textAlign = 'center';
+                    ctx.font = `900 ${Math.floor(W * 0.038)}px Inter`;
+                    ctx.fillText("GTA V (2013)", leftX + boxW / 2, topY + 60);
+                    ctx.fillStyle = '#E2E8F0';
+                    ctx.font = `700 ${Math.floor(W * 0.027)}px "JetBrains Mono"`;
+                    ctx.fillText("★ ★ ★ ☆ ☆", leftX + boxW / 2, topY + 125);
+                    ctx.fillText("ESCONDER E ESPERAR", leftX + boxW / 2, topY + 185);
+                    ctx.fillStyle = '#FF2A6D';
+                    ctx.fillText("[ OBSOLETO ]", leftX + boxW / 2, topY + 250);
+
+                    // GTA 6 Card (Flashing Police Lights)
+                    drawRoundedRect(ctx, rightX, topY, boxW, boxH, 22);
+                    ctx.fillStyle = 'rgba(28, 8, 38, 0.95)';
+                    ctx.fill();
+                    ctx.strokeStyle = Math.sin(time * 16) > 0 ? '#FF2A6D' : '#00F0FF';
+                    ctx.lineWidth = 5;
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#FFB800';
+                    ctx.font = `900 ${Math.floor(W * 0.038)}px Inter`;
+                    ctx.fillText("GTA VI (LEONIDA)", rightX + boxW / 2, topY + 60);
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.font = `700 ${Math.floor(W * 0.027)}px "JetBrains Mono"`;
+                    ctx.fillText("🚔 CERCO TÁTICO IA", rightX + boxW / 2, topY + 125);
+                    ctx.fillText("RUAS BLOQUEADAS", rightX + boxW / 2, topY + 185);
+                    ctx.fillStyle = '#00F0FF';
+                    ctx.fillText("[ RECONHECIMENTO ]", rightX + boxW / 2, topY + 250);
+                    break;
+                }
+
+                case "casino_vault_heist": {
+                    // Vice City Casino & Secret Document Blueprint
+                    const r = Math.min(W, H) * 0.16;
+                    ctx.save();
+                    ctx.translate(cx, cy);
+                    ctx.rotate(time * 0.6);
+                    ctx.strokeStyle = '#FFB800';
+                    ctx.lineWidth = 8;
+                    ctx.setLineDash([28, 16]);
+                    ctx.beginPath();
+                    ctx.arc(0, 0, r, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.restore();
+
+                    ctx.fillStyle = '#FFB800';
+                    ctx.textAlign = 'center';
+                    ctx.font = `900 ${Math.floor(W * 0.05)}px "JetBrains Mono"`;
+                    ctx.fillText("🎰 CASSINO", cx, cy - 10);
+                    ctx.fillStyle = '#00F0FF';
+                    ctx.font = `800 ${Math.floor(W * 0.03)}px "JetBrains Mono"`;
+                    ctx.fillText("ALVO: DOCUMENTO SECRETO", cx, cy + 45);
+                    break;
+                }
+
+                case "mission_sim_phone_sms": {
+                    // Smartphone Warning SMS: "NÃO CONFIE EM NINGUÉM"
+                    const pw = W * 0.68;
+                    const ph = H * 0.22;
+                    const px = cx - pw / 2;
+                    const py = cy - ph / 2;
+
+                    drawRoundedRect(ctx, px, py, pw, ph, 32);
+                    ctx.fillStyle = '#0A0915';
+                    ctx.fill();
+                    ctx.lineWidth = 5;
+                    ctx.strokeStyle = '#FF2A6D';
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#00F0FF';
+                    ctx.textAlign = 'center';
+                    ctx.font = `800 ${Math.floor(W * 0.028)}px "JetBrains Mono"`;
+                    ctx.fillText("📱 MENSAGEM CRIPTOGRAFADA • LÚCIA", cx, py + 65);
+
+                    // Glitching Warning Text
+                    const glitchX = Math.sin(time * 30) * 3;
+                    ctx.fillStyle = '#FFB800';
+                    ctx.font = `900 ${Math.floor(W * 0.044)}px Inter`;
+                    ctx.fillText("“NÃO CONFIE EM NINGUÉM”", cx + glitchX, cy + 25);
+
+                    ctx.fillStyle = '#FF2A6D';
+                    ctx.font = `700 ${Math.floor(W * 0.026)}px "JetBrains Mono"`;
+                    ctx.fillText("⚠️ CONTATO DESAPARECEU • ALARME ATIVO", cx, py + ph - 45);
+                    break;
+                }
+
+                default: {
+                    // Universal High-Impact Data Comparison & Analytical Card
+                    const panelW = cardW;
+                    const panelH = H * 0.22;
+                    const px = cx - panelW / 2;
+                    const py = cy - panelH / 2;
+
+                    drawRoundedRect(ctx, px, py, panelW, panelH, 26);
+                    ctx.fillStyle = 'rgba(14, 7, 32, 0.9)';
+                    ctx.fill();
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = shot.badgeColor || '#FF2A6D';
+                    ctx.stroke();
+
+                    // Sub-stat pills inside card
+                    shot.subStats.forEach((st, i) => {
+                        const pillW = panelW * 0.84;
+                        const pillH = panelH * 0.3;
+                        const pillX = cx - pillW / 2;
+                        const pillY = py + 35 + i * (pillH + 28);
+
+                        drawRoundedRect(ctx, pillX, pillY, pillW, pillH, 16);
+                        ctx.fillStyle = i === 0 ? 'rgba(255, 42, 109, 0.2)' : 'rgba(0, 240, 255, 0.15)';
+                        ctx.fill();
+                        ctx.lineWidth = 2;
+                        ctx.strokeStyle = i === 0 ? '#FF2A6D' : '#00F0FF';
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.textAlign = 'center';
+                        ctx.font = `900 ${Math.floor(W * 0.035)}px "JetBrains Mono"`;
+                        ctx.fillText(st, cx, pillY + pillH * 0.64);
+                    });
+                    break;
+                }
+            }
+            ctx.restore();
+        }
+
+        // --- ANIMATED NARRATOR MASCOT (AUDIO-REACTIVE IN LOWER LEFT) ---
+        function renderNarratorMascot(W, H, time, energy) {
+            const mx = W * 0.16;
+            const my = H * 0.72 + Math.sin(time * 4) * 8;
+            const radius = Math.min(W, H) * 0.068;
+
+            ctx.save();
+            // Water ripples under narrator (reference video style)
+            for (let r = 1; r <= 3; r++) {
+                const rippleR = radius * (0.9 + r * 0.35 + ((time * 1.5) % 0.4));
+                ctx.strokeStyle = `rgba(0, 240, 255, ${0.5 - r * 0.12})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.ellipse(mx, my + radius * 0.65, rippleR, rippleR * 0.28, 0, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            // Character Head (Clean 2D vector outline + explorer safari hat + Vice City neon headphones)
+            ctx.fillStyle = '#FFFFFF';
+            ctx.strokeStyle = '#0A0915';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.arc(mx, my, radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Neon Gaming Headphones
+            ctx.strokeStyle = '#FF2A6D';
+            ctx.lineWidth = 10;
+            ctx.beginPath();
+            ctx.arc(mx, my, radius * 1.08, Math.PI * 1.1, Math.PI * 1.9);
+            ctx.stroke();
+
+            ctx.fillStyle = '#00F0FF';
+            ctx.fillRect(mx - radius * 1.18, my - 18, 16, 42);
+            ctx.fillRect(mx + radius * 1.02, my - 18, 16, 42);
+
+            // Beige Explorer Safari Hat on top
+            ctx.fillStyle = '#D9C398';
+            ctx.strokeStyle = '#0A0915';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.ellipse(mx, my - radius * 0.78, radius * 1.25, radius * 0.28, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(mx, my - radius * 0.82, radius * 0.7, Math.PI, 0);
+            ctx.fill();
+            ctx.stroke();
+
+            // Eyes (Blinking)
+            const blink = Math.sin(time * 3.7) > 0.96 ? 0.15 : 1;
+            ctx.fillStyle = '#0A0915';
+            ctx.beginPath();
+            ctx.ellipse(mx - radius * 0.32, my - radius * 0.1, 8, 12 * blink, 0, 0, Math.PI * 2);
+            ctx.ellipse(mx + radius * 0.32, my - radius * 0.1, 8, 12 * blink, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Audio-Reactive Mouth
+            const mouthOpen = isPlaying ? (4 + energy * 28) : 4;
+            ctx.fillStyle = '#FF2A6D';
+            drawRoundedRect(ctx, mx - 20, my + radius * 0.22, 40, mouthOpen, 8);
+            ctx.fill();
+            ctx.stroke();
+
+            // Floating Question / Speech Bubble
+            if (isPlaying) {
+                ctx.fillStyle = '#FFB800';
+                ctx.font = `900 ${Math.floor(W * 0.032)}px "JetBrains Mono"`;
+                ctx.fillText("?", mx + radius * 1.1, my - radius * 0.9);
+            }
+            ctx.restore();
+        }
+
+        // --- TOP CHAPTER HEADER & FLOATING SOURCE STAMP ---
+        function renderTopHeaders(W, H, shot, energy) {
+            const cx = W * 0.5;
+
+            // Chapter Pill
+            const badgeW = W * 0.78;
+            const badgeH = H * 0.045;
+            drawRoundedRect(ctx, cx - badgeW / 2, H * 0.06, badgeW, badgeH, 16);
+            ctx.fillStyle = 'rgba(10, 9, 21, 0.88)';
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = shot.badgeColor;
+            ctx.stroke();
+
+            ctx.fillStyle = shot.badgeColor;
+            ctx.textAlign = 'center';
+            ctx.font = `800 ${Math.floor(W * 0.026)}px "JetBrains Mono"`;
+            ctx.fillText(`${shot.chapter}  •  ${shot.badge}`, cx, H * 0.06 + badgeH * 0.66);
+
+            // Main Shot Headline
+            ctx.save();
+            ctx.fillStyle = '#FFFFFF';
+            ctx.shadowColor = 'rgba(0,0,0,0.9)';
+            ctx.shadowBlur = 16;
+            ctx.font = `900 ${Math.floor(W * 0.052)}px Inter`;
+            ctx.fillText(shot.headline, cx, H * 0.165);
+            ctx.restore();
+        }
+
+        // --- LOWER-THIRD WORD-BY-WORD KARAOKE CAPTIONS (PORTUGUESE) ---
+        function renderWordByWordCaptions(W, H, shot, shotProgress, energy) {
+            const words = shot.words;
+            const activeWordIndex = Math.min(words.length - 1, Math.floor(shotProgress * words.length));
+
+            // Group words into chunks of 5 words so captions are huge, punchy, and readable
+            const chunkSize = 5;
+            const chunkIndex = Math.floor(activeWordIndex / chunkSize);
+            const startWord = chunkIndex * chunkSize;
+            const visibleWords = words.slice(startWord, startWord + chunkSize);
+
+            const boxW = W * 0.9;
+            const boxH = H * 0.115;
+            const boxX = (W - boxW) / 2;
+            const boxY = H * 0.81;
+
+            // Dark Glassmorphic Pill Backdrop
+            ctx.save();
+            drawRoundedRect(ctx, boxX, boxY, boxW, boxH, 28);
+            ctx.fillStyle = 'rgba(7, 5, 16, 0.92)';
+            ctx.fill();
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#FF2A6D';
+            ctx.stroke();
+
+            // Render visible words centered with active word highlighted in Solar Gold
+            const fontSize = Math.floor(W * 0.044);
+            ctx.font = `900 ${fontSize}px Inter`;
+            ctx.textBaseline = 'middle';
+
+            const wordMetrics = visibleWords.map(w => ctx.measureText(w.toUpperCase() + " ").width);
+            const totalTextW = wordMetrics.reduce((a, b) => a + b, 0);
+
+            let cursorX = (W - totalTextW) / 2;
+            const textY = boxY + boxH * 0.52;
+
+            visibleWords.forEach((word, idx) => {
+                const globalIdx = startWord + idx;
+                const isCurrent = (globalIdx === activeWordIndex);
+                const cleanWord = word.toUpperCase();
+
+                ctx.save();
+                if (isCurrent) {
+                    // Highlight pill behind active word
+                    const wWidth = wordMetrics[idx] - 10;
+                    drawRoundedRect(ctx, cursorX - 6, textY - fontSize * 0.65, wWidth + 12, fontSize * 1.3, 12);
+                    ctx.fillStyle = '#FF2A6D';
+                    ctx.fill();
+                    ctx.fillStyle = '#FFB800';
+                } else if (globalIdx < activeWordIndex) {
+                    ctx.fillStyle = '#FFFFFF';
+                } else {
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+                }
+
+                ctx.textAlign = 'left';
+                ctx.fillText(cleanWord, cursorX, textY);
+                ctx.restore();
+
+                cursorX += wordMetrics[idx];
+            });
+
+            // Audio Equalizer Bars at bottom of caption box
+            const barCount = 24;
+            const barSpacing = (boxW * 0.6) / barCount;
+            const startBarX = (W - boxW * 0.6) / 2;
+            for (let b = 0; b < barCount; b++) {
+                const bh = 4 + Math.abs(Math.sin(b * 0.7 + currentTime * 15)) * (energy * 18);
+                ctx.fillStyle = b % 2 === 0 ? '#00F0FF' : '#FF2A6D';
+                ctx.fillRect(startBarX + b * barSpacing, boxY + boxH - bh - 6, barSpacing * 0.6, bh);
+            }
+
+            ctx.restore();
+        }
+
+        // --- PIXELATION TRANSITION EFFECT BETWEEN SHOTS ---
+        function renderShotTransitionWipe(W, H, shotProgress) {
+            if (shotProgress < 0.06) {
+                const alpha = 1 - (shotProgress / 0.06);
+                ctx.fillStyle = `rgba(0, 240, 255, ${alpha * 0.35})`;
+                ctx.fillRect(0, 0, W * (shotProgress / 0.06), H);
+            }
+        }
+
+        // --- MASTER RENDER LOOP (60 FPS) ---
+        function animateLoop(now) {
+            const dt = (now - lastFrameTime) / 1000;
+            lastFrameTime = now;
+            if (dt > 0 && dt < 0.5) {
+                fps = Math.round(1 / dt);
+            }
+
+            if (isPlaying) {
+                if (usingExternalAudio && externalAudio.duration && !externalAudio.paused) {
+                    // Sync timeline to external MP3
+                    const progress = externalAudio.currentTime / externalAudio.duration;
+                    currentTime = progress * totalDuration;
+                } else {
+                    // Advance internal precision clock
+                    currentTime += dt;
+                    if (currentTime >= totalDuration) {
+                        currentTime = 0;
+                        isPlaying = false;
+                        playSvg.classList.remove('hidden');
+                        pauseSvg.classList.add('hidden');
+                        playLabel.textContent = "REPRODUZIR NOVAMENTE";
+                    }
+                }
+                scrubber.value = currentTime;
+            }
+
+            const activeShot = getActiveShot(currentTime);
+            const shotDuration = Math.max(0.1, activeShot.end - activeShot.start);
+            const shotProgress = Math.max(0, Math.min(1, (currentTime - activeShot.start) / shotDuration));
+            const energy = getAudioEnergy(currentTime);
+
+            // Trigger TTS if playing on internal clock
+            if (isPlaying && !usingExternalAudio) {
+                speakCurrentShot(activeShot);
+            }
+
+            // Update UI indicators
+            timeCurrentEl.textContent = formatTime(currentTime);
+            timeTotalEl.textContent = formatTime(totalDuration);
+            shotIndicatorEl.textContent = `SHOT ${String(activeShot.id).padStart(2, '0')} / ${STORYBOARD.length}`;
+            partBadgeHud.textContent = `PARTE ${activeShot.part}`;
+            cameraMoveHud.textContent = `CAM: ${activeShot.cam}`;
+            document.getElementById('fps-counter').textContent = `${Math.min(60, fps)} FPS`;
+
+            // Highlight active part button
+            partBtns.forEach(btn => {
+                const p = parseInt(btn.getAttribute('data-part'));
+                if (p === activeShot.part) {
+                    btn.className = "part-btn py-2.5 px-2 rounded-xl bg-gtaPink/25 border-2 border-gtaPink text-white font-extrabold text-xs flex flex-col items-center transition-all";
+                } else {
+                    btn.className = "part-btn py-2.5 px-2 rounded-xl bg-purple-950/50 border border-purple-700/40 text-purple-200 hover:text-white font-extrabold text-xs flex flex-col items-center transition-all";
+                }
+            });
+
+            // Highlight active shot in Storyboard list
+            STORYBOARD.forEach(s => {
+                const el = document.getElementById(`sb-item-${s.id}`);
+                if (el) {
+                    if (s.id === activeShot.id) {
+                        el.className = "p-2 rounded-xl bg-gtaPink/25 border border-gtaPink cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
+                    } else {
+                        el.className = "p-2 rounded-xl bg-[#0A0915]/80 hover:bg-purple-900/40 border border-purple-800/40 cursor-pointer transition-all flex items-center justify-between gap-2 text-xs";
+                    }
+                }
+            });
+
+            // --- DRAW CANVAS ---
+            const W = canvas.width;
+            const H = canvas.height;
+            ctx.clearRect(0, 0, W, H);
+
+            // Sync Gameplay Video to the current shot's AI-mapped timestamp
+            syncGameplayVideoToShot(activeShot, shotProgress);
+
+            renderBackgroundSynthwave(W, H, now * 0.001, energy, shotProgress);
+            renderGameplayLayer(W, H, activeShot, now * 0.001, shotProgress, energy, 'background');
+            renderShotVisuals(W, H, activeShot, now * 0.001, shotProgress, energy);
+            renderGameplayLayer(W, H, activeShot, now * 0.001, shotProgress, energy, 'foreground');
+            renderNarratorMascot(W, H, now * 0.001, energy);
+            renderTopHeaders(W, H, activeShot, energy);
+            renderWordByWordCaptions(W, H, activeShot, shotProgress, energy);
+            renderShotTransitionWipe(W, H, shotProgress);
+
+            requestAnimationFrame(animateLoop);
+        }
+
+        // --- VIDEO RECORDING & EXPORT (CANVAS + AUDIO) ---
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let isRecording = false;
+
+        recordExportBtn.addEventListener('click', () => {
+            if (!isRecording) {
+                initAudioContext();
+                const canvasStream = canvas.captureStream(30);
+                if (mediaStreamDest && mediaStreamDest.stream.getAudioTracks().length > 0) {
+                    canvasStream.addTrack(mediaStreamDest.stream.getAudioTracks()[0]);
+                }
+
+                recordedChunks = [];
+                const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
+                    ? 'video/webm;codecs=vp9'
+                    : 'video/webm';
+
+                mediaRecorder = new MediaRecorder(canvasStream, { mimeType });
+                mediaRecorder.ondataavailable = (e) => {
+                    if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+                };
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `GTA6_ViceCity_Video_${currentAspect.replace(':', 'x')}.webm`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                };
+
+                mediaRecorder.start(200);
+                isRecording = true;
+                recordBtnText.textContent = "PARAR GRAVAÇÃO E BAIXAR ARQUIVO";
+                recordFeedback.classList.remove('hidden');
+
+                if (!isPlaying) togglePlay();
+            } else {
+                mediaRecorder.stop();
+                isRecording = false;
+                recordBtnText.textContent = "Gravar & Baixar Vídeo (Record & Export)";
+                recordFeedback.classList.add('hidden');
+            }
+        });
+
+        // Start animation loop immediately on window load
+        window.onload = function () {
+            lastFrameTime = performance.now();
+            requestAnimationFrame(animateLoop);
+        };
+    </script>
+</body>
+</html>
